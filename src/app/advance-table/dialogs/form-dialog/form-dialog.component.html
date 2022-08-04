@@ -1,0 +1,346 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!-- <img [src]='advanceTable.img' alt="avatar"> -->
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 font-17">
+            <h2>
+              <strong> {{dialogTitle}}</strong>
+            </h2></div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4"  (ngSubmit)="submit">
+      <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+          
+            <div class="body">
+              <mat-vertical-stepper  #stepper>
+                <mat-step >
+                  <form  [formGroup]="advanceTableForm">
+                    <ng-template matStepLabel>Entrez vos informations personnelles</ng-template>
+                    <div class="row">
+                      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>First Name</mat-label>
+                          <input matInput formControlName="firstName" >
+                          <mat-icon matSuffix>face</mat-icon>
+                          <mat-error *ngIf="advanceTableForm.get('firstName').hasError('required')">
+                            First Name is required
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Last Name</mat-label>
+                          <input matInput formControlName="lastName">
+                          <mat-icon matSuffix>face</mat-icon>
+                          <mat-error *ngIf="advanceTableForm.get('lastName').hasError('required')">
+                            Last Name is required
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Email</mat-label>
+                          <input matInput formControlName="email" required>
+                          <mat-icon matSuffix>email</mat-icon>
+                          <mat-error
+                            *ngIf="advanceTableForm.get('email').hasError('required') || advanceTableForm.get('email').touched">
+                            Please enter a valid email address
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Status</mat-label>
+                          <input matInput formControlName="status">
+                          <mat-icon matSuffix>face</mat-icon>
+                          <mat-error *ngIf="advanceTableForm.get('status').hasError('required')">
+                            Status is required
+                          </mat-error>
+                        </mat-form-field>
+                      </div> -->
+
+                      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                        <mat-label>Status</mat-label>
+                        <mat-form-field class="example-full-width">
+                          <mat-select [formControl]="status" formControlName="status" required>
+                            <mat-option *ngFor="let animal of animals" [value]="animal">
+                              {{animal}}
+                            </mat-option>
+                          </mat-select>
+                          <mat-error *ngIf="status.hasError('required')">Please choose status
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Real Name</mat-label>
+                          <input matInput formControlName="realName" required>
+                          <mat-icon matSuffix>email</mat-icon>
+                          <mat-error
+                          *ngIf="advanceTableForm.get('realName').hasError('required')">
+                            Please enter a Real name
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Status</mat-label>
+                          <input matInput formControlName="status">
+                          <mat-icon matSuffix>face</mat-icon>
+                          <mat-error *ngIf="advanceTableForm.get('status').hasError('required')">
+                            Status is required
+                          </mat-error>
+                        </mat-form-field>
+                      </div> -->
+                    </div>
+                    <div>
+                      <button mat-raised-button matStepperNext color="primary"
+                        >Suivant</button>
+                    </div>
+                  </form>
+                </mat-step>
+                <mat-step >
+                  <form  [formGroup]="advanceTableForm">
+                    <ng-template matStepLabel>Informations de compte</ng-template>
+                    <div class="row">
+                      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Login </mat-label>
+                          <input matInput formControlName="loginName">
+                          <mat-icon matSuffix>face</mat-icon>
+                          <mat-error *ngIf="advanceTableForm.get('loginName').hasError('required')">
+                            First Name is required
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Pseudo</mat-label>
+                          <input matInput formControlName="pseudo">
+                          <mat-icon matSuffix>face</mat-icon>
+                          <mat-error *ngIf="advanceTableForm.get('pseudo').hasError('required')">
+                            Last Name is required
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Mot de passe</mat-label>
+                      <input matInput type="password" formControlName="passeword">
+                    </mat-form-field>
+              
+                   
+               
+                    <div>
+                      <button mat-raised-button matStepperPrevious color="warn" class="msr-2">précédent</button>
+                      <button mat-raised-button matStepperNext color="primary"
+                        >Suivant</button>
+                    </div>
+                  </form>
+                </mat-step>
+                <mat-step>
+                  <ng-template matStepLabel>Paramétrages</ng-template>
+                  <br>
+                  <div>
+                    <div>
+                      <h6>Sélectionnez Habilitation</h6>
+                      <div >
+                     
+                        <mat-selection-list #shoes>
+                          <cdk-virtual-scroll-viewport  appendOnly itemSize="50" class="example-viewport">
+
+                          <mat-list-option *ngFor="let contact of Contacts">
+                            <a mat-list-item> <span class="contact-names">{{ contact }}</span> </a>
+                          </mat-list-option>
+                          </cdk-virtual-scroll-viewport>
+                        </mat-selection-list>
+                      </div>
+                  </div>
+                  <br>
+                  <br>
+                  <div >
+                    <h6>Sélectionnez Groupe</h6>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>Select</mat-label>
+                      <mat-select>
+                        <mat-option *ngFor="let topping of groupesList" [value]="topping">{{topping}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+
+                  <div >
+                    <h6>Sélectionnez Préférences</h6>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>Select</mat-label>
+                      <mat-select>
+                        <mat-option *ngFor="let topping of groupesList" [value]="topping">{{topping}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <!-- <div >
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label> Name</mat-label>
+                      <input matInput formControlName="name" >
+                      <mat-icon matSuffix>face</mat-icon>
+                      <mat-error *ngIf="advanceTableForm.get('name').hasError('required')">
+                         Name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div> -->
+                  <!-- <p>You are now done.</p> -->
+                  <!-- <div>
+                    <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Modifier</button>
+                    <button mat-raised-button color="primary" (click)="stepper.reset()">réinitialiser</button>
+                  </div> -->
+                 
+                  </div>
+                </mat-step>
+              </mat-vertical-stepper>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="fName">
+            <mat-icon matSuffix>face</mat-icon>
+            <mat-error *ngIf="advanceTableForm.get('fName').hasError('required')">
+              First Name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lName">
+            <mat-icon matSuffix>face</mat-icon>
+            <mat-error *ngIf="advanceTableForm.get('lName').hasError('required')">
+              Last Name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="m-b-20">
+            <mat-label class="msr-3">Gender:</mat-label>
+            <mat-radio-group aria-label="Select gender" formControlName="gender" required>
+              <mat-radio-button value="male">Male</mat-radio-button>
+              <mat-radio-button value="female">Female</mat-radio-button>
+              <mat-error *ngIf="advanceTableForm.get('gender').hasError('required')">
+                Select gender
+              </mat-error>
+            </mat-radio-group>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" required>
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error
+              *ngIf="advanceTableForm.get('email').hasError('required') || advanceTableForm.get('email').touched">
+              Please enter a valid email address
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Birth date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="bDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="advanceTableForm.get('bDate').hasError('required')">
+              Please select date
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Mobile</mat-label>
+            <input matInput formControlName="mobile" type="number">
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-error *ngIf="advanceTableForm.get('mobile').hasError('required')">
+              Mobile is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class=" col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width " appearance="outline">
+            <mat-label>Country</mat-label>
+            <mat-select formControlName="country" required>
+              <mat-option [value]="'india'">
+                India
+              </mat-option>
+              <mat-option [value]="'usa'">
+                USA
+              </mat-option>
+              <mat-option [value]="'france'">
+                France
+              </mat-option>
+              <mat-option [value]="'germany'">
+                Germany
+              </mat-option>
+              <mat-option [value]="'spain'">
+                Spain
+              </mat-option>
+              <mat-option [value]="'turkey'">
+                Turkey
+              </mat-option>
+              <mat-option [value]="'other'">
+                Other
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="advanceTableForm.get('country').hasError('required')">
+              Country Name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Address</mat-label>
+            <textarea matInput formControlName="address"></textarea>
+          </mat-form-field>
+        </div>
+      </div> -->
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-raised-button color="primary" [type]="submit" 
+            *ngIf="show" [mat-dialog-close]="1" (click)="confirmAdd()">Sauvgarder</button>
+              <button   *ngIf="!show"  mat-raised-button color="primary" [type]="submit" 
+              [mat-dialog-close]="1" (click)="confirmUpdate()">Modifier </button>
+            <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">Annuler</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+{
+  "HEADER":{
+    "SEARCH": {
+      "TEXT": "Search.."
+    }
+  },
+  "MENUITEMS": {
+    "USER":{
+      "POST": "Manager"
+    },
+    "MAIN": {
+      "TEXT": "-- Main"
+    },
+    "HOME": {
+      "TEXT": "Tableau de bord"
+     
+    },
+    "ADVANCE-TABLE": {
+      "TEXT": "Localisation"
+
+    },
+    "MATERIAL": {
+      "TEXT": "Matériel",
+      "LIST": {
+        "DASHBOARD1": "Équipement",
+        "DASHBOARD2": "Pièces de rechange",
+        "DASHBOARD3": "Maintenance",
+        "DASHBOARD4": "Composants"
+
+      }
+    },
+    "SURVEILLANCE-FONCTIONNEL": {
+      "TEXT": "Surveillance fonctionnelle",
+      "LIST": {
+        "DASHBOARD1": "Déclencheurs d'alerte",
+        "DASHBOARD2": "Alertes d'équipement",
+        "DASHBOARD3": "Alertes système ",
+        "DASHBOARD4": "Équipement avec alertes",
+        "DASHBOARD5": "Composants avec alertes"
+
+      }
+    },
+    "SURVEILLANCE-SYSTEM": {
+      "TEXT": "Surveillance système",
+      "LIST": {
+        "DASHBOARD1": "Parc",
+        "DASHBOARD2": "Équipement",
+        "DASHBOARD3": "Journaux"
+      }
+    },
+    "RAPPORTS": {
+      "TEXT": "Rapports",
+      "LIST": {
+        "DASHBOARD1": "Équipement",
+        "DASHBOARD2": "Pièces de rechange",
+        "DASHBOARD3": "Entrées-Sorties"
+      }
+    },
+    "JOURNAUX": {
+      "TEXT": "Journaux"
+    },
+    "GESTION-CONTENU": {
+      "TEXT": "Gestion de contenu"
+    },
+    "TASK": {
+      "TEXT": "Task"
+    },
+    "TELECHARGEMENTS": {
+      "TEXT": "Téléchargements"
+    },
+    "CERTIFICATS": {
+      "TEXT": "certificats"
+    }
+  ,
+    "ADMIN": {
+      "TEXT": "Administration",
+      "LIST": {
+        "DASHBOARD1": "Utilisateurs",
+        "DASHBOARD2": "Groupes",
+        "DASHBOARD3": "Grappes de serveurs",
+        "DASHBOARD4": "Historiques"
+
+      }
+    }
+  
+   
+    
+
+  }
+}
