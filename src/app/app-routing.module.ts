@@ -67,19 +67,33 @@ const routes: Routes = [
             (m) => m.GestionContenuModule
           )
       },
+      {
+        path: 'telechargements',
+        loadChildren: () =>
+          import('./gestion-contenu/gestion-contenu.module').then(
+            (m) => m.GestionContenuModule
+          )
+      },
+      {
+        path: 'certificats',
+        loadChildren: () =>
+          import('./certificats/certificats.module').then(
+            (m) => m.CertificatsModule
+          )
+      },
       { path: '', redirectTo: '/authentication/signin', pathMatch: 'full' },
       {
         path: 'dashboard',
         loadChildren: () =>
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule)
       },
-      {
-        path: 'list-utilisateurs',
-        loadChildren: () =>
-          import('./advance-table/advance-table.module').then(
-            (m) => m.AdvanceTableModule
-          )
-      },
+      // {
+      //   path: 'list-utilisateurs',
+      //   loadChildren: () =>
+      //     import('./advance-table/advance-table.module').then(
+      //       (m) => m.AdvanceTableModule
+      //     )
+      // },
 
       {
         path: 'task',

@@ -4,6 +4,7 @@ import { GestionsUtilisateursComponent } from './gestions-utilisateurs/gestions-
 import { GroupesUtilisateursComponent } from './groupes-utilisateurs/groupes-utilisateurs.component';
 
 const routes: Routes = [
+
   {
     path: 'list-utilisateurs',
     component: GestionsUtilisateursComponent

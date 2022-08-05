@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { User } from '../models/user';
 import { environment } from 'src/environments/environment';
-import { User } from 'src/app/advance-table/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly API_URL = 'http://localhost:8080/api/';
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
@@ -24,17 +23,22 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  login(user : UserAuth) {
+  login(username: string, password: string) {
+
+    console.log("---" , environment.apiUrl)
     return this.http
-      .post<User>(this.API_URL+'authentificat',user)
+      .post<any>(`${environment.apiUrl}/authenticate`, {
+        username,
+        password
+      })
       .pipe(
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-
+          console.log("---" , environment.apiUrl)
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
           return user;
-         })
+        })
       );
   }
 
@@ -45,10 +49,3 @@ export class AuthService {
     return of({ success: false });
   }
 }
-
-
-export class UserAuth {
-	email:  string ;
-	passeword : string;
-}
-

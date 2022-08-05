@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TelechargementsRoutingModule } from './telechargements-routing.module';
-import { TelechargementsComponent } from './telechargements/telechargements.component';
+import { TelechargementsComponent } from './telechargements.component';
 
 
 @NgModule({

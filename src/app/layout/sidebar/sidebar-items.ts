@@ -3,7 +3,7 @@ import { RouteInfo } from './sidebar.metadata';
 export const ROUTES: RouteInfo[] = [
 
   {
-    path: '',
+    path: 'dashboard/dashboard3',
     title: 'MENUITEMS.HOME.TEXT',
     moduleName: 'Tableau de bord',
     icon: 'home',
@@ -14,7 +14,7 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
-    path: '',
+    path: 'localisation',
     title: 'MENUITEMS.ADVANCE-TABLE.TEXT',
     moduleName: 'Localisation',
     icon: 'location_searching',
@@ -31,7 +31,7 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     submenu: [
       {
-        path: '/list-utilisateurs',
+        path: '/materiel/equipements',
         title: 'MENUITEMS.MATERIAL.LIST.DASHBOARD1',
         moduleName: 'Équipement en Point de vente',
         icon: '',
@@ -40,7 +40,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
       {
-        path: 'dashboard/dashboard2',
+        path: '/materiel/pieces-rechanges',
         title: 'MENUITEMS.MATERIAL.LIST.DASHBOARD2',
         moduleName: 'Équipement',
         icon: '',
@@ -49,7 +49,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
       {
-        path: 'dashboard/dashboard3',
+        path: 'materiel/maintenance',
         title: 'MENUITEMS.MATERIAL.LIST.DASHBOARD3',
         moduleName: 'dashboard',
         icon: '',
@@ -58,7 +58,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
       {
-        path: '/list-utilisateurs',
+        path: 'materiel/composants',
         title: 'MENUITEMS.MATERIAL.LIST.DASHBOARD4',
         moduleName: 'Composants',
         icon: '',
@@ -77,7 +77,7 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     submenu: [
       {
-        path: '/list-utilisateurs',
+        path: '/surveillance-fonctionnelle/declencheurs-alerts',
         title: 'MENUITEMS.SURVEILLANCE-FONCTIONNEL.LIST.DASHBOARD1',
         moduleName: 'Déclencheurs d alerte',
         icon: '',
@@ -86,7 +86,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
       {
-        path: 'dashboard/dashboard2',
+        path: 'surveillance-fonctionnelle/alerts-equipement',
         title: 'MENUITEMS.SURVEILLANCE-FONCTIONNEL.LIST.DASHBOARD2',
         moduleName: 'Équipement',
         icon: '',
@@ -95,7 +95,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
       {
-        path: 'dashboard/dashboard3',
+        path: 'surveillance-fonctionnelle/alerte-systeme',
         title: 'MENUITEMS.SURVEILLANCE-FONCTIONNEL.LIST.DASHBOARD3',
         moduleName: 'dashboard',
         icon: '',
@@ -104,7 +104,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
       {
-        path: 'dashboard/dashboard3',
+        path: 'surveillance-fonctionnelle/equipement-avec-alertes',
         title: 'MENUITEMS.SURVEILLANCE-FONCTIONNEL.LIST.DASHBOARD4',
         moduleName: 'dashboard',
         icon: '',
@@ -113,7 +113,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
       {
-        path: 'dashboard/dashboard3',
+        path: 'surveillance-fonctionnelle/composant-avec-alertes',
         title: 'MENUITEMS.SURVEILLANCE-FONCTIONNEL.LIST.DASHBOARD5',
         moduleName: 'dashboard',
         icon: '',
@@ -132,7 +132,7 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     submenu: [
       {
-        path: '/list-utilisateurs',
+        path: 'surveillance-systeme/parc',
         title: 'MENUITEMS.SURVEILLANCE-SYSTEM.LIST.DASHBOARD1',
         moduleName: 'Parc',
         icon: '',
@@ -141,7 +141,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
       {
-        path: 'dashboard/dashboard2',
+        path: 'surveillance-systeme/equipement-systeme',
         title: 'MENUITEMS.SURVEILLANCE-SYSTEM.LIST.DASHBOARD2',
         moduleName: 'Équipement',
         icon: '',
@@ -150,7 +150,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
       {
-        path: 'dashboard/dashboard3',
+        path: 'surveillance-systeme/journaux-systeme',
         title: 'MENUITEMS.SURVEILLANCE-SYSTEM.LIST.DASHBOARD3',
         moduleName: 'Journaux',
         icon: '',
@@ -169,7 +169,7 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     submenu: [
       {
-        path: '/list-utilisateurs',
+        path: 'rapports/rapports-equipement',
         title: 'MENUITEMS.RAPPORTS.LIST.DASHBOARD1',
         moduleName: 'Parc',
         icon: '',
@@ -178,7 +178,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
       {
-        path: 'dashboard/dashboard2',
+        path: 'rapports/rapports-pieces-rechange',
         title: 'MENUITEMS.RAPPORTS.LIST.DASHBOARD2',
         moduleName: 'Équipement',
         icon: '',
@@ -187,7 +187,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
       {
-        path: 'dashboard/dashboard3',
+        path: 'rapports/rapports-entre-sortie',
         title: 'MENUITEMS.RAPPORTS.LIST.DASHBOARD3',
         moduleName: 'Journaux',
         icon: '',
@@ -198,7 +198,7 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
-    path: '',
+    path: 'journaux',
     title: 'MENUITEMS.JOURNAUX.TEXT',
     moduleName: 'Journaux',
     icon: 'monitor',
@@ -208,7 +208,7 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
-    path: '',
+    path: 'gestion-contenu',
     title: 'MENUITEMS.GESTION-CONTENU.TEXT',
     moduleName: 'Gestion de contenu',
     icon: 'monitor',
@@ -218,7 +218,7 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
-    path: '',
+    path: 'telechargements',
     title: 'MENUITEMS.TELECHARGEMENTS.TEXT',
     moduleName: 'Téléchargements',
     icon: '',
@@ -228,7 +228,7 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
-    path: '',
+    path: 'certificats',
     title: 'MENUITEMS.CERTIFICATS.TEXT',
     moduleName: 'Certificats',
     icon: 'monitor',

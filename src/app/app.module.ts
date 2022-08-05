@@ -30,6 +30,7 @@ import {
   HttpClient
 } from '@angular/common/http';
 import { WINDOW_PROVIDERS } from './core/service/window.service';
+import { fakeBackendProvider } from './core/interceptor/fake-backend';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -69,14 +70,15 @@ export function createTranslateLoader(http: HttpClient): any {
         SharedModule
     ],
     providers: [
-        { provide: LocationStrategy, useClass: HashLocationStrategy },
-        {
-            provide: PERFECT_SCROLLBAR_CONFIG,
-            useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-        },
-        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        WINDOW_PROVIDERS
+      { provide: LocationStrategy, useClass: HashLocationStrategy },
+      {
+        provide: PERFECT_SCROLLBAR_CONFIG,
+        useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+      },
+      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+      { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+      fakeBackendProvider,
+      WINDOW_PROVIDERS
     ],
     bootstrap: [AppComponent]
 })
