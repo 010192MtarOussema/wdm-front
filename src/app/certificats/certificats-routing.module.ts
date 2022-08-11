@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CertificatsComponent } from './certificats.component';
 
 const routes: Routes = [{
-  path : 'certificats', 
+  path : '', 
   component : CertificatsComponent
 }];
 

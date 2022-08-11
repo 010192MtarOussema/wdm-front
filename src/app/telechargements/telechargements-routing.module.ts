@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TelechargementsComponent } from './telechargements.component';
 
 const routes: Routes = [{
-  path : 'telechargements' , 
+  path : '' , 
   component : TelechargementsComponent
 }];
 

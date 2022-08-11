@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LocalisationComponent } from './localisation.component';
 
 const routes: Routes = [{
-  path : 'localisation' , 
+  path : '' , 
   component : LocalisationComponent
 }];
 
