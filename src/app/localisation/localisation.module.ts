@@ -1,17 +1,34 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LocalisationRoutingModule } from './localisation-routing.module';
-import { LocalisationComponent } from './localisation.component';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { ComponentsModule } from '../shared/components/components.module';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MatStepperModule } from '@angular/material/stepper';
+import { SharedModule } from '../shared/shared.module';
+import { ComponentsModule } from '../shared/components/components.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableExporterModule } from 'mat-table-exporter';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { LocalisationComponent } from './localisation.component';
+import { LocalisationRoutingModule } from './localisation-routing.module';
+import { MaterielRoutingModule } from '../materiel/materiel-routing.module';
 
 
 @NgModule({
@@ -20,17 +37,38 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
+    MatPaginatorModule,
+    MatMenuModule,
+
     LocalisationRoutingModule,
+    CommonModule,
+    MaterielRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MatExpansionModule,
+    MatTableModule,
+    MatTabsModule,
+    MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
-    MatIconModule,
+    MatSnackBarModule,
     MatButtonModule,
+    MatIconModule,
+    MatRadioModule,
+    MatSelectModule,
     MatCheckboxModule,
-    MatTabsModule,
-    ComponentsModule
+    MatCardModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatSortModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatTooltipModule,
+    MatTableExporterModule,
+    MatProgressSpinnerModule,
+    ComponentsModule,
+    SharedModule,
+    MatStepperModule,
+    ScrollingModule,
   ]
 })
 export class LocalisationModule { }
