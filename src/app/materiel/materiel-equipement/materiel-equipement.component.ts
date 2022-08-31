@@ -12,8 +12,8 @@ import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { SelectionModel } from '@angular/cdk/collections';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
-import { GestionsUtilisateursService } from 'src/app/administration/gestions-utilisateurs/gestions-utilisateurs.service';
 import { User } from 'src/app/core/models/user';
+import { GestionsUtilisateursService } from 'src/app/services/gestions-utilisateurs.service';
 
 @Component({
   selector: 'app-materiel-equipement',

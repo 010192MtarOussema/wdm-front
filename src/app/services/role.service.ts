@@ -2,37 +2,36 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
-import { User } from '../models/user';
-
+import { Role } from '../models/role';
 @Injectable({
   providedIn: 'root'
 })
-export class GestionsUtilisateursService extends UnsubscribeOnDestroyAdapter {
+export class RoleService extends UnsubscribeOnDestroyAdapter {
   // private readonly API_URL = 'assets/data/advanceTable.json';
   private readonly API_URL = 'http://localhost:8080/api/';
 
   isTblLoading = true;
-  dataChange: BehaviorSubject<User[]> = new BehaviorSubject<
-    User[]
+  dataChange: BehaviorSubject<Role[]> = new BehaviorSubject<
+  Role[]
   >([]);
   // Temporarily stores data from dialogs
   dialogData: any;
   constructor(private httpClient: HttpClient) {
     super();
   }
-  get data(): User[] {
+  get data(): Role[] {
     return this.dataChange.value;
   }
   getDialogData() {
     return this.dialogData;
   }
   /** CRUD METHODS */
-  getAllUser(): Observable<User>{
-   return this.httpClient.get<User>(this.API_URL+'users')
+  getAllRole(): Observable<Role>{
+   return this.httpClient.get<Role>(this.API_URL+'roles')
   }
-  getAllUsers(): void {
+  getAllRoles(): void {
    this.httpClient
-      .get<User[]>(this.API_URL+'users')
+      .get<Role[]>(this.API_URL+'roles')
       .subscribe(
         (data) => {
           this.isTblLoading = false;
@@ -44,31 +43,31 @@ export class GestionsUtilisateursService extends UnsubscribeOnDestroyAdapter {
         }
       );
   }
-  addUser(user: User): void {
+  addRole(role: Role): void {
     // this.dialogData = advanceTable;
 
-      this.httpClient.post(this.API_URL+'add-user', user).subscribe(data => {
-      this.dialogData = user;
+      this.httpClient.post(this.API_URL+'add-role', role).subscribe(data => {
+      this.dialogData = role;
       },
       (err: HttpErrorResponse) => {
      // error code here
     });
   }
-  updateUser(user: User): void {
+  updateRole(role: Role): void {
     // this.dialogData = advanceTable;
 
-     this.httpClient.put(this.API_URL+"update-user/"+ user.idUser, user).subscribe(data => {
-      this.dialogData = user;
+     this.httpClient.put(this.API_URL+"update-role/"+ role.id, role).subscribe(data => {
+      this.dialogData = role;
     },
     (err: HttpErrorResponse) => {
       // error code here
     }
   );
   }
-  blockUser(id: number): void {
+  deleteRole(id: number): void {
     console.log("service id" , id);
 
-     this.httpClient.post(this.API_URL+'block-user', id).subscribe(data => {
+     this.httpClient.post(this.API_URL+'block-role', id).subscribe(data => {
       this.dialogData = data;
       console.log(id);
       },

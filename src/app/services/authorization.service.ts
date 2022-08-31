@@ -1,36 +1,38 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
-import { UserGroup } from './userGroup';
+import { Authorization } from '../models/authorization';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GroupesTilisateursService extends UnsubscribeOnDestroyAdapter {
+export class AuthorizationService extends UnsubscribeOnDestroyAdapter {
   // private readonly API_URL = 'assets/data/advanceTable.json';
   private readonly API_URL = 'http://localhost:8080/api/';
 
   isTblLoading = true;
-  dataChange: BehaviorSubject<UserGroup[]> = new BehaviorSubject<
-  UserGroup[]
+  dataChange: BehaviorSubject<Authorization[]> = new BehaviorSubject<
+  Authorization[]
   >([]);
   // Temporarily stores data from dialogs
   dialogData: any;
   constructor(private httpClient: HttpClient) {
     super();
   }
-  get data(): UserGroup[] {
+  get data(): Authorization[] {
     return this.dataChange.value;
   }
   getDialogData() {
     return this.dialogData;
   }
   /** CRUD METHODS */
-
-  getUserGrpoupes(): void {
+  getAllAuthorization(): Observable<Authorization>{
+   return this.httpClient.get<Authorization>(this.API_URL+'roles')
+  }
+  getAllAbilities(): void {
    this.httpClient
-      .get<UserGroup[]>(this.API_URL+'groupes')
+      .get<Authorization[]>(this.API_URL+'roles')
       .subscribe(
         (data) => {
           this.isTblLoading = false;
@@ -42,31 +44,31 @@ export class GroupesTilisateursService extends UnsubscribeOnDestroyAdapter {
         }
       );
   }
-  addUserGroupe(userGroup: UserGroup): void {
+  addAuthorization(authorization: Authorization): void {
     // this.dialogData = advanceTable;
 
-      this.httpClient.post(this.API_URL+'add-group', userGroup).subscribe(data => {
-      this.dialogData = userGroup;
+      this.httpClient.post(this.API_URL+'add-Authorization', authorization).subscribe(data => {
+      this.dialogData = Authorization;
       },
       (err: HttpErrorResponse) => {
      // error code here
     });
   }
-  updateUserGroupe(user: UserGroup): void {
+  updateAuthorization(authorization: Authorization): void {
     // this.dialogData = advanceTable;
 
-     this.httpClient.put(this.API_URL+"update-group/"+ user.idUserGroup, user).subscribe(data => {
-      this.dialogData = user;
+     this.httpClient.put(this.API_URL+"update-Authorization/"+ authorization.id, authorization).subscribe(data => {
+      this.dialogData = authorization;
     },
     (err: HttpErrorResponse) => {
       // error code here
     }
   );
   }
-  deleteUserGroupe(id: number): void {
+  deleteAuthorization(id: number): void {
     console.log("service id" , id);
 
-     this.httpClient.delete(this.API_URL+'delete-group/'+ id).subscribe(data => {
+     this.httpClient.post(this.API_URL+'delete-Authorization', id).subscribe(data => {
       this.dialogData = data;
       console.log(id);
       },

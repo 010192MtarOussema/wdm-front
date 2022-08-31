@@ -8,9 +8,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
-import { GestionsUtilisateursService } from 'src/app/administration/gestions-utilisateurs/gestions-utilisateurs.service';
 import { map } from 'rxjs/operators';
-import { User } from 'src/app/administration/gestions-utilisateurs/user';
+import { User } from 'src/app/models/user';
+import { GestionsUtilisateursService } from 'src/app/services/gestions-utilisateurs.service';
 
 @Component({
   selector: 'app-materiel-pieces-rechanges',

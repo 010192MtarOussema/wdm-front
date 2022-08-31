@@ -8,8 +8,8 @@ import {
 } from '@angular/forms';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { formatDate } from '@angular/common';
-import { UserGroup } from '../../userGroup';
-import { GroupesTilisateursService } from '../../groupes-tilisateurs.service';
+import { UserGroup } from '../../../../models/userGroup';
+import { GroupesTilisateursService } from '../../../../services/groupes-tilisateurs.service';
 @Component({
   selector: 'app-form-dialog',
   templateUrl: './form-dialog.component.html',

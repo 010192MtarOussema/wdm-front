@@ -8,11 +8,11 @@ import {
 } from '@angular/forms';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { formatDate } from '@angular/common';
-import { User } from '../../user';
+import { User } from '../../../../models/user';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatSelectionListChange } from '@angular/material/list';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { GestionsUtilisateursService } from '../../gestions-utilisateurs.service';
+import { GestionsUtilisateursService } from 'src/app/services/gestions-utilisateurs.service';
 
 @Component({
   selector: 'app-form-dialog-user',

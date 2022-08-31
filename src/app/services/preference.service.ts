@@ -1,38 +1,39 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
-import { User } from '../models/user';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Preference } from '../models/Preference';
+import { UnsubscribeOnDestroyAdapter } from '../shared/UnsubscribeOnDestroyAdapter';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GestionsUtilisateursService extends UnsubscribeOnDestroyAdapter {
+export class PreferenceService extends UnsubscribeOnDestroyAdapter {
   // private readonly API_URL = 'assets/data/advanceTable.json';
   private readonly API_URL = 'http://localhost:8080/api/';
 
   isTblLoading = true;
-  dataChange: BehaviorSubject<User[]> = new BehaviorSubject<
-    User[]
+  dataChange: BehaviorSubject<Preference[]> = new BehaviorSubject<
+  Preference[]
   >([]);
   // Temporarily stores data from dialogs
   dialogData: any;
   constructor(private httpClient: HttpClient) {
     super();
   }
-  get data(): User[] {
+  get data(): Preference[] {
     return this.dataChange.value;
   }
   getDialogData() {
     return this.dialogData;
   }
   /** CRUD METHODS */
-  getAllUser(): Observable<User>{
-   return this.httpClient.get<User>(this.API_URL+'users')
+  getAPreference(): Observable<Preference>{
+   return this.httpClient.get<Preference>(this.API_URL+'preferences')
   }
-  getAllUsers(): void {
+  getAllPreferences(): void {
    this.httpClient
-      .get<User[]>(this.API_URL+'users')
+      .get<Preference[]>(this.API_URL+'preferences')
       .subscribe(
         (data) => {
           this.isTblLoading = false;
@@ -44,31 +45,31 @@ export class GestionsUtilisateursService extends UnsubscribeOnDestroyAdapter {
         }
       );
   }
-  addUser(user: User): void {
+  addPreference(preference: Preference): void {
     // this.dialogData = advanceTable;
 
-      this.httpClient.post(this.API_URL+'add-user', user).subscribe(data => {
-      this.dialogData = user;
+      this.httpClient.post(this.API_URL+'add-preference', preference).subscribe(data => {
+      this.dialogData = preference;
       },
       (err: HttpErrorResponse) => {
      // error code here
     });
   }
-  updateUser(user: User): void {
+  updatePreference(preference: Preference): void {
     // this.dialogData = advanceTable;
 
-     this.httpClient.put(this.API_URL+"update-user/"+ user.idUser, user).subscribe(data => {
-      this.dialogData = user;
+     this.httpClient.put(this.API_URL+"update-preference/"+ preference.id, preference).subscribe(data => {
+      this.dialogData = preference;
     },
     (err: HttpErrorResponse) => {
       // error code here
     }
   );
   }
-  blockUser(id: number): void {
+  deletePreference(id: number): void {
     console.log("service id" , id);
 
-     this.httpClient.post(this.API_URL+'block-user', id).subscribe(data => {
+     this.httpClient.post(this.API_URL+'delete-preference', id).subscribe(data => {
       this.dialogData = data;
       console.log(id);
       },

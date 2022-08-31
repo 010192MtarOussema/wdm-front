@@ -12,10 +12,10 @@ import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { SelectionModel } from '@angular/cdk/collections';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
-import { User } from './user';
-import { GestionsUtilisateursService } from './gestions-utilisateurs.service';
+import { User } from '../../models/user';
 import { FormDialogUserComponent } from './dialogs/form-dialog-user/form-dialog-user.component';
 import { BlockUserComponent } from './dialogs/block-user/block-user.component';
+import { GestionsUtilisateursService } from 'src/app/services/gestions-utilisateurs.service';
 
 
 @Component({

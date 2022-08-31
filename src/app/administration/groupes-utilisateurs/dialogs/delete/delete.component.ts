@@ -1,6 +1,6 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Component, Inject } from '@angular/core';
-import { GroupesTilisateursService } from '../../groupes-tilisateurs.service';
+import { GroupesTilisateursService } from '../../../../services/groupes-tilisateurs.service';
 @Component({
   selector: 'app-delete',
   templateUrl: './delete.component.html',

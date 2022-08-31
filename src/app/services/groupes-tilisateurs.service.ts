@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
-import { UserGroup } from '../administration/groupes-utilisateurs/userGroup';
+import { UserGroup } from '../models/userGroup';
 
 @Injectable({
   providedIn: 'root'

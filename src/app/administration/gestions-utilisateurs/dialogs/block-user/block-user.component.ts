@@ -1,6 +1,6 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Component, Inject } from '@angular/core';
-import { GestionsUtilisateursService } from '../../gestions-utilisateurs.service';
+import { GestionsUtilisateursService } from 'src/app/services/gestions-utilisateurs.service';
 
 @Component({
   selector: 'app-block-user',
