@@ -28,9 +28,12 @@ export class GroupesTilisateursService extends UnsubscribeOnDestroyAdapter {
   }
   /** CRUD METHODS */
 
-  getUserGrpoupes(): void {
+  list() : Observable<UserGroup[]> {
+   return this.httpClient.get<UserGroup[]>(this.API_URL+'list-users-groupes')
+  }
+  getUserGrpoupes() {
    this.httpClient
-      .get<UserGroup[]>(this.API_URL+'groupes')
+      .get<UserGroup[]>(this.API_URL+'list-users-groupes')
       .subscribe(
         (data) => {
           this.isTblLoading = false;
@@ -55,7 +58,7 @@ export class GroupesTilisateursService extends UnsubscribeOnDestroyAdapter {
   updateUserGroupe(user: UserGroup): void {
     // this.dialogData = advanceTable;
 
-     this.httpClient.put(this.API_URL+"update-group/"+ user.idUserGroup, user).subscribe(data => {
+     this.httpClient.put(this.API_URL+"update-group/"+ user.id, user).subscribe(data => {
       this.dialogData = user;
     },
     (err: HttpErrorResponse) => {

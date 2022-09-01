@@ -1,14 +1,11 @@
-export class UserGroup {
-    idUserGroup : number ; 
+import { AbstractEntity } from "./abstractEntity";
+
+export class UserGroup extends AbstractEntity {
     name:string ; 
     description : string ; 
     status : string ;
+    users: [] ; 
+    userGroupPreferenceValues : [] ;
 
-    constructor(userGroupe){
-        this.idUserGroup = userGroupe.idUserGroup ; 
-        this.name = userGroupe.name ; 
-        this.description = userGroupe.description ; 
-        this.status = userGroupe.status;
-
-    }
+ 
 }

@@ -1,71 +1,43 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import {
   UntypedFormControl,
   Validators,
   UntypedFormGroup,
   UntypedFormBuilder
 } from '@angular/forms';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
-import { formatDate } from '@angular/common';
 import { User } from '../../../../models/user';
 import { SelectionModel } from '@angular/cdk/collections';
-import { MatSelectionListChange } from '@angular/material/list';
+import { MatSelectionList, MatSelectionListChange } from '@angular/material/list';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { GestionsUtilisateursService } from 'src/app/services/gestions-utilisateurs.service';
+import { GroupesTilisateursService } from 'src/app/services/groupes-tilisateurs.service';
+import { UserGroup } from 'src/app/models/userGroup';
+import { AbilityService } from 'src/app/services/ability.service';
+import { Ability } from 'src/app/models/ability';
 
 @Component({
   selector: 'app-form-dialog-user',
   templateUrl: './form-dialog-user.component.html',
   styleUrls: ['./form-dialog-user.component.sass']
 })
-export class FormDialogUserComponent  {
+export class FormDialogUserComponent  implements OnInit {
 
   action: string;
   dialogTitle: string;
   advanceTableForm: UntypedFormGroup;
   user: User;
+  userGroupes! : UserGroup[] ; 
+  abilities! : Ability [];
   toppings = new UntypedFormControl();
   show : boolean = true ;
   abilitiesList: string[] = [
     'Action sur script',
     'Commentaire script',
- 
-   
   ];
   fileUploadForm: UntypedFormGroup;
-
   typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
-  Contacts: string[] = [
-    'contact 1',
-    'contact 2',
-    'contact 3',
-    'contact 4',
-    'contact 5',
-    'contact 6',
-    'contact 7',
-    'contact 8',
-    'contact 9',
-    'contact 10',
-    'contact 9',
-    'contact 10',
-    'contact 9',
-    'contact 10',
-    'contact 9',
-    'contact 10',
-    'contact 9',
-    'contact 10',
-    'contact 9',
-    'contact 10',
-    'contact 9',
-    'contact 10',
-    'contact 9',
-    'contact 10',
-    'contact 9',
-    'contact 10',
-    'contact 9',
-    'contact 10',
-  ];
+
   groupesList: string[] = [
     'Admin',
     'Super-Admin',
@@ -74,6 +46,8 @@ export class FormDialogUserComponent  {
     'Manager',
    
   ];
+  @ViewChild('shoes') shoesSelectionList: MatSelectionList;
+
   selection = new SelectionModel(true);
   list = Array.from(Array(10000).keys());
   status = new UntypedFormControl('', Validators.required);
@@ -87,9 +61,12 @@ export class FormDialogUserComponent  {
   constructor(
     public dialogRef: MatDialogRef<FormDialogUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public advanceTableService: GestionsUtilisateursService,
+    public userService: GestionsUtilisateursService,
+    public groupeUtilisateurService:  GroupesTilisateursService ,
+    public abilityService : AbilityService ,
     private fb: UntypedFormBuilder
   ) {
+
     this.fileUploadForm = fb.group({
       singleUpload: ['']
     });
@@ -106,6 +83,18 @@ export class FormDialogUserComponent  {
       this.user = new User({});
     }
     this.advanceTableForm = this.createContactForm();
+    
+  }
+  ngOnInit() {
+ this.groupeUtilisateurService.list().subscribe(data =>{
+  this.userGroupes = data 
+ }) ;
+
+ this.abilityService.getAllAbility().subscribe(data =>{
+  this.abilities = data ;
+
+ })
+
   }
   formControl = new UntypedFormControl('', [
     Validators.required
@@ -118,16 +107,17 @@ export class FormDialogUserComponent  {
       ? 'Not a valid email'
       : '';
   }
-  onSelectionChange(selection: MatSelectionListChange) {
-    selection.source
-      ? this.selection.select(selection.source._value)
-      : this.selection.deselect(selection.source._value);
+  getSelected() {
+    return this.shoesSelectionList.selectedOptions.selected.map(s => s.value);
   }
-
+  onSelectionChange() {
+    console.log(this.getSelected());
+  }
   onSelectAll(e: MatCheckboxChange) {
     e.checked ? this.selection.select(...this.list) : this.selection.clear();
   }
   createContactForm(): UntypedFormGroup {
+  
     return this.fb.group({
       idUser : [this.user.idUser],
       firstName: [this.user.firstName, [Validators.required]],
@@ -141,6 +131,7 @@ export class FormDialogUserComponent  {
       loginName: [this.user.loginName, [Validators.required]],
       pseudo: [this.user.pseudo, [Validators.required]],
       passeword: [this.user.passeword, [Validators.required]],
+       abilities : [this.user.abilities ]
       
     });
   }
@@ -151,13 +142,13 @@ export class FormDialogUserComponent  {
     this.dialogRef.close();
   }
   public confirmAdd(): void {
-    this.advanceTableService.addUser(
+    this.userService.addUser(
       this.advanceTableForm.getRawValue()
     );
   }
 
   public confirmUpdate(): void {
-    this.advanceTableService.updateUser(
+    this.userService.updateUser(
       
       this.advanceTableForm.getRawValue()
     );

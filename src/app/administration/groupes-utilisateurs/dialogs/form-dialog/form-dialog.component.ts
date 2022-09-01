@@ -54,7 +54,7 @@ export class FormDialogComponent {
       this.user = data.advanceTable;
     } else {
       this.dialogTitle = 'Ajouter un nouveau Groupe';
-      this.user = new UserGroup({});
+      this.user = new UserGroup();
     }
     this.advanceTableForm = this.createContactForm();
   }
@@ -71,7 +71,7 @@ export class FormDialogComponent {
   }
   createContactForm(): UntypedFormGroup {
     return this.fb.group({
-      idUserGroup : [this.user.idUserGroup],
+      idUserGroup : [this.user.id],
       name: [this.user.name, [Validators.required]],
       description: [this.user.description, [Validators.required]],
 

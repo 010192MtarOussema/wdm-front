@@ -27,8 +27,8 @@ export class AbilityService extends UnsubscribeOnDestroyAdapter {
     return this.dialogData;
   }
   /** CRUD METHODS */
-  getAllAbility(): Observable<Ability>{
-   return this.httpClient.get<Ability>(this.API_URL+'roles')
+  getAllAbility(): Observable<Ability[]>{
+   return this.httpClient.get<Ability[]>(this.API_URL+'ability-list')
   }
   getAllAbilities(): void {
    this.httpClient
