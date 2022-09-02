@@ -99,7 +99,7 @@ refresh() {
 //   });
 // }
 // editCall(row) {
-//   this.id = row.idUser;
+//   this.id = row.id;
 //   console.log('row ', row)
 
 //   let tempDirection;
@@ -119,7 +119,7 @@ refresh() {
 //     if (result === 1) {
 //       // When using an edit things are little different, firstly we find record inside DataService by id
 //       const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
-//         (x) => x.idUser === this.id
+//         (x) => x.id === this.id
 //       );
 //       // Then you update that record using data from dialogData (values you enetered)
 //       this.exampleDatabase.dataChange.value[foundIndex] =
@@ -136,7 +136,7 @@ refresh() {
 //   });
 // }
 // deleteItem(row) {
-//   this.id = row.idUser;
+//   this.id = row.id;
 //   console.log("row" , this.id)
 //   let tempDirection;
 //   if (localStorage.getItem('isRtl') === 'true') {
@@ -151,7 +151,7 @@ refresh() {
 //   this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
 //     if (result === 1) {
 //       const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
-//         (x) => x.idUser === this.id
+//         (x) => x.id === this.id
 //       );
 //       this.exampleDatabase.dataChange.value[foundIndex] =
 //       this.advanceTableService.getDialogData();
@@ -311,7 +311,7 @@ sortData(data: User[]): User[] {
     let propertyB: number | string = '';
     switch (this._sort.active) {
       case 'id':
-        [propertyA, propertyB] = [a.idUser, b.idUser];
+        [propertyA, propertyB] = [a.id, b.id];
         break;
       // case 'fName':
       //   [propertyA, propertyB] = [a.email, b.];

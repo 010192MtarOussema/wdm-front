@@ -123,7 +123,7 @@ export class FormDialogComponent {
   }
   createContactForm(): UntypedFormGroup {
     return this.fb.group({
-      idUser : [this.user.idUser],
+      id : [this.user.id],
       firstName: [this.user.firstName, [Validators.required]],
       lastName: [this.user.lastName, [Validators.required]],
       email: [

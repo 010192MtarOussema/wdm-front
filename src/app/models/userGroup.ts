@@ -7,5 +7,8 @@ export class UserGroup extends AbstractEntity {
     users: [] ; 
     userGroupPreferenceValues : [] ;
 
+    constructor(){
+        super();
+    }
  
 }

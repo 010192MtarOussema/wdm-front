@@ -19,26 +19,13 @@ import { GroupesTilisateursService } from '../../../../services/groupes-tilisate
 export class FormDialogComponent {
   action: string;
   dialogTitle: string;
-  advanceTableForm: UntypedFormGroup;
+  userGroupeForm: UntypedFormGroup;
   user: UserGroup;
   toppings = new UntypedFormControl();
   show : boolean = true ;
-  toppingList: string[] = [
-    'Admin',
-    'Mushroom',
-    'Onion',
-    'Pepperoni',
-    'Sausage',
-    'Tomato'
-  ];
+
   status = new UntypedFormControl('', Validators.required);
-  animals: any[] = [
-     'En création' ,
-      'Valide' ,
-      'Bloqué'
-  ];
-  favoriteSeason: string;
-  seasons: string[] = ['Lecture', 'Ecriture'];
+
   constructor(
     public dialogRef: MatDialogRef<FormDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -56,7 +43,7 @@ export class FormDialogComponent {
       this.dialogTitle = 'Ajouter un nouveau Groupe';
       this.user = new UserGroup();
     }
-    this.advanceTableForm = this.createContactForm();
+    this.userGroupeForm = this.createContactForm();
   }
   formControl = new UntypedFormControl('', [
     Validators.required
@@ -71,10 +58,8 @@ export class FormDialogComponent {
   }
   createContactForm(): UntypedFormGroup {
     return this.fb.group({
-      idUserGroup : [this.user.id],
       name: [this.user.name, [Validators.required]],
       description: [this.user.description, [Validators.required]],
-
        status: [this.user.status , [Validators.required]],
 
       
@@ -87,17 +72,17 @@ export class FormDialogComponent {
     this.dialogRef.close();
   }
   public confirmAdd(): void {
-    console.log("-------form" , this.advanceTableForm.getRawValue()) ;
+    console.log("-------form" , this.userGroupeForm.getRawValue()) ;
     this.advanceTableService.addUserGroupe(
-      this.advanceTableForm.getRawValue()
+      this.userGroupeForm.getRawValue()
     );
   }
 
   public confirmUpdate(): void {
-    console.log("-------form" , this.advanceTableForm.getRawValue()) ;
+    console.log("-------form" , this.userGroupeForm.getRawValue()) ;
     this.advanceTableService.updateUserGroupe(
       
-      this.advanceTableForm.getRawValue()
+      this.userGroupeForm.getRawValue()
     );
   }
 }

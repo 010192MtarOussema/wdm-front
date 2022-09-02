@@ -57,7 +57,7 @@ export class GestionsUtilisateursService extends UnsubscribeOnDestroyAdapter {
   updateUser(user: User): void {
     // this.dialogData = advanceTable;
 
-     this.httpClient.put(this.API_URL+"update-user/"+ user.idUser, user).subscribe(data => {
+     this.httpClient.put(this.API_URL+"update-user/"+ user.id, user).subscribe(data => {
       this.dialogData = user;
     },
     (err: HttpErrorResponse) => {

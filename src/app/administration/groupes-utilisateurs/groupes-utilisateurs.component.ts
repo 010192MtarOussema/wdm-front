@@ -53,8 +53,7 @@ constructor(
   private snackBar: MatSnackBar
 ) {
   super();
-  // this.advanceTableService.getUserGrpoupes().subscribe(data=>
-  //   console.log("list users <====> " + data))
+
 }
 @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -93,7 +92,6 @@ addNew() {
       this.refreshTable();
       this.showNotification(
         'snackbar-success',
-    
         'Nouveau Groupe ajouté avec succès ...!!!',
         'top',
         'center'
@@ -102,7 +100,7 @@ addNew() {
   });
 }
 editCall(row) {
-  this.id = row.idUserGroup;
+  this.id = row.id;
   console.log('row ', row)
 
   let tempDirection;
@@ -131,7 +129,7 @@ editCall(row) {
       this.refreshTable();
       this.showNotification(
         'snackbar-success',
-        'Compte utilisateur modifié avec succès...!!!',
+        'Groupe  modifié avec succès...!!!',
         'top',
         'center'
       );
@@ -139,7 +137,7 @@ editCall(row) {
   });
 }
 deleteItem(row) {
-  this.id = row.idUser;
+  this.id = row.id;
   console.log("row" , this.id)
   let tempDirection;
   if (localStorage.getItem('isRtl') === 'true') {
@@ -208,6 +206,7 @@ removeSelectedRows() {
 }
 public loadData() {
   this.exampleDatabase = new GroupesTilisateursService(this.httpClient);
+  console.log(this.exampleDatabase)
   this.dataSource = new ExampleDataSource(
     this.exampleDatabase,
     this.paginator,
@@ -279,9 +278,11 @@ connect(): Observable<UserGroup[]> {
           const searchStr = (
             userGroupe.name + 
             userGroupe.description + 
-            userGroupe.status
+            userGroupe.status +
+            userGroupe.users  
+
           ).toLowerCase();
-          return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
+          return searchStr.toString().toLowerCase().indexOf(this.filter.toLowerCase()) !== -1;
         });
       // Sort filtered data
       const sortedData = this.sortData(this.filteredData.slice());

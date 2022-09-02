@@ -142,6 +142,8 @@
                     </form>
                   </mat-step>
                   <mat-step>
+                    <form  [formGroup]="advanceTableForm">
+
                     <ng-template matStepLabel>Paramétrages</ng-template>
                     <br>
                     <div>
@@ -149,10 +151,10 @@
                         <h6>Sélectionnez Habilitation</h6>
                         <div >
                        
-                          <mat-selection-list #shoes  (selectionChange)="onSelectionChange()" >
+                          <mat-selection-list #abilitie formControlName="abilities" (selectionChange)="onSelectionChange()" >
                             <cdk-virtual-scroll-viewport  appendOnly itemSize="50" class="example-viewport">
   
-                            <mat-list-option formControlName="ability"  *ngFor="let ability of abilities"  [value]="ability">
+                            <mat-list-option  *ngFor="let ability of abilities"  [value]="ability">
                               <a mat-list-item> <span class="contact-names">{{ ability.name }}</span> </a>
                             </mat-list-option>
                             </cdk-virtual-scroll-viewport>
@@ -161,23 +163,12 @@
                     </div>
                     <br>
                     <br>
-                    <!-- <div >
-                      <mat-form-field class="example-full-width" appearance="outline">
-                        <mat-label>Select</mat-label>
-                        <mat-select>
-                          <mat-option *ngFor="let topping of groupesList" [value]="topping">{{topping}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div> -->
-  
-  
                     <div >
                       <h6>Sélectionnez Groupes</h6>
 
-                      <mat-selection-list #shoes>
+                      <mat-selection-list #groupes (selectionChange)="onSelectionChange2()" formControlName="userGroups" >
                         <cdk-virtual-scroll-viewport  appendOnly itemSize="50" class="example-viewport">
-                        <mat-list-option *ngFor="let userGroup of userGroupes">
+                        <mat-list-option *ngFor="let userGroup of userGroupes" [value]="userGroup">
                           <a mat-list-item> <span class="contact-names">{{ userGroup.name  }}</span> </a>
                         </mat-list-option>
                         </cdk-virtual-scroll-viewport>
@@ -201,6 +192,7 @@
                     </div> -->
                    
                     </div>
+                    </form>
                   </mat-step>
                 </mat-vertical-stepper>
               </div>

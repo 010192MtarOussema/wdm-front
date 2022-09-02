@@ -22,36 +22,24 @@
           <div class="card">
           
             <div class="body">
-                  <form  [formGroup]="advanceTableForm">
+                  <form  [formGroup]="userGroupeForm">
                  
-                      <div >
-                        <!-- <mat-checkbox class="example-select-all" labelPosition="before" (change)="onSelectAll($event)">Select All</mat-checkbox>
-
-                        <mat-selection-list dense (selectionChange)="onSelectionChange($event)">
-                          <cdk-virtual-scroll-viewport [itemSize]="20" class="example-viewport">
-                            <mat-list-option *cdkVirtualFor="let item of list; let odd = odd; templateCacheSize: 0" [class.example-alternate]="odd"
-                              [value]="item" [selected]="selection.isSelected(item)">{{item}}
-                            </mat-list-option>
-                          </cdk-virtual-scroll-viewport>
-                        </mat-selection-list> -->
-                      </div>
+                    
               
-                   
+                      <div > 
+                        <mat-form-field   class="example-full-width" appearance="outline">
+                          <mat-label>Name</mat-label>
+                          <input matInput formControlName="Name" formControlName="name" >
+                          <mat-icon matSuffix>face</mat-icon>
+                        </mat-form-field>
+                      </div>
                     <div class="row">
                       <div >
                         <mat-form-field class="example-full-width" appearance="outline">
                           <mat-label>Description</mat-label>
                           <textarea matInput  formControlName="description"></textarea>
                         </mat-form-field>
-                        <!-- <mat-form-field class="example-full-width" appearance="outline">
-                          <mat-label>status</mat-label>
-                          <input matInput formControlName="status" required>
-                          <mat-icon matSuffix>status</mat-icon>
-                          <mat-error
-                            *ngIf="advanceTableForm.get('status').hasError('required') || advanceTableForm.get('status').touched">
-                            Please enter a valid status address
-                          </mat-error>
-                        </mat-form-field> -->
+                      
                       </div>
                
 
@@ -60,8 +48,8 @@
                       <mat-label>Status</mat-label>
                       <mat-form-field class="example-full-width">
                         <mat-select [formControl]="status" formControlName="status" required>
-                          <mat-option *ngFor="let animal of animals" [value]="animal">
-                            {{animal}}
+                          <mat-option >
+                        
                           </mat-option>
                         </mat-select>
                         <mat-error *ngIf="status.hasError('required')">Please choose status

@@ -1,5 +1,5 @@
 export class User {
-    idUser:number ; 
+    id:number ; 
     status : string ;
     loginName : string;
     pseudo: string ;
@@ -19,7 +19,7 @@ export class User {
     preferences :[];
     constructor(user) {
         {
-          this.idUser = user.idUser;
+          this.id = user.id;
           this.status = user.status ;
           this.loginName = user.avatar  ;
           this.pseudo = user.fName  ;

@@ -48,7 +48,7 @@ export class GroupesTilisateursService extends UnsubscribeOnDestroyAdapter {
   addUserGroupe(userGroup: UserGroup): void {
     // this.dialogData = advanceTable;
 
-      this.httpClient.post(this.API_URL+'add-group', userGroup).subscribe(data => {
+      this.httpClient.post(this.API_URL+'add-user-group', userGroup).subscribe(data => {
       this.dialogData = userGroup;
       },
       (err: HttpErrorResponse) => {
@@ -58,7 +58,7 @@ export class GroupesTilisateursService extends UnsubscribeOnDestroyAdapter {
   updateUserGroupe(user: UserGroup): void {
     // this.dialogData = advanceTable;
 
-     this.httpClient.put(this.API_URL+"update-group/"+ user.id, user).subscribe(data => {
+     this.httpClient.put(this.API_URL+"update-user-group/"+ user.id, user).subscribe(data => {
       this.dialogData = user;
     },
     (err: HttpErrorResponse) => {
@@ -69,7 +69,7 @@ export class GroupesTilisateursService extends UnsubscribeOnDestroyAdapter {
   deleteUserGroupe(id: number): void {
     console.log("service id" , id);
 
-     this.httpClient.delete(this.API_URL+'delete-group/'+ id).subscribe(data => {
+     this.httpClient.delete(this.API_URL+'delete-user-groupe/'+ id).subscribe(data => {
       this.dialogData = data;
       console.log(id);
       },

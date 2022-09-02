@@ -16,6 +16,6 @@ export class DeleteDialogComponent {
     this.dialogRef.close();
   }
   confirmDelete(): void {
-    this.advanceTableService.deleteUserGroupe(this.data.idUserGroup);
+    this.advanceTableService.deleteUserGroupe(this.data.id);
   }
 }

@@ -4,7 +4,8 @@ import {
   UntypedFormControl,
   Validators,
   UntypedFormGroup,
-  UntypedFormBuilder
+  UntypedFormBuilder,
+  FormControl
 } from '@angular/forms';
 import { User } from '../../../../models/user';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -31,22 +32,11 @@ export class FormDialogUserComponent  implements OnInit {
   abilities! : Ability [];
   toppings = new UntypedFormControl();
   show : boolean = true ;
-  abilitiesList: string[] = [
-    'Action sur script',
-    'Commentaire script',
-  ];
-  fileUploadForm: UntypedFormGroup;
-  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
 
-  groupesList: string[] = [
-    'Admin',
-    'Super-Admin',
-    'Manager',
-    'Consultant',
-    'Manager',
-   
-  ];
-  @ViewChild('shoes') shoesSelectionList: MatSelectionList;
+  fileUploadForm: UntypedFormGroup;
+
+  @ViewChild('abilitie') shoesSelectionListAbilities: MatSelectionList;
+  @ViewChild('groupes') shoesSelectionListUserGroupes: MatSelectionList;
 
   selection = new SelectionModel(true);
   list = Array.from(Array(10000).keys());
@@ -80,7 +70,7 @@ export class FormDialogUserComponent  implements OnInit {
       this.user = data.advanceTable;
     } else {
       this.dialogTitle = 'Ajouter un nouveau utilisateur';
-      this.user = new User({});
+      this.user = new User();
     }
     this.advanceTableForm = this.createContactForm();
     
@@ -108,18 +98,21 @@ export class FormDialogUserComponent  implements OnInit {
       : '';
   }
   getSelected() {
-    return this.shoesSelectionList.selectedOptions.selected.map(s => s.value);
+    return this.shoesSelectionListAbilities.selectedOptions.selected.map(s => s.value);
+  }
+  getSelected2() {
+    return this.shoesSelectionListUserGroupes.selectedOptions.selected.map(s => s.value);
+  }
+  onSelectionChange2() {
+    console.log(this.getSelected2());
   }
   onSelectionChange() {
     console.log(this.getSelected());
   }
-  onSelectAll(e: MatCheckboxChange) {
-    e.checked ? this.selection.select(...this.list) : this.selection.clear();
-  }
+
   createContactForm(): UntypedFormGroup {
   
     return this.fb.group({
-      idUser : [this.user.idUser],
       firstName: [this.user.firstName, [Validators.required]],
       lastName: [this.user.lastName, [Validators.required]],
       email: [
@@ -131,7 +124,8 @@ export class FormDialogUserComponent  implements OnInit {
       loginName: [this.user.loginName, [Validators.required]],
       pseudo: [this.user.pseudo, [Validators.required]],
       passeword: [this.user.passeword, [Validators.required]],
-       abilities : [this.user.abilities ]
+      abilities : new FormControl([]) , 
+      userGroups : new FormControl([])
       
     });
   }
@@ -142,6 +136,7 @@ export class FormDialogUserComponent  implements OnInit {
     this.dialogRef.close();
   }
   public confirmAdd(): void {
+    console.log(this.advanceTableForm.getRawValue())
     this.userService.addUser(
       this.advanceTableForm.getRawValue()
     );

@@ -1,5 +1,6 @@
-export class User {
-    idUser:number ; 
+import { AbstractEntity } from "./abstractEntity";
+
+export class User extends AbstractEntity {
     status : string ;
     loginName : string;
     pseudo: string ;
@@ -17,17 +18,6 @@ export class User {
     abilities :  [] ;
     userGroups : [];
     preferences :[];
-    constructor(user) {
-        {
-          this.idUser = user.idUser;
-          this.status = user.status ;
-          this.loginName = user.avatar  ;
-          this.pseudo = user.fName  ;
-          this.picture = user.lName  ;
-          this.email = user.email ;
-          this.firstName = user.firstName ;
-        
-         
-        }
-      }
+
+      
 }
