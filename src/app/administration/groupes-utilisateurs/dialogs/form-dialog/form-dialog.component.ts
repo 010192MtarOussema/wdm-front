@@ -58,6 +58,7 @@ export class FormDialogComponent {
   }
   createContactForm(): UntypedFormGroup {
     return this.fb.group({
+      id :[this.user.id],
       name: [this.user.name, [Validators.required]],
       description: [this.user.description, [Validators.required]],
        status: [this.user.status , [Validators.required]],
