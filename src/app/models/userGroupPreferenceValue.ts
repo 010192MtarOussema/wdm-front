@@ -1,9 +1,8 @@
-import { AbstractEntity } from "./abstractEntity";
 import { Preference } from "./Preference";
 import { UserGroup } from "./userGroup";
 
-export class UserGroupPreferenceValue extends AbstractEntity {
-
+export class UserGroupPreferenceValue  {
+    id : number ; 
     userGroup : UserGroup ; 
     preference : Preference ; 
     value : string ;

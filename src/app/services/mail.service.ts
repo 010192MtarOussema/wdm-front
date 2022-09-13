@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,8 @@ export class MailService {
   constructor(private httpClient: HttpClient) { }
 
   resetPassword(email : string){
-    return this.httpClient.post(this.API_URL+"",email)
+
+
+    return this.httpClient.get<User>(this.API_URL+"sendmail/"+email )
   }
 }

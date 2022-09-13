@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ExtraPagesRoutingModule } from './extra-pages-routing.module';
-import { ProfileComponent } from './profile/profile.component';
-import { InvoiceComponent } from './invoice/invoice.component';
-import { FaqsComponent } from './faqs/faqs.component';
+import { ExtraPagesRoutingModule } from './profile-routing.module';
+import { ProfileComponent } from './profile.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,8 +14,7 @@ import { ComponentsModule } from '../shared/components/components.module';
 @NgModule({
   declarations: [
     ProfileComponent,
-    InvoiceComponent,
-    FaqsComponent,
+  
   ],
   imports: [
     CommonModule,

@@ -30,7 +30,9 @@ import {
   HttpClient
 } from '@angular/common/http';
 import { WINDOW_PROVIDERS } from './core/service/window.service';
-import { fakeBackendProvider } from './core/interceptor/fake-backend';
+import { ShowNotificationService } from './services/show-notification.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+// import { fakeBackendProvider } from './core/interceptor/fake-backend';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -49,7 +51,8 @@ export function createTranslateLoader(http: HttpClient): any {
         SidebarComponent,
         RightSidebarComponent,
         AuthLayoutComponent,
-        MainLayoutComponent
+        MainLayoutComponent,
+    
     ],
     imports: [
         BrowserModule,
@@ -77,7 +80,9 @@ export function createTranslateLoader(http: HttpClient): any {
       },
       { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
       { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-      fakeBackendProvider,
+      // fakeBackendProvider,
+      ShowNotificationService ,
+      MatSnackBar,
       WINDOW_PROVIDERS
     ],
     bootstrap: [AppComponent]

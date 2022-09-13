@@ -56,7 +56,16 @@
                         </mat-error>
                       </mat-form-field>
                     </div>
-               
+                    <div >
+                      <h6>Sélectionnez Préferences</h6>
+                      <mat-selection-list #preference (selectionChange)="onSelectionChange3()" formControlName="userPreferenceValues" >
+                        <cdk-virtual-scroll-viewport  appendOnly itemSize="50" class="example-viewport">
+                        <mat-list-option *ngFor="let preference of preferences" [value]="preference">
+                          <a mat-list-item> <span class="contact-names">{{ preference.name  }}</span> </a>
+                        </mat-list-option>
+                        </cdk-virtual-scroll-viewport>
+                      </mat-selection-list>
+                    </div>
                
                   </form>
        

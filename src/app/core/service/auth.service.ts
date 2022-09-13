@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
 import { environment } from 'src/environments/environment';
+import { UserConnect } from 'src/app/models/user-connect';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
+  private readonly API_URL = 'http://localhost:8080/api/';
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(
@@ -23,14 +25,11 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  login(username: string, password: string) {
+  login(userConnect: UserConnect) {
 
-    console.log("---" , environment.apiUrl)
+    // console.log("---" , environment.apiUrl)
     return this.http
-      .post<any>(`${environment.apiUrl}/authenticate`, {
-        username,
-        password
-      })
+      .post<any>(`${this.API_URL}block-user-connect`,userConnect)
       .pipe(
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes

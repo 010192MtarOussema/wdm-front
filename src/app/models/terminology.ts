@@ -1,7 +1,6 @@
-import { AbstractEntity } from "./abstractEntity";
 
-export class Terminology extends AbstractEntity {
-
+export class Terminology  {
+    id : number ; 
     name :  string ; 
     description : string ; 
     terminology : Terminology ; 

@@ -1,5 +1,4 @@
-import { AbstractEntity } from "./abstractEntity";
 
-export class PiecesRechange extends AbstractEntity {
+export class PiecesRechange  {
     
 }

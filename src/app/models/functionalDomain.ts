@@ -1,6 +1,6 @@
-import { AbstractEntity } from "./abstractEntity";
 
-export class FunctionalDomain extends AbstractEntity {
+export class FunctionalDomain  {
+    id : number ; 
     name : string ; 
     description : string ; 
     functionalDomain : FunctionalDomain ; 

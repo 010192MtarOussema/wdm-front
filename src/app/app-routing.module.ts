@@ -144,9 +144,9 @@ const routes: Routes = [
           import('./icons/icons.module').then((m) => m.IconsModule)
       },
       {
-        path: 'extra-pages',
+        path: 'profile',
         loadChildren: () =>
-          import('./extra-pages/extra-pages.module').then(
+          import('./profile/profile.module').then(
             (m) => m.ExtraPagesModule
           )
       },

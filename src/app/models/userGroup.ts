@@ -1,14 +1,12 @@
-import { AbstractEntity } from "./abstractEntity";
 
-export class UserGroup extends AbstractEntity {
+export class UserGroup  {
+    id : number ; 
     name:string ; 
     description : string ; 
     status : string ;
     users: [] ; 
     userGroupPreferenceValues : [] ;
 
-    constructor(){
-        super();
-    }
+  
  
 }

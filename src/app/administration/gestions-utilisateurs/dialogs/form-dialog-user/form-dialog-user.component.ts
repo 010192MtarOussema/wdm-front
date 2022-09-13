@@ -16,6 +16,8 @@ import { GroupesTilisateursService } from 'src/app/services/groupes-tilisateurs.
 import { UserGroup } from 'src/app/models/userGroup';
 import { AbilityService } from 'src/app/services/ability.service';
 import { Ability } from 'src/app/models/ability';
+import { Preference } from 'src/app/models/Preference';
+import { PreferenceService } from 'src/app/services/preference.service';
 
 @Component({
   selector: 'app-form-dialog-user',
@@ -26,20 +28,22 @@ export class FormDialogUserComponent  implements OnInit {
 
   action: string;
   dialogTitle: string;
-  advanceTableForm: UntypedFormGroup;
+  userForm: UntypedFormGroup;
   user: User;
   userGroupes! : UserGroup[] ; 
   abilities! : Ability [];
+  preferences! : Preference[] ;
   toppings = new UntypedFormControl();
   show : boolean = true ;
-
+  isLinear = false;
   fileUploadForm: UntypedFormGroup;
 
   @ViewChild('abilitie') shoesSelectionListAbilities: MatSelectionList;
   @ViewChild('groupes') shoesSelectionListUserGroupes: MatSelectionList;
+  @ViewChild('preference') shoesSelectionListPreferences: MatSelectionList;
+
 
   selection = new SelectionModel(true);
-  list = Array.from(Array(10000).keys());
   status = new UntypedFormControl('', Validators.required);
   animals: any[] = [
      'En création' ,
@@ -54,6 +58,7 @@ export class FormDialogUserComponent  implements OnInit {
     public userService: GestionsUtilisateursService,
     public groupeUtilisateurService:  GroupesTilisateursService ,
     public abilityService : AbilityService ,
+    public preferenceService : PreferenceService , 
     private fb: UntypedFormBuilder
   ) {
 
@@ -72,7 +77,7 @@ export class FormDialogUserComponent  implements OnInit {
       this.dialogTitle = 'Ajouter un nouveau utilisateur';
       this.user = new User();
     }
-    this.advanceTableForm = this.createContactForm();
+    this.userForm = this.createContactForm();
     
   }
   ngOnInit() {
@@ -84,7 +89,10 @@ export class FormDialogUserComponent  implements OnInit {
   this.abilities = data ;
 
  })
-
+this.preferenceService.getAPreferences().subscribe(data=>{
+  console.log(data)
+  this.preferences = data ;
+})
   }
   formControl = new UntypedFormControl('', [
     Validators.required
@@ -103,6 +111,13 @@ export class FormDialogUserComponent  implements OnInit {
   getSelected2() {
     return this.shoesSelectionListUserGroupes.selectedOptions.selected.map(s => s.value);
   }
+  getSelected3() {
+    return this.shoesSelectionListPreferences.selectedOptions.selected.map(s => s.value);
+  }
+  onSelectionChange3() {
+    console.log(this.getSelected3());
+  }
+
   onSelectionChange2() {
     console.log(this.getSelected2());
   }
@@ -125,9 +140,18 @@ export class FormDialogUserComponent  implements OnInit {
       pseudo: [this.user.pseudo, [Validators.required]],
       passeword: [this.user.passeword, [Validators.required]],
       abilities : new FormControl([]) , 
-      userGroups : new FormControl([])
+      userGroups : new FormControl([]) ,
+      userPreferenceValues : new FormControl([])
+      
       
     });
+  }
+  disableInfoPersonnell(){
+   return this.userForm.get('lastName').hasError('required')  ||this.userForm.get('firstName').hasError('required') 
+   || this.userForm.get('status').hasError('required') || this.userForm.get('realName').hasError('required')
+  }
+  disableInfosCompte(){
+    return this.userForm.get('loginName').hasError('required') || this.userForm.get('pseudo').hasError('required')
   }
   submit() {
     // emppty stuff
@@ -136,16 +160,16 @@ export class FormDialogUserComponent  implements OnInit {
     this.dialogRef.close();
   }
   public confirmAdd(): void {
-    console.log(this.advanceTableForm.getRawValue())
+    console.log(this.userForm.getRawValue())
     this.userService.addUser(
-      this.advanceTableForm.getRawValue()
+      this.userForm.getRawValue()
     );
   }
 
   public confirmUpdate(): void {
     this.userService.updateUser(
       
-      this.advanceTableForm.getRawValue()
+      this.userForm.getRawValue()
     );
   }
 }

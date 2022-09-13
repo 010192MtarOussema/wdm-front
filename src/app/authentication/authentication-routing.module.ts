@@ -7,6 +7,7 @@ import { LockedComponent } from './locked/locked.component';
 import { Page404Component } from './page404/page404.component';
 import { Page500Component } from './page500/page500.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 const routes: Routes = [
   {
     path: '',
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'page500',
     component: Page500Component
+  },
+  {
+    path: 'change-password',
+    component: ChangePasswordComponent
   }
 ];
 @NgModule({

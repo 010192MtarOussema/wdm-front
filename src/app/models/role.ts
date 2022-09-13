@@ -1,8 +1,7 @@
-import { AbstractEntity } from "./abstractEntity";
 import { FunctionalDomain } from "./functionalDomain";
 
-export class Role  extends AbstractEntity {
-    
+export class Role   {
+    id : number ;     
     description : string ; 
     abilities : [] ; 
     functionalDomain : FunctionalDomain ; 

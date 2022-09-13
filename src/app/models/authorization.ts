@@ -1,7 +1,6 @@
-import { AbstractEntity } from "./abstractEntity";
 
-export class Authorization  extends AbstractEntity{
-
+export class Authorization  {
+    id : number ; 
     name : string ; 
     description : string ; 
     abilities : [] ;

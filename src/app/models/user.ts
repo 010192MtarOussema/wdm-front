@@ -1,6 +1,6 @@
-import { AbstractEntity } from "./abstractEntity";
 
-export class User extends AbstractEntity {
+export class User  {
+    id : number ; 
     status : string ;
     loginName : string;
     pseudo: string ;

@@ -1,7 +1,6 @@
-import { AbstractEntity } from "./abstractEntity";
 
-export class Preference  extends AbstractEntity {
-            
+export class Preference   {     
+    id : number ; 
     name : string ; 
     description : string ; 
     valueType : string ; 

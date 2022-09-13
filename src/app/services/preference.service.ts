@@ -28,8 +28,8 @@ export class PreferenceService extends UnsubscribeOnDestroyAdapter {
     return this.dialogData;
   }
   /** CRUD METHODS */
-  getAPreference(): Observable<Preference>{
-   return this.httpClient.get<Preference>(this.API_URL+'preferences')
+  getAPreferences(): Observable<Preference[]>{
+   return this.httpClient.get<Preference[]>(this.API_URL+'list-preferences')
   }
   getAllPreferences(): void {
    this.httpClient

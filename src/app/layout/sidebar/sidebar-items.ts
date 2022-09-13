@@ -1,7 +1,16 @@
 import { RouteInfo } from './sidebar.metadata';
 
 export const ROUTES: RouteInfo[] = [
-
+  {
+    path: 'authentication/change-password',
+    title: 'MENUITEMS.PASSWORD.TEXT',
+    moduleName: 'Changer Mot De Passe',
+    icon: 'home',
+    class: '',
+    groupTitle: false,
+    submenu: [  
+    ]
+  },
   {
     path: 'dashboard/dashboard3',
     title: 'MENUITEMS.HOME.TEXT',
