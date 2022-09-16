@@ -33,6 +33,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { GestionsUtilisateursComponent } from './gestions-utilisateurs/gestions-utilisateurs.component';
 import { BlockUserComponent } from './gestions-utilisateurs/dialogs/block-user/block-user.component';
 import { FormDialogUserComponent } from './gestions-utilisateurs/dialogs/form-dialog-user/form-dialog-user.component';
+import {MatTreeModule} from '@angular/material/tree';
+import { TreeChecklistExample } from './gestions-utilisateurs/dialogs/tree-checklist-example/tree-checklist-example';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { FormDialogUserComponent } from './gestions-utilisateurs/dialogs/form-di
     DeleteDialogComponent,
     GestionsUtilisateursComponent,
     BlockUserComponent,
-    FormDialogUserComponent
+    FormDialogUserComponent,TreeChecklistExample
+    
   ],
   imports: [
     CommonModule,
@@ -70,7 +73,7 @@ import { FormDialogUserComponent } from './gestions-utilisateurs/dialogs/form-di
     SharedModule,
     MatStepperModule,
     ScrollingModule,
-
+    MatTreeModule,
     AdministrationRoutingModule
   ]
 })

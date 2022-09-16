@@ -138,11 +138,7 @@ const routes: Routes = [
           import('./charts/charts.module').then((m) => m.ChartsModule)
       },
  
-      {
-        path: 'icons',
-        loadChildren: () =>
-          import('./icons/icons.module').then((m) => m.IconsModule)
-      },
+
       {
         path: 'profile',
         loadChildren: () =>
