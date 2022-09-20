@@ -87,13 +87,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule)
       },
-      // {
-      //   path: 'list-utilisateurs',
-      //   loadChildren: () =>
-      //     import('./advance-table/advance-table.module').then(
-      //       (m) => m.AdvanceTableModule
-      //     )
-      // },
+   
 
       {
         path: 'task',

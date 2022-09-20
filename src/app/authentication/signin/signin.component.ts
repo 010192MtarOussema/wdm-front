@@ -53,24 +53,24 @@ export class SigninComponent
         .login(this.loginForm.getRawValue())
         .subscribe(
           (res) => {
-            console.log("error")
+            console.log("error" , res)
             if (res) {
               console.log("response" , res)
               // const token = this.authService.currentUserValue.token;
               // if (token) {
                 this.router.navigate(['/administration/list-utilisateurs']);
-                // this.showNotificationService.showNotification(
-                //   'snackbar-danger',
-                //   'Welcome To WDM',
-                //   'top',
-                //   'right'
-                // );
-              // }
-            } 
+                this.showNotificationService.showNotification(
+                  'snackbar-danger',
+                  'Welcome To WDM',
+                  'top',
+                  'right'
+                );
+              }
+            
           },
           (error) => {
             console.log(error)
-            this.error = "Probleme ";
+            this.error = error
             this.submitted = false;
           }
         );
