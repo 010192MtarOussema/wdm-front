@@ -14,6 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import {PickListModule} from 'primeng/picklist';
+
 @NgModule({
   declarations: [
     Page500Component,
@@ -32,7 +34,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    PickListModule
   ]
 })
 export class AuthenticationModule {}

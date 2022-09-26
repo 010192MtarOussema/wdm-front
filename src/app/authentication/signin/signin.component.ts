@@ -5,6 +5,8 @@ import { AuthService } from 'src/app/core/service/auth.service';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
 import { User } from 'src/app/models/user';
 import { ShowNotificationService } from 'src/app/services/show-notification.service';
+import { PrimeNGConfig } from 'primeng/api';
+import { ProductService } from './productService';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -14,6 +16,9 @@ export class SigninComponent
   extends UnsubscribeOnDestroyAdapter
   implements OnInit
 {
+  sourceProducts: any[];
+    
+  targetProducts: any[];
   loginForm: FormGroup;
   submitted = false;
   error = '';
@@ -23,7 +28,8 @@ export class SigninComponent
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService , 
-    private showNotificationService : ShowNotificationService 
+    private showNotificationService : ShowNotificationService ,
+    private carService: ProductService, private primengConfig: PrimeNGConfig
   ) {
     super();
   }
