@@ -7,7 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
-import { DeleteDialogComponent } from './dialogs/delete/delete.component';
+import { DeleteDialogComponent } from './delete/delete.component';
 import { FormDialogComponent } from './dialogs/form-dialog/form-dialog.component';
 import { UserGroup } from '../../models/userGroup';
 import { GroupesTilisateursService } from '../../services/groupes-tilisateurs.service';
@@ -278,8 +278,8 @@ connect(): Observable<UserGroup[]> {
           const searchStr = (
             userGroupe.name + 
             userGroupe.description + 
-            userGroupe.status +
-            userGroupe.users  
+            userGroupe.status 
+            // userGroupe.users  
 
           ).toLowerCase();
           return searchStr.toString().toLowerCase().indexOf(this.filter.toLowerCase()) !== -1;

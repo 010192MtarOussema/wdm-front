@@ -1,11 +1,10 @@
 
 export class UserGroup  {
-    id : number ; 
-    name:string ; 
-    description : string ; 
-    status : string ;
-    users: [] ; 
-    userGroupPreferenceValues : [] ;
+    id? : number ; 
+    name?:string ; 
+    description? : string ; 
+    status? : string ;
+   
 
   
  

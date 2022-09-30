@@ -27,19 +27,22 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ComponentsModule } from '../shared/components/components.module';
 import { SharedModule } from '../shared/shared.module';
 import { MatStepperModule } from '@angular/material/stepper';
-import { DeleteDialogComponent } from './groupes-utilisateurs/dialogs/delete/delete.component';
+import { DeleteDialogComponent } from './groupes-utilisateurs/delete/delete.component';
 import { FormDialogComponent as advanceTableForm } from './groupes-utilisateurs/dialogs/form-dialog/form-dialog.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { GestionsUtilisateursComponent } from './gestions-utilisateurs/gestions-utilisateurs.component';
-import { BlockUserComponent } from './gestions-utilisateurs/dialogs/block-user/block-user.component';
+import { BlockUserComponent } from './gestions-utilisateurs/block-user/block-user.component';
 import { FormDialogUserComponent } from './gestions-utilisateurs/dialogs/form-dialog-user/form-dialog-user.component';
 import {MatTreeModule} from '@angular/material/tree';
 import { TreeChecklistExample } from './gestions-utilisateurs/dialogs/tree-checklist-example/tree-checklist-example';
+import { NewUserComponent } from './gestions-utilisateurs/new-user/new-user.component';
+import { PickListModule } from 'primeng/picklist';
 
 @NgModule({
   declarations: [
     GroupesUtilisateursComponent,
     advanceTableForm ,
+    NewUserComponent,
     DeleteDialogComponent,
     GestionsUtilisateursComponent,
     BlockUserComponent,
@@ -73,6 +76,7 @@ import { TreeChecklistExample } from './gestions-utilisateurs/dialogs/tree-check
     SharedModule,
     MatStepperModule,
     ScrollingModule,
+    PickListModule,
     MatTreeModule,
     AdministrationRoutingModule
   ]

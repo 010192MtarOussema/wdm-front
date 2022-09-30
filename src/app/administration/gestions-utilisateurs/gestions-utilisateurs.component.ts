@@ -8,14 +8,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
+import {  MatMenuTrigger } from '@angular/material/menu';
 import { SelectionModel } from '@angular/cdk/collections';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
 import { User } from '../../models/user';
-import { FormDialogUserComponent } from './dialogs/form-dialog-user/form-dialog-user.component';
-import { BlockUserComponent } from './dialogs/block-user/block-user.component';
+import { BlockUserComponent } from './block-user/block-user.component';
 import { GestionsUtilisateursService } from 'src/app/services/gestions-utilisateurs.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -56,7 +55,8 @@ constructor(
   public httpClient: HttpClient,
   public dialog: MatDialog,
   public advanceTableService: GestionsUtilisateursService,
-  private snackBar: MatSnackBar
+  private snackBar: MatSnackBar  ,
+  private router : Router
 ) {
   super();
   this.advanceTableService.getAllUser().subscribe(data=>
@@ -81,30 +81,8 @@ addNew() {
   } else {
     tempDirection = 'ltr';
   }
-  const dialogRef = this.dialog.open(FormDialogUserComponent, {
-    data: {
-      advanceTable: this.user,
-      action: 'add'
-    },
-    direction: tempDirection
-  });
-  this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-    if (result === 1) {
-      // After dialog is closed we're doing frontend updates
-      // For add we're just pushing a new row inside DataService
-      this.exampleDatabase.dataChange.value.unshift(
-        this.advanceTableService.getDialogData()
-      );
-      this.refreshTable();
-      this.showNotification(
-        'snackbar-success',
-    
-        'Compte utilisateur ajouté avec succès ...!!!',
-        'top',
-        'center'
-      );
-    }
-  });
+  this.router.navigate(['/administration/add-new-user']);
+
 }
 editCall(row) {
   this.id = row.id;
@@ -116,32 +94,33 @@ editCall(row) {
   } else {
     tempDirection = 'ltr';
   }
-  const dialogRef = this.dialog.open(FormDialogUserComponent, {
-    data: {
-      advanceTable: row,
-      action: 'edit'
-    },
-    direction: tempDirection
-  });
-  this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-    if (result === 1) {
-      // When using an edit things are little different, firstly we find record inside DataService by id
-      const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
-        (x) => x.id === this.id
-      );
-      // Then you update that record using data from dialogData (values you enetered)
-      this.exampleDatabase.dataChange.value[foundIndex] =
-        this.advanceTableService.getDialogData();
-      // And lastly refresh table
-      this.refreshTable();
-      this.showNotification(
-        'snackbar-success',
-        'Compte utilisateur modifié avec succès...!!!',
-        'top',
-        'center'
-      );
-    }
-  });
+  // const dialogRef = this.dialog.open(FormDialogUserComponent, {
+  //   data: {
+  //     advanceTable: row,
+  //     action: 'edit'
+  //   },
+  //   direction: tempDirection
+  // });
+  this.router.navigate(['/administration/edit-user']);
+  // this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+  //   if (result === 1) {
+  //     // When using an edit things are little different, firstly we find record inside DataService by id
+  //     const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
+  //       (x) => x.id === this.id
+  //     );
+  //     // Then you update that record using data from dialogData (values you enetered)
+  //     this.exampleDatabase.dataChange.value[foundIndex] =
+  //       this.advanceTableService.getDialogData();
+  //     // And lastly refresh table
+  //     this.refreshTable();
+  //     this.showNotification(
+  //       'snackbar-success',
+  //       'Compte utilisateur modifié avec succès...!!!',
+  //       'top',
+  //       'center'
+  //     );
+  //   }
+  // });
 }
 deleteItem(row) {
   this.id = row.id;

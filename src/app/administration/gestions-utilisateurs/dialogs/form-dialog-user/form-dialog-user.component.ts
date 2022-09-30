@@ -81,9 +81,9 @@ export class FormDialogUserComponent  implements OnInit {
     
   }
   ngOnInit() {
- this.groupeUtilisateurService.list().subscribe(data =>{
-  this.userGroupes = data 
- }) ;
+//  this.groupeUtilisateurService.list().subscribe(data =>{
+//   this.userGroupes = data 
+//  }) ;
 
  this.abilityService.getAllAbility().subscribe(data =>{
   this.abilities = data ;

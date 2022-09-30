@@ -28,7 +28,7 @@ export class GroupesTilisateursService extends UnsubscribeOnDestroyAdapter {
   }
   /** CRUD METHODS */
 
-  list() : Observable<UserGroup[]> {
+  list()  {
    return this.httpClient.get<UserGroup[]>(this.API_URL+'list-users-groupes')
   }
   getUserGrpoupes() {
