@@ -11,9 +11,9 @@ import { GroupesTilisateursService } from 'src/app/services/groupes-tilisateurs.
   styleUrls: ['./new-user.component.sass']
 })
 export class NewUserComponent implements OnInit {
-  sourceProducts:  UserGroup[];
+  sourceProducts:  any[] = [];
   userGroupes : UserGroup[]; 
-  targetProducts: any[];
+  targetProducts: any[]  = [];;
   userForm: FormGroup;
   user: User;
   fileUploadForm: UntypedFormGroup;
@@ -40,7 +40,7 @@ export class NewUserComponent implements OnInit {
     this.groupeUtilisateurService.list().subscribe(data =>{
       this.sourceProducts = data ; 
 
-      
+    
     }) ;
     this.primengConfig.ripple = true;
     this.createContactForm();
