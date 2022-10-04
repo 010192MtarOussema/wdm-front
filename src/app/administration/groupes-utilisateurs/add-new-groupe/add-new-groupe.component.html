@@ -1,1 +1,85 @@
-<p>add-new-groupe works!</p>
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header" *ngFor="let breadscrum of breadscrums">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+            </app-breadcrumb>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Entrez vos informations personnelles</h2>
+                    </div>
+                    <div class="body">
+                        <form [formGroup]="userGroupeForm">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Name</mat-label>
+                                        <input matInput formControlName="Name" formControlName="name">
+                                        <mat-icon matSuffix>face</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Description</mat-label>
+                                        <textarea matInput formControlName="description"></textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Paramétrages</h2>
+                    </div>
+                    <div class="body">
+                        <form [formGroup]="userGroupeForm">
+                            <p-pickList [source]="sourceProducts" [target]="targetProducts"
+                                sourceHeader="Available Groupes" targetHeader="Selected Groupes" dragdrop="true"
+                                [responsive]="true" [sourceStyle]="{'height':'300px'}"
+                                [targetStyle]="{'height':'300px'}" filterBy="name"
+                                sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name">
+                                <ng-template let-product pTemplate="item">
+                                    <div class="product-item">
+                                        <div class="product-list-detail">
+                                            <h5 class="mb-2">{{product.name}}</h5>
+                                            <i class="pi pi-tag product-category-icon"></i>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </p-pickList>
+                        </form>
+                    </div>
+                    <h4 class="align-center m-t-10">Attribution Habilitations </h4>
+                    <div class="body">
+                        <form [formGroup]="userGroupeForm">
+                            <p-pickList [source]="sourceProducts" [target]="targetProducts"
+                                sourceHeader="Available Habilitations" targetHeader="Selected Habilitations"
+                                dragdrop="true" [responsive]="true" [sourceStyle]="{'height':'300px'}"
+                                [targetStyle]="{'height':'300px'}" filterBy="name"
+                                sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name">
+                                <ng-template let-product pTemplate="item">
+                                    <div class="product-item">
+                                        <div class="product-list-detail">
+                                            <h5 class="mb-2">{{product.name}}</h5>
+                                            <i class="pi pi-tag product-category-icon"></i>
+                                        </div>
+
+                                    </div>
+                                </ng-template>
+                            </p-pickList>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

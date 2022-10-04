@@ -1,55 +1,53 @@
-
 <section class="content">
-    <div class="container-fluid">
-      <div class="block-header" *ngFor="let breadscrum of breadscrums">
-        <!-- breadcrumb -->
-        <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
-        </app-breadcrumb>
-      </div>
-     
-<div class="row clearfix">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-      <div class="card">
-        <div class="header">
-          <h2>Entrez vos informations personnelles</h2>
-        </div>
-      <div class="body">
-        <form [formGroup]="userForm">
-          <div class="row">
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-              <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>First Name</mat-label>
-                <input matInput formControlName="firstName">
-                <mat-icon matSuffix>face</mat-icon>
-                <mat-error *ngIf="userForm.get('firstName').hasError('required')">
-                  First Name is required
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-              <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Last Name</mat-label>
-                <input matInput formControlName="lastName">
-                <mat-icon matSuffix>face</mat-icon>
-                <mat-error *ngIf="userForm.get('lastName').hasError('required')">
-                  Last Name is required
-                </mat-error>
-              </mat-form-field>
-            </div>
+  <div class="container-fluid">
+    <div class="block-header" *ngFor="let breadscrum of breadscrums">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+      </app-breadcrumb>
+    </div>
+
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>Entrez vos informations personnelles</h2>
           </div>
-          <div class="row">
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-              <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Email</mat-label>
-                <input matInput formControlName="email" required>
-                <mat-icon matSuffix>email</mat-icon>
-                <mat-error
-                  *ngIf="userForm.get('email').hasError('required') || userForm.get('email').touched">
-                  Please enter a valid email address
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <div class="body">
+            <form [formGroup]="userForm">
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="firstName">
+                    <mat-icon matSuffix>face</mat-icon>
+                    <mat-error *ngIf="userForm.get('firstName').hasError('required')">
+                      First Name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="lastName">
+                    <mat-icon matSuffix>face</mat-icon>
+                    <mat-error *ngIf="userForm.get('lastName').hasError('required')">
+                      Last Name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" required>
+                    <mat-icon matSuffix>email</mat-icon>
+                    <mat-error *ngIf="userForm.get('email').hasError('required') || userForm.get('email').touched">
+                      Please enter a valid email address
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
               <mat-label>Status</mat-label>
               <mat-form-field class="example-full-width">
                 <mat-select [formControl]="status" formControlName="status" required>
@@ -60,115 +58,308 @@
                 <mat-error *ngIf="status.hasError('required')">Please choose status
                 </mat-error>
               </mat-form-field>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-              <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Real Name</mat-label>
-                <input matInput formControlName="realName" required>
-                <mat-icon matSuffix>email</mat-icon>
-                <mat-error *ngIf="userForm.get('realName').hasError('required')">
-                  Please enter a Real name
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-              <div>
-                <form [formGroup]="fileUploadForm">
-                  <div class="row">
-                    <div>
-                      <app-file-upload formControlName="singleUpload"></app-file-upload>
-                    </div>
-                  </div>
-                </form>
+            </div> -->
               </div>
-            </div>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Real Name</mat-label>
+                    <input matInput formControlName="realName" required>
+                    <mat-icon matSuffix>email</mat-icon>
+                    <mat-error *ngIf="userForm.get('realName').hasError('required')">
+                      Please enter a Real name
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <div>
+                    <form [formGroup]="fileUploadForm">
+                      <div class="row">
+                        <div>
+                          <app-file-upload formControlName="singleUpload"></app-file-upload>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
 
-          </div>
-          <div>
+              </div>
+              <!-- <div>
             <button mat-raised-button  color="primary"
               [disabled]="disableInfoPersonnell()">Suivant </button>
+          </div> -->
+            </form>
+
+
           </div>
-        </form>
-
-
-      </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="row clearfix">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-      <div class="card">
-        <div class="header">
-          <h2>Informations de compte</h2>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>Informations de compte</h2>
+          </div>
+          <div class="body">
+            <form *ngIf="user" [formGroup]="userForm">
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Login </mat-label>
+                    <input matInput formControlName="loginName">
+                    <mat-icon matSuffix>face</mat-icon>
+                    <mat-error *ngIf="userForm.get('loginName').hasError('required')">
+                      Login is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Pseudo</mat-label>
+                    <input matInput formControlName="pseudo">
+                    <mat-icon matSuffix>face</mat-icon>
+                    <mat-error *ngIf="userForm.get('pseudo').hasError('required')">
+                      Psuedo is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+            </form>
+
+
+          </div>
         </div>
-      <div class="body">
-        <form *ngIf="user" [formGroup]="userForm">
-          <div class="row">
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-              <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Login </mat-label>
-                <input matInput formControlName="loginName">
-                <mat-icon matSuffix>face</mat-icon>
-                <mat-error *ngIf="userForm.get('loginName').hasError('required')">
-                  Login is required
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-              <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Pseudo</mat-label>
-                <input matInput formControlName="pseudo">
-                <mat-icon matSuffix>face</mat-icon>
-                <mat-error *ngIf="userForm.get('pseudo').hasError('required')">
-                  Psuedo is required
-                </mat-error>
-              </mat-form-field>
-            </div>
-          </div>
-          <div>
-            <button mat-raised-button  color="warn" class="msr-2">précédent</button>
-            <button mat-raised-button  color="primary"
-              >Suivant</button>
-          </div>
-        </form>
-
-
-      </div>
       </div>
     </div>
-  </div>
 
 
-  <div class="row clearfix">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-      <div class="card">
-        <div class="header">
-          <h2>Paramétrages</h2>
-        </div>
-      <div class="body">
-        <form [formGroup]="userForm">
-          <p-pickList [source]="sourceProducts" [target]="targetProducts" sourceHeader="Available Groupes" targetHeader="Selected Groupes" dragdrop="true"
-          [responsive]="true" [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}" filterBy="name"
-          sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name">
-          <ng-template let-product pTemplate="item">
-              <div class="product-item">
-                  <div class="product-list-detail">
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>Paramétrages</h2>
+          </div>
+          <div class="body">
+            <form [formGroup]="userForm">
+              <p-pickList [source]="sourceProducts" [target]="targetProducts" sourceHeader="Available Groupes"
+                targetHeader="Selected Groupes" dragdrop="true" [responsive]="true" [sourceStyle]="{'height':'300px'}"
+                [targetStyle]="{'height':'300px'}" filterBy="name" sourceFilterPlaceholder="Search by name"
+                targetFilterPlaceholder="Search by name">
+                <ng-template let-product pTemplate="item">
+                  <div class="product-item">
+                    <div class="product-list-detail">
                       <h5 class="mb-2">{{product.name}}</h5>
                       <i class="pi pi-tag product-category-icon"></i>
+                    </div>
+
                   </div>
-                  
+                </ng-template>
+              </p-pickList>
+            </form>
+
+
+          </div>
+          <h4 class="align-center m-t-10">Attribution Habilitations </h4>
+          <div class="body">
+            <form [formGroup]="userForm">
+              <p-pickList [source]="sourceProducts" [target]="targetProducts" sourceHeader="Available Habilitations"
+                targetHeader="Selected Habilitations" dragdrop="true" [responsive]="true"
+                [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}" filterBy="name"
+                sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name">
+                <ng-template let-product pTemplate="item">
+                  <div class="product-item">
+                    <div class="product-list-detail">
+                      <h5 class="mb-2">{{product.name}}</h5>
+                      <i class="pi pi-tag product-category-icon"></i>
+                    </div>
+
+                  </div>
+                </ng-template>
+              </p-pickList>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="task-module">
+              <div class="task-header">
+                <div class="task-title">
+                  <h2>Préferences</h2>
+                  <h5>{{tasks.length}} Total Préferences</h5>
+                </div>
+                <!-- <div class="header-button">
+                  <button mat-raised-button color="primary" (click)="addNewTask(sidenav)">Add
+                    Task</button>
+                </div> -->
               </div>
-          </ng-template>
-        </p-pickList>
-        </form>
+              <div class="row">
+                <div class="col-md-12 col-sm-12">
+                  <mat-sidenav-container class="task-container">
+                    <mat-sidenav #sidenav [mode]="mode.value" position="end">
+                      <div class="header">
+                        <h2 class="header-title">{{dialogTitle}}</h2>
+                        <div class="header-close m-l-0">
+                          <button mat-icon-button *ngIf="!isNewEvent" (click)="deleteTask(sidenav)"
+                            matTooltip="Delete Task">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                          <button mat-icon-button *ngIf="isNewEvent" (click)="saveTask()" matTooltip="Save Task">
+                            <mat-icon>save</mat-icon>
+                          </button>
+                          <button mat-icon-button *ngIf="!isNewEvent" (click)="editTask()" matTooltip="Edit Task">
+                            <mat-icon>save</mat-icon>
+                          </button>
+                          <button mat-icon-button (click)="closeSlider(sidenav)">
+                            <mat-icon>close</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                      <form class="register-form m-4" [formGroup]="taskForm">
+                        <div class="row">
+                          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
+                            <mat-form-field [hidden]="true">
+                              <input matInput formControlName="id">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
+                            <mat-form-field [hidden]="true">
+                              <input matInput formControlName="img">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Title</mat-label>
+                              <input matInput formControlName="title">
+                              <mat-icon matSuffix>turned_in_not</mat-icon>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                            <mat-checkbox class="example-margin" formControlName="done" color="primary">Mark as
+                              complete
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Assigned Name</mat-label>
+                              <mat-select formControlName="name">
+                                <mat-option [value]="'Sarah Smith'">
+                                  Sarah Smith
+                                </mat-option>
+                                <mat-option [value]="'John Deo'">
+                                  John Deo
+                                </mat-option>
+                                <mat-option [value]="'Jens Brincker'">
+                                  Jens Brincker
+                                </mat-option>
+                                <mat-option [value]="'Mark Hay'">
+                                  Mark Hay
+                                </mat-option>
+                                <mat-option [value]="'Anthony Davie'">
+                                  Anthony Davie
+                                </mat-option>
+                                <mat-option [value]="'Sue Woodger'">
+                                  Sue Woodger
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Priority</mat-label>
+                              <mat-select formControlName="priority">
+                                <mat-option [value]="'Low'">
+                                  Low
+                                </mat-option>
+                                <mat-option [value]="'Normal'">
+                                  Normal
+                                </mat-option>
+                                <mat-option [value]="'High'">
+                                  High
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Due date</mat-label>
+                              <input matInput formControlName="due_date" [matDatepicker]="picker1">
+                              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                              <mat-datepicker #picker1></mat-datepicker>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                              <mat-label>Event Details</mat-label>
+                              <textarea matInput formControlName="note"></textarea>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12">
+                          </div>
+                        </div>
+                      </form>
+                    </mat-sidenav>
+                    <mat-sidenav-content>
+                      <div class="task-list" style="position: relative; max-height: 500px;" [perfectScrollbar]>
+                        <div class="task-box" *ngFor="let task of tasks" (click)="taskClick(task, sidenav)">
+                          <div>
+                            <div class="task-handle m-r-20" cdkDragHandle>
+                              <mat-icon aria-hidden="false">drag_indicator</mat-icon>
+                            </div>
+                          </div>
 
-
-      </div>
+                          <div class="task-custom-placeholder" *cdkDragPlaceholder></div>
+                          <div matTooltip="Title" [ngClass]="{done:task.done}">
+                            {{task.title}}</div>
+                          <!-- <div
+                            [ngClass]="{'task-low': task.priority=='Low', 'task-high': task.priority=='High','task-normal': task.priority=='Normal'}">
+                            <mat-icon matTooltip="Low" aria-hidden="false" class="lbl-low"
+                              *ngIf="task?.priority == 'Low'">
+                              arrow_downward
+                            </mat-icon>
+                            <mat-icon matTooltip="High" aria-hidden="false" class="lbl-high"
+                              *ngIf="task?.priority == 'High'">
+                              arrow_upward
+                            </mat-icon>
+                            <mat-icon matTooltip="Normal" aria-hidden="false" class="lbl-normal"
+                              *ngIf="task?.priority == 'Normal'">
+                              remove</mat-icon>
+                            {{task.priority}}
+                          </div> -->
+                          <!-- <img src='{{ task.img }}' class="task-user-img" matTooltip='{{ task.name }}'>
+                          <div class="task-date" matTooltip="Due Date">{{ task.due_date | date }}</div> -->
+                        </div>
+                      </div>
+                    </mat-sidenav-content>
+                  </mat-sidenav-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
+
   </div>
-    </div>
 </section>

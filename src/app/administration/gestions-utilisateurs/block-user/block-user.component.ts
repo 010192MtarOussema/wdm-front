@@ -7,12 +7,12 @@ import { GestionsUtilisateursService } from 'src/app/services/gestions-utilisate
   templateUrl: './block-user.component.html',
   styleUrls: ['./block-user.component.sass']
 })
-export class BlockUserComponent  {
+export class BlockUserComponent {
   constructor(
     public dialogRef: MatDialogRef<BlockUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public advanceTableService: GestionsUtilisateursService
-  ) {}
+  ) { }
   onNoClick(): void {
     this.dialogRef.close();
   }

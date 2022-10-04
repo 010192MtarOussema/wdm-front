@@ -33,21 +33,27 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { GestionsUtilisateursComponent } from './gestions-utilisateurs/gestions-utilisateurs.component';
 import { BlockUserComponent } from './gestions-utilisateurs/block-user/block-user.component';
 import { FormDialogUserComponent } from './gestions-utilisateurs/dialogs/form-dialog-user/form-dialog-user.component';
-import {MatTreeModule} from '@angular/material/tree';
+import { MatTreeModule } from '@angular/material/tree';
 import { TreeChecklistExample } from './gestions-utilisateurs/dialogs/tree-checklist-example/tree-checklist-example';
 import { NewUserComponent } from './gestions-utilisateurs/new-user/new-user.component';
 import { PickListModule } from 'primeng/picklist';
+import { EditUserComponent } from './gestions-utilisateurs/edit-user/edit-user.component';
+import { AddNewGroupeComponent } from './groupes-utilisateurs/add-new-groupe/add-new-groupe.component';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
     GroupesUtilisateursComponent,
-    advanceTableForm ,
+    advanceTableForm,
     NewUserComponent,
+    EditUserComponent,
     DeleteDialogComponent,
     GestionsUtilisateursComponent,
     BlockUserComponent,
-    FormDialogUserComponent,TreeChecklistExample
-    
+    AddNewGroupeComponent,
+    FormDialogUserComponent, TreeChecklistExample
+
   ],
   imports: [
     CommonModule,
@@ -77,6 +83,8 @@ import { PickListModule } from 'primeng/picklist';
     MatStepperModule,
     ScrollingModule,
     PickListModule,
+    PerfectScrollbarModule,
+    MatSidenavModule,
     MatTreeModule,
     AdministrationRoutingModule
   ]

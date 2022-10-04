@@ -8,9 +8,9 @@ describe('BlockUserComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BlockUserComponent ]
+      declarations: [BlockUserComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(BlockUserComponent);
     component = fixture.componentInstance;
