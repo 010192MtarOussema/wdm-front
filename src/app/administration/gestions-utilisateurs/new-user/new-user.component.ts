@@ -6,6 +6,8 @@ import { UserGroup } from 'src/app/models/userGroup';
 import { GroupesTilisateursService } from 'src/app/services/groupes-tilisateurs.service';
 import { formatDate } from '@angular/common';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { PreferenceService } from 'src/app/services/preference.service';
+import { Preference } from 'src/app/models/Preference';
 
 @Component({
   selector: 'app-new-user',
@@ -35,7 +37,7 @@ export class NewUserComponent implements OnInit {
 
 
   //preferences
-
+  preferences!: Preference[];
   mode = new UntypedFormControl('side');
   taskForm: UntypedFormGroup;
   showFiller = false;
@@ -46,9 +48,9 @@ export class NewUserComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder, private groupeUtilisateurService: GroupesTilisateursService,
-    private primengConfig: PrimeNGConfig, private fb: UntypedFormBuilder
+    private primengConfig: PrimeNGConfig, private fb: UntypedFormBuilder, public preferenceService: PreferenceService,
   ) {
-
+    this.taskForm = this.createFormGroup(null);
     this.fileUploadForm = fb.group({
       singleUpload: ['']
     });
@@ -125,86 +127,8 @@ export class NewUserComponent implements OnInit {
       priority: 'High',
       due_date: '2/12/2019'
     },
-    {
-      id: '8',
-      img: 'assets/images/user/user8.jpg',
-      name: 'Jens Brincker',
-      title: 'Web service data load issue',
-      done: false,
-      note: 'note details',
-      priority: 'High',
-      due_date: '2/12/2020'
-    },
-    {
-      id: '9',
-      img: 'assets/images/user/user9.jpg',
-      name: 'Sarah Smith',
-      title: 'Java compile error',
-      done: false,
-      note: 'note details',
-      priority: 'Low',
-      due_date: '2/12/2017'
-    },
-    {
-      id: '10',
-      img: 'assets/images/user/user10.jpg',
-      name: 'Mark Hay',
-      title: 'Integrate project with spring boot',
-      done: true,
-      note: 'note details',
-      priority: 'High',
-      due_date: '2/12/2019'
-    },
-    {
-      id: '11',
-      img: 'assets/images/user/user1.jpg',
-      name: 'John Deo',
-      title: 'Update latest angular version',
-      done: false,
-      note: 'note details',
-      priority: 'High',
-      due_date: '2/12/2017'
-    },
-    {
-      id: '12',
-      img: 'assets/images/user/user2.jpg',
-      name: 'Jens Brincker',
-      title: 'Integrate lazy loading on project',
-      done: false,
-      note: 'note details',
-      priority: 'Normal',
-      due_date: '2/12/2020'
-    },
-    {
-      id: '13',
-      img: 'assets/images/user/user3.jpg',
-      name: 'Mark Hay',
-      title: 'js file not load properly',
-      done: true,
-      note: 'note details',
-      priority: 'Normal',
-      due_date: '2/12/2019'
-    },
-    {
-      id: '14',
-      img: 'assets/images/user/user4.jpg',
-      name: 'Anthony Davie',
-      title: 'need to change color of table',
-      done: false,
-      note: 'note details',
-      priority: 'Normal',
-      due_date: '2/12/2017'
-    },
-    {
-      id: '15',
-      img: 'assets/images/user/user5.jpg',
-      name: 'Sue Woodger',
-      title: 'modal window select item issue',
-      done: false,
-      note: 'note details',
-      priority: 'Low',
-      due_date: '2/12/2017'
-    }
+
+
   ];
 
   drop(event: CdkDragDrop<string[]>) {
@@ -289,6 +213,10 @@ export class NewUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.preferenceService.getAPreferences().subscribe(data => {
+      console.log(data)
+      this.preferences = data;
+    })
     this.groupeUtilisateurService.list().subscribe(data => {
       this.sourceProducts = data;
 

@@ -184,7 +184,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-md-12 col-sm-12">
         <div class="card h-100">
           <div class="card-body">
@@ -193,33 +193,41 @@
                 <div class="task-title">
                   <h2>Préferences</h2>
                   <h5>{{tasks.length}} Total Préferences</h5>
-                </div>
-                <!-- <div class="header-button">
+                </div> -->
+    <!-- <div class="header-button">
                   <button mat-raised-button color="primary" (click)="addNewTask(sidenav)">Add
                     Task</button>
                 </div> -->
-              </div>
+    <!-- </div>
               <div class="row">
                 <div class="col-md-12 col-sm-12">
                   <mat-sidenav-container class="task-container">
                     <mat-sidenav #sidenav [mode]="mode.value" position="end">
                       <div class="header">
-                        <h2 class="header-title">{{dialogTitle}}</h2>
+                        <h2 class="header-title">Setting Panel</h2>
                         <div class="header-close m-l-0">
-                          <button mat-icon-button *ngIf="!isNewEvent" (click)="deleteTask(sidenav)"
+                          <div class="rightSetting">
+                            <h6 class="font-medium m-b-10">Sidebar Menu Color</h6>
+                            <mat-button-toggle-group class="mt-2">
+                              <mat-button-toggle value="light">Light
+                              </mat-button-toggle>
+                              <mat-button-toggle value="dark">Dark</mat-button-toggle>
+                            </mat-button-toggle-group>
+                          </div> -->
+    <!-- <button mat-icon-button *ngIf="!isNewEvent" (click)="deleteTask(sidenav)"
                             matTooltip="Delete Task">
                             <mat-icon>delete</mat-icon>
-                          </button>
-                          <button mat-icon-button *ngIf="isNewEvent" (click)="saveTask()" matTooltip="Save Task">
+                          </button> -->
+    <!-- <button mat-icon-button *ngIf="isNewEvent" (click)="saveTask()" matTooltip="Save Task">
                             <mat-icon>save</mat-icon>
-                          </button>
-                          <button mat-icon-button *ngIf="!isNewEvent" (click)="editTask()" matTooltip="Edit Task">
+                          </button> -->
+    <!-- <button mat-icon-button *ngIf="!isNewEvent" (click)="editTask()" matTooltip="Edit Task">
                             <mat-icon>save</mat-icon>
-                          </button>
-                          <button mat-icon-button (click)="closeSlider(sidenav)">
+                          </button> -->
+    <!-- <button mat-icon-button (click)="closeSlider(sidenav)">
                             <mat-icon>close</mat-icon>
-                          </button>
-                        </div>
+                          </button> -->
+    <!-- </div>
                       </div>
                       <form class="register-form m-4" [formGroup]="taskForm">
                         <div class="row">
@@ -321,7 +329,7 @@
                     </mat-sidenav>
                     <mat-sidenav-content>
                       <div class="task-list" style="position: relative; max-height: 500px;" [perfectScrollbar]>
-                        <div class="task-box" *ngFor="let task of tasks" (click)="taskClick(task, sidenav)">
+                        <div class="task-box" *ngFor="let task of preferences" (click)="taskClick(task, sidenav)">
                           <div>
                             <div class="task-handle m-r-20" cdkDragHandle>
                               <mat-icon aria-hidden="false">drag_indicator</mat-icon>
@@ -330,8 +338,8 @@
 
                           <div class="task-custom-placeholder" *cdkDragPlaceholder></div>
                           <div matTooltip="Title" [ngClass]="{done:task.done}">
-                            {{task.title}}</div>
-                          <!-- <div
+                            {{task.name}}</div> -->
+    <!-- <div
                             [ngClass]="{'task-low': task.priority=='Low', 'task-high': task.priority=='High','task-normal': task.priority=='Normal'}">
                             <mat-icon matTooltip="Low" aria-hidden="false" class="lbl-low"
                               *ngIf="task?.priority == 'Low'">
@@ -346,9 +354,9 @@
                               remove</mat-icon>
                             {{task.priority}}
                           </div> -->
-                          <!-- <img src='{{ task.img }}' class="task-user-img" matTooltip='{{ task.name }}'>
+    <!-- <img src='{{ task.img }}' class="task-user-img" matTooltip='{{ task.name }}'>
                           <div class="task-date" matTooltip="Due Date">{{ task.due_date | date }}</div> -->
-                        </div>
+    <!-- </div>
                       </div>
                     </mat-sidenav-content>
                   </mat-sidenav-container>
@@ -358,7 +366,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
 
   </div>
