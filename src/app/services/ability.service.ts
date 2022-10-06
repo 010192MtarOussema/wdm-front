@@ -2,37 +2,41 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
-import { Ability } from '../models/ability';
+import { AbilityDto } from '../models/ability';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AbilityService extends UnsubscribeOnDestroyAdapter {
+export class AbilityDtoService extends UnsubscribeOnDestroyAdapter {
   // private readonly API_URL = 'assets/data/advanceTable.json';
   private readonly API_URL = 'http://localhost:8080/api/';
 
   isTblLoading = true;
-  dataChange: BehaviorSubject<Ability[]> = new BehaviorSubject<
-  Ability[]
+  dataChange: BehaviorSubject<AbilityDto[]> = new BehaviorSubject<
+    AbilityDto[]
   >([]);
   // Temporarily stores data from dialogs
   dialogData: any;
   constructor(private httpClient: HttpClient) {
     super();
   }
-  get data(): Ability[] {
+  get data(): AbilityDto[] {
     return this.dataChange.value;
   }
   getDialogData() {
     return this.dialogData;
   }
   /** CRUD METHODS */
-  getAllAbility(): Observable<Ability[]>{
-   return this.httpClient.get<Ability[]>(this.API_URL+'ability-list')
+  getAllAbilityDto() {
+
+    return this.httpClient.get<any>(this.API_URL + 'list')
+      .toPromise()
+      .then(res => <AbilityDto[]>res.data);
+    // return this.httpClient.get<AbilityDto[]>(this.API_URL + 'list')
   }
   getAllAbilities(): void {
-   this.httpClient
-      .get<Ability[]>(this.API_URL+'roles')
+    this.httpClient
+      .get<AbilityDto[]>(this.API_URL + 'roles')
       .subscribe(
         (data) => {
           this.isTblLoading = false;
@@ -44,36 +48,36 @@ export class AbilityService extends UnsubscribeOnDestroyAdapter {
         }
       );
   }
-  addAbility(ability: Ability): void {
+  addAbilityDto(AbilityDto: AbilityDto): void {
     // this.dialogData = advanceTable;
 
-      this.httpClient.post(this.API_URL+'add-ability', ability).subscribe(data => {
-      this.dialogData = ability;
-      },
+    this.httpClient.post(this.API_URL + 'add-AbilityDto', AbilityDto).subscribe(data => {
+      this.dialogData = AbilityDto;
+    },
       (err: HttpErrorResponse) => {
-     // error code here
-    });
+        // error code here
+      });
   }
-  updateAbility(role: Ability): void {
+  updateAbilityDto(role: AbilityDto): void {
     // this.dialogData = advanceTable;
 
-     this.httpClient.put(this.API_URL+"update-ability/"+ role.id, role).subscribe(data => {
+    this.httpClient.put(this.API_URL + "update-AbilityDto/" + role.id, role).subscribe(data => {
       this.dialogData = role;
     },
-    (err: HttpErrorResponse) => {
-      // error code here
-    }
-  );
+      (err: HttpErrorResponse) => {
+        // error code here
+      }
+    );
   }
-  deleteAbility(id: number): void {
-    console.log("service id" , id);
+  deleteAbilityDto(id: number): void {
+    console.log("service id", id);
 
-     this.httpClient.post(this.API_URL+'delete-ability', id).subscribe(data => {
+    this.httpClient.post(this.API_URL + 'delete-AbilityDto', id).subscribe(data => {
       this.dialogData = data;
       console.log(id);
-      },
+    },
       (err: HttpErrorResponse) => {
-         // error code here
+        // error code here
       }
     );
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { PrimeNGConfig } from 'primeng/api';
+import { PrimeNGConfig, TreeNode } from 'primeng/api';
 import { User } from 'src/app/models/user';
 import { UserGroup } from 'src/app/models/userGroup';
 import { GroupesTilisateursService } from 'src/app/services/groupes-tilisateurs.service';
@@ -8,6 +8,8 @@ import { formatDate } from '@angular/common';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { PreferenceService } from 'src/app/services/preference.service';
 import { Preference } from 'src/app/models/Preference';
+import { AbilityDtoService } from 'src/app/services/ability.service';
+import { AbilityDto } from 'src/app/models/ability';
 
 @Component({
   selector: 'app-new-user',
@@ -34,6 +36,7 @@ export class NewUserComponent implements OnInit {
       active: 'new user'
     }
   ];
+  selectedFiles2: AbilityDto;
 
 
   //preferences
@@ -45,158 +48,22 @@ export class NewUserComponent implements OnInit {
   dialogTitle: string;
   userImg: string;
   direction: string;
+  files3: AbilityDto[];
 
-
-  constructor(private formBuilder: FormBuilder, private groupeUtilisateurService: GroupesTilisateursService,
+  constructor(private formBuilder: FormBuilder, private groupeUtilisateurService: GroupesTilisateursService, private nodeService: AbilityDtoService,
     private primengConfig: PrimeNGConfig, private fb: UntypedFormBuilder, public preferenceService: PreferenceService,
   ) {
-    this.taskForm = this.createFormGroup(null);
     this.fileUploadForm = fb.group({
       singleUpload: ['']
     });
 
   }
-  tasks = [
-    {
-      id: '1',
-      img: 'assets/images/user/user1.jpg',
-      name: 'Sarah Smith',
-      title: 'Develop angular project',
-      done: true,
-      note: 'note details',
-      priority: 'High',
-      due_date: '2/12/2020'
-    },
-    {
-      id: '2',
-      img: 'assets/images/user/user2.jpg',
-      name: 'John Deo',
-      title: 'File not found exception solve',
-      done: false,
-      note: 'note details',
-      priority: 'High',
-      due_date: '2/12/2019'
-    },
-    {
-      id: '3',
-      img: 'assets/images/user/user3.jpg',
-      name: 'Jens Brincker',
-      title: 'Test project and find bug',
-      done: false,
-      note: 'note details',
-      priority: 'Low',
-      due_date: '2/12/2017'
-    },
-    {
-      id: '4',
-      img: 'assets/images/user/user4.jpg',
-      name: 'Mark Hay',
-      title: 'Image not found error',
-      done: true,
-      note: 'note details',
-      priority: 'Normal',
-      due_date: '2/12/2020'
-    },
-    {
-      id: '5',
-      img: 'assets/images/user/user5.jpg',
-      name: 'Anthony Davie',
-      title: 'Solve client error in form',
-      done: false,
-      note: 'note details',
-      priority: 'High',
-      due_date: '2/12/2019'
-    },
-    {
-      id: '6',
-      img: 'assets/images/user/user6.jpg',
-      name: 'Sue Woodger',
-      title: 'Tab button is flickering on hover',
-      done: false,
-      note: 'note details',
-      priority: 'Normal',
-      due_date: '2/12/2017'
-    },
-    {
-      id: '7',
-      img: 'assets/images/user/user7.jpg',
-      name: 'John Deo',
-      title: 'Chart responsive issue solve',
-      done: true,
-      note: 'note details',
-      priority: 'High',
-      due_date: '2/12/2019'
-    },
 
 
-  ];
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
-  }
-  toggle(task, nav: any) {
-    nav.close();
-    task.done = !task.done;
-  }
-  addNewTask(nav: any) {
-    this.resetFormField();
-    this.isNewEvent = true;
-    this.dialogTitle = 'New Task';
-    this.userImg = 'assets/images/user/user1.jpg';
-    nav.open();
-  }
-  taskClick(task, nav: any): void {
-    this.isNewEvent = false;
-    this.dialogTitle = 'Edit Task';
-    this.userImg = task.img;
-    nav.open();
-    this.taskForm = this.createFormGroup(task);
-  }
-  closeSlider(nav: any) {
-    if (nav.open()) {
-      nav.close();
-    }
-  }
-  createFormGroup(data: any) {
-    return this.fb.group({
-      id: [data ? data.id : this.getRandomID()],
-      img: [data ? data.img : 'assets/images/user/user1.jpg'],
-      name: [data ? data.name : null],
-      title: [data ? data.title : null],
-      done: [data ? data.done : null],
-      priority: [data ? data.priority : null],
-      due_date: [
-        formatDate(
-          data
-            ? data.due_date
-            : formatDate(new Date(), 'yyyy-MM-dd', 'en') || '',
-          'yyyy-MM-dd',
-          'en'
-        )
-      ],
-      note: [data ? data.note : null]
-    });
-  }
-  saveTask() {
-    this.tasks.unshift(this.taskForm.value);
-    this.resetFormField();
 
-  }
-  editTask() {
-    const targetIdx = this.tasks
-      .map((item) => item.id)
-      .indexOf(this.taskForm.value.id);
-    this.tasks[targetIdx] = this.taskForm.value;
 
-  }
-  deleteTask(nav: any) {
-    const targetIdx = this.tasks
-      .map((item) => item.id)
-      .indexOf(this.taskForm.value.id);
-    this.tasks.splice(targetIdx, 1);
-    nav.close();
 
-  }
   resetFormField() {
     this.taskForm.controls.name.reset();
     this.taskForm.controls.title.reset();
@@ -213,6 +80,9 @@ export class NewUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.nodeService.getAllAbilityDto().then(files => { this.files3 = files; console.log("test ", this.files3) });
+
+
     this.preferenceService.getAPreferences().subscribe(data => {
       console.log(data)
       this.preferences = data;
@@ -240,14 +110,14 @@ export class NewUserComponent implements OnInit {
   createContactForm() {
 
     this.userForm = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      firstName: [''],
+      lastName: [''],
       email: [
         '',
         [Validators.required, Validators.email, Validators.minLength(5)]
       ],
       status: ['', [Validators.required]],
-      realName: ['', [Validators.required]],
+      realName: [''],
       loginName: ['', [Validators.required]],
       pseudo: ['', [Validators.required]],
       passeword: ['', [Validators.required]],
