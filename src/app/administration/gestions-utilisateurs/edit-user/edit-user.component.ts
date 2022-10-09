@@ -8,13 +8,15 @@ import { GroupesTilisateursService } from 'src/app/services/groupes-tilisateurs.
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.sass']
+  styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
   sourceProducts: any[] = [];
   userGroupes: UserGroup[];
   targetProducts: any[] = [];;
   userForm: FormGroup;
+  isLinear = false;
+
   user: User;
   fileUploadForm: UntypedFormGroup;
   status = new UntypedFormControl('', Validators.required);

@@ -14,13 +14,14 @@ import { AbilityDto } from 'src/app/models/ability';
 @Component({
   selector: 'app-new-user',
   templateUrl: './new-user.component.html',
-  styleUrls: ['./new-user.component.sass']
+  styleUrls: ['./new-user.component.scss']
 })
 export class NewUserComponent implements OnInit {
   sourceProducts: any[] = [];
   userGroupes: UserGroup[];
   targetProducts: any[] = [];
   userForm: FormGroup;
+  isLinear = false;
   user: User;
   fileUploadForm: UntypedFormGroup;
   status = new UntypedFormControl('', Validators.required);

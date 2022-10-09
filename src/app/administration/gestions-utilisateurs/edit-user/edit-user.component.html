@@ -7,184 +7,234 @@
         </div>
 
 
-
         <div class="row clearfix">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
                     <div class="header">
-                        <h2>Informations de compte</h2>
+                        <h2>
+                            <strong>Add new User</strong>
+                        </h2>
                     </div>
                     <div class="body">
-                        <form *ngIf="user" [formGroup]="userForm">
-                            <div class="row">
-                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                                    <mat-form-field class="example-full-width" appearance="outline">
-                                        <mat-label>Email</mat-label>
-                                        <input matInput formControlName="email" required>
-                                        <mat-icon matSuffix>email</mat-icon>
-                                        <mat-error
-                                            *ngIf="userForm.get('email').hasError('required') || userForm.get('email').touched">
-                                            Please enter a valid email address
-                                        </mat-error>
-                                    </mat-form-field>
+                        <mat-horizontal-stepper [linear]="isLinear" #stepper>
+                            <mat-step>
+                                <ng-template matStepLabel>Step 1</ng-template>
+
+                                <div class="body">
+                                    <form *ngIf="user" [formGroup]="userForm">
+                                        <div class="row">
+                                            <h2>Informations de compte</h2>
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                                <mat-form-field class="example-full-width" appearance="outline">
+                                                    <mat-label>Email</mat-label>
+                                                    <input matInput formControlName="email" required>
+                                                    <mat-icon matSuffix>email</mat-icon>
+                                                    <mat-error
+                                                        *ngIf="userForm.get('email').hasError('required') || userForm.get('email').touched">
+                                                        Please enter a valid email address
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                                <mat-form-field class="example-full-width" appearance="outline">
+                                                    <mat-label>Password</mat-label>
+                                                    <input matInput formControlName="pseudo">
+                                                    <mat-icon matSuffix>face</mat-icon>
+                                                    <mat-error *ngIf="userForm.get('pseudo').hasError('required')">
+                                                        Psuedo is required
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <button mat-raised-button matStepperNext color="primary">Next</button>
+                                        </div>
+                                    </form>
+
+
                                 </div>
-                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                                    <!-- <mat-form-field class="example-full-width" appearance="outline">
-                                        <mat-label>Password</mat-label>
-                                        <input matInput formControlName="pseudo">
-                                        <mat-icon matSuffix>face</mat-icon>
-                                        <mat-error *ngIf="userForm.get('pseudo').hasError('required')">
-                                            Psuedo is required
-                                        </mat-error>
-                                    </mat-form-field> -->
-                                </div>
-                            </div>
-
-                        </form>
-
-
+                                <!-- <form [formGroup]="HFormGroup1">
+                    <ng-template matStepLabel>Fill out your name</ng-template>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>First Name</mat-label>
+                      <input matInput formControlName="firstName" required>
+                      <mat-icon matSuffix>face</mat-icon>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>Last Name</mat-label>
+                      <input matInput formControlName="lastName" required>
+                      <mat-icon matSuffix>face</mat-icon>
+                    </mat-form-field>
+                    <div>
+                      <button mat-raised-button matStepperNext color="primary"
+                        [disabled]="!HFormGroup1.valid">Next</button>
                     </div>
-                </div>
-            </div>
-        </div>
+                  </form> -->
+
+                            </mat-step>
+                            <mat-step>
+                                <ng-template matStepLabel>Step 2</ng-template>
+                                <div class="row clearfix">
+                                    <h2>Informations personnelles</h2>
+                                    <div class="col-lg-3 col-md-12">
+                                        <div class="card">
+                                            <div class="contact-grid">
+                                                <div class="profile-header-image ">
+                                                </div>
+                                                <img src="assets/images/user/usrbig3.jpg" class="user-img" alt="">
 
 
-        <div class="row clearfix">
-            <div class="col-lg-3 col-md-12">
-                <div class="card">
-                    <div class="m-b-20">
-                        <div class="contact-grid">
-                            <div class="profile-header ">
-                            </div>
-                            <img src="assets/images/user/usrbig3.jpg" class="user-img" alt="">
+                                                <form [formGroup]="fileUploadForm">
+                                                    <div class="row">
+                                                        <div>
+                                                            <app-file-upload formControlName="singleUpload">
+                                                            </app-file-upload>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-9 col-md-12">
+                                        <div class="card">
 
 
-                            <form [formGroup]="fileUploadForm">
-                                <div class="row">
-                                    <div>
-                                        <app-file-upload formControlName="singleUpload"></app-file-upload>
+                                            <div class="body">
+
+                                                <div class="row">
+
+                                                    <div class="col-5">
+
+                                                        <mat-form-field class="example-full-width" appearance="outline">
+                                                            <mat-label>First Name</mat-label>
+                                                            <input matInput formControlName="firstName">
+                                                            <mat-icon matSuffix>face</mat-icon>
+
+                                                        </mat-form-field>
+
+                                                    </div>
+                                                    <div class="col-1"></div>
+                                                    <div class="col-5">
+                                                        <mat-form-field class="example-full-width" appearance="outline">
+                                                            <mat-label>Last Name</mat-label>
+                                                            <input matInput formControlName="lastName">
+                                                            <mat-icon matSuffix>face</mat-icon>
+
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col-5">
+
+                                                        <mat-form-field class="example-full-width" appearance="outline">
+                                                            <mat-label>Real Name</mat-label>
+                                                            <input matInput formControlName="firstName">
+                                                            <mat-icon matSuffix>face</mat-icon>
+
+                                                        </mat-form-field>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-9 col-md-12">
-                <div class="card">
-
-                    <div class="header">
-                        <h2>Entrez vos informations personnelles</h2>
-                    </div>
-                    <div class="body">
-                        <div class="row">
-                            <div class="col-5">
-
-                                <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>First Name</mat-label>
-                                    <input matInput formControlName="firstName">
-                                    <mat-icon matSuffix>face</mat-icon>
-
-                                </mat-form-field>
-
-                            </div>
-                            <div class="col-1"></div>
-                            <div class="col-5">
-                                <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Last Name</mat-label>
-                                    <input matInput formControlName="lastName">
-                                    <mat-icon matSuffix>face</mat-icon>
-
-                                </mat-form-field>
-                            </div>
-                            <div class="col-5">
-
-                                <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Real Name</mat-label>
-                                    <input matInput formControlName="firstName">
-                                    <mat-icon matSuffix>face</mat-icon>
-
-                                </mat-form-field>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="row clearfix">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                <div class="card">
-                    <div class="header">
-                        <h2>Affectation des Préferences</h2>
-                    </div>
-                    <div class="body">
-                        <form *ngIf="user" [formGroup]="userForm">
-                            <div class="row">
-                                <div class="col-6">
-                                    <mat-form-field class="example-full-width" appearance="fill">
-                                        <mat-label>Select me</mat-label>
-                                        <mat-select>
-                                            <mat-option value="option1">Option 1</mat-option>
-                                            <mat-option value="option2">Option 2</mat-option>
-                                            <mat-option value="option3">Option 3</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
+                                <div>
+                                    <button mat-raised-button matStepperPrevious color="warn"
+                                        class="msr-2">Back</button>
+                                    <button mat-raised-button matStepperNext color="primary">Next</button>
                                 </div>
-                                <div class="col-6">
-                                    <mat-form-field class="example-full-width" appearance="fill">
-                                        <mat-label>Select me</mat-label>
-                                        <mat-select>
-                                            <mat-option value="option1">Option 1</mat-option>
-                                            <mat-option value="option2">Option 2</mat-option>
-                                            <mat-option value="option3">Option 3</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                            </div>
 
-                        </form>
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row clearfix">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                <div class="card">
-                    <div class="header">
-                        <h2>Paramétrages</h2>
-                    </div>
-                    <h4 class="align-center m-t-10">Affectation groupes</h4>
-                    <div class="body">
-                        <form [formGroup]="userForm">
-                            <p-pickList [source]="sourceProducts" [target]="targetProducts"
-                                sourceHeader="Available Groupes" targetHeader="Selected Groupes" dragdrop="true"
-                                [responsive]="true" [sourceStyle]="{'height':'300px'}"
-                                [targetStyle]="{'height':'300px'}" filterBy="name"
-                                sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name">
-                                <ng-template let-product pTemplate="item">
-                                    <div class="product-item">
-                                        <div class="product-list-detail">
-                                            <h5 class="mb-2">{{product.name}}</h5>
-                                            <i class="pi pi-tag product-category-icon"></i>
+                            </mat-step>
+                            <mat-step>
+                                <ng-template matStepLabel> Step 3</ng-template>
+                                <h2>Affectation des préferences</h2>
+                                <div class="body">
+                                    <form *ngIf="user" [formGroup]="userForm">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <mat-form-field class="example-full-width" appearance="fill">
+                                                    <mat-label>Select me</mat-label>
+                                                    <mat-select>
+                                                        <mat-option value="option1">Option 1</mat-option>
+                                                        <mat-option value="option2">Option 2</mat-option>
+                                                        <mat-option value="option3">Option 3</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-6">
+                                                <mat-form-field class="example-full-width" appearance="fill">
+                                                    <mat-label>Select me</mat-label>
+                                                    <mat-select>
+                                                        <mat-option value="option1">Option 1</mat-option>
+                                                        <mat-option value="option2">Option 2</mat-option>
+                                                        <mat-option value="option3">Option 3</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
                                         </div>
 
-                                    </div>
-                                </ng-template>
-                            </p-pickList>
-                        </form>
+                                    </form>
 
 
+                                </div>
+                                <div>
+                                    <button mat-raised-button matStepperPrevious color="warn"
+                                        class="msr-2">Back</button>
+                                    <button mat-raised-button matStepperNext color="primary">Next</button>
+                                </div>
+
+                            </mat-step>
+                            <mat-step>
+                                <ng-template matStepLabel> Step 4</ng-template>
+                                <h2>Affectation des Groupes</h2>
+                                <div class="body">
+                                    <form [formGroup]="userForm">
+                                        <p-pickList [source]="sourceProducts" [target]="targetProducts"
+                                            sourceHeader="Available Groupes" targetHeader="Selected Groupes"
+                                            dragdrop="true" [responsive]="true" [sourceStyle]="{'height':'300px'}"
+                                            [targetStyle]="{'height':'300px'}" filterBy="name"
+                                            sourceFilterPlaceholder="Search by name"
+                                            targetFilterPlaceholder="Search by name">
+                                            <ng-template let-product pTemplate="item">
+                                                <div class="product-item">
+                                                    <div class="product-list-detail">
+                                                        <h5 class="mb-2">{{product.name}}</h5>
+                                                        <i class="pi pi-tag product-category-icon"></i>
+                                                    </div>
+
+                                                </div>
+                                            </ng-template>
+                                        </p-pickList>
+                                    </form>
+                                </div>
+                                <div>
+                                    <button mat-raised-button matStepperPrevious color="warn"
+                                        class="msr-2">Back</button>
+                                    <button mat-raised-button matStepperNext color="primary">Next</button>
+                                </div>
+                            </mat-step>
+
+                            <mat-step>
+                                <ng-template matStepLabel> Step 5</ng-template>
+                                <div>
+                                    <button mat-raised-button matStepperPrevious color="warn"
+                                        class="msr-2">Back</button>
+
+
+                                </div>
+                            </mat-step>
+                        </mat-horizontal-stepper>
                     </div>
-
                 </div>
             </div>
         </div>
+
+
+
+
+
+
 
 
 
