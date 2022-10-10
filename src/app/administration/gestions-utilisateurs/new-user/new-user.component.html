@@ -16,9 +16,9 @@
             </h2>
           </div>
           <div class="body">
-            <mat-horizontal-stepper [linear]="isLinear" #stepper>
+            <mat-horizontal-stepper [linear]="isLinear" #stepper labelPosition="bottom">
               <mat-step>
-                <ng-template matStepLabel>Step 1</ng-template>
+                <ng-template matStepLabel>Informations de compte</ng-template>
 
                 <div class="body">
                   <form *ngIf="user" [formGroup]="userForm">
@@ -73,7 +73,8 @@
 
               </mat-step>
               <mat-step>
-                <ng-template matStepLabel>Step 2</ng-template>
+                <ng-template matStepLabel>Informations personnelles
+                </ng-template>
                 <div class="row clearfix">
                   <h2>Informations personnelles</h2>
                   <div class="col-lg-3 col-md-12">
@@ -145,7 +146,7 @@
 
               </mat-step>
               <mat-step>
-                <ng-template matStepLabel> Step 3</ng-template>
+                <ng-template matStepLabel> Affectation des préferences</ng-template>
                 <h2>Affectation des préferences</h2>
                 <div class="body">
                   <form *ngIf="user" [formGroup]="userForm">
@@ -183,7 +184,7 @@
 
               </mat-step>
               <mat-step>
-                <ng-template matStepLabel> Step 4</ng-template>
+                <ng-template matStepLabel>Affectation des Groupes</ng-template>
                 <h2>Affectation des Groupes</h2>
                 <div class="body">
                   <form [formGroup]="userForm">

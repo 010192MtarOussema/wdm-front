@@ -23,6 +23,7 @@ export class NewUserComponent implements OnInit {
   userForm: FormGroup;
   isLinear = false;
   user: User;
+  show: boolean = false;
   fileUploadForm: UntypedFormGroup;
   status = new UntypedFormControl('', Validators.required);
   animals: any[] = [
