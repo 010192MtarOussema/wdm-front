@@ -32,7 +32,6 @@ import {
 import { WINDOW_PROVIDERS } from './core/service/window.service';
 import { ShowNotificationService } from './services/show-notification.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ProductService } from './authentication/signin/productService';
 // import { fakeBackendProvider } from './core/interceptor/fake-backend';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -45,47 +44,47 @@ export function createTranslateLoader(http: HttpClient): any {
 }
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HeaderComponent,
-        PageLoaderComponent,
-        SidebarComponent,
-        RightSidebarComponent,
-        AuthLayoutComponent,
-        MainLayoutComponent,
-    
-    ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        HttpClientModule,
-        PerfectScrollbarModule,
-        NgxSpinnerModule,
-        ClickOutsideModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: createTranslateLoader,
-                deps: [HttpClient]
-            }
-        }),
-        CoreModule,
-        SharedModule
-    ],
-    providers: [
-      { provide: LocationStrategy, useClass: HashLocationStrategy },
-      {
-        provide: PERFECT_SCROLLBAR_CONFIG,
-        useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-      },
-      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-      { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-      // fakeBackendProvider,
-      ShowNotificationService ,ProductService,
-      MatSnackBar,
-      WINDOW_PROVIDERS
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    PageLoaderComponent,
+    SidebarComponent,
+    RightSidebarComponent,
+    AuthLayoutComponent,
+    MainLayoutComponent,
+
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    PerfectScrollbarModule,
+    NgxSpinnerModule,
+    ClickOutsideModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
+    CoreModule,
+    SharedModule
+  ],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // fakeBackendProvider,
+    ShowNotificationService,
+    MatSnackBar,
+    WINDOW_PROVIDERS
+  ],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

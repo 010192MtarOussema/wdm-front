@@ -61,11 +61,6 @@ export class NewUserComponent implements OnInit {
 
   }
 
-
-
-
-
-
   resetFormField() {
     this.taskForm.controls.name.reset();
     this.taskForm.controls.title.reset();

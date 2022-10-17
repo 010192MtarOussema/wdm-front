@@ -12,7 +12,7 @@
         <div class="card">
           <div class="header">
             <h2>
-              <strong>Add new User</strong>
+              <strong>Ajouter un nouvel utilisateur</strong>
             </h2>
           </div>
           <div class="body">
@@ -26,50 +26,25 @@
                       <h2>Informations de compte</h2>
                       <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                         <mat-form-field class="example-full-width" appearance="outline">
-                          <mat-label>Email</mat-label>
+                          <mat-label>Adresse mail</mat-label>
                           <input matInput formControlName="email" required>
                           <mat-icon matSuffix>email</mat-icon>
                           <mat-error
                             *ngIf="userForm.get('email').hasError('required') || userForm.get('email').touched">
-                            Please enter a valid email address
+                            Le format de l'adresse mail est invalide
                           </mat-error>
                         </mat-form-field>
                       </div>
-                      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                        <mat-form-field class="example-full-width" appearance="outline">
-                          <mat-label>Password</mat-label>
-                          <input matInput formControlName="pseudo">
-                          <mat-icon matSuffix>face</mat-icon>
-                          <mat-error *ngIf="userForm.get('pseudo').hasError('required')">
-                            Psuedo is required
-                          </mat-error>
-                        </mat-form-field>
-                      </div>
+
                     </div>
                     <div>
-                      <button mat-raised-button matStepperNext color="primary">Next</button>
+                      <button mat-raised-button matStepperNext color="primary">Suivant</button>
                     </div>
                   </form>
 
 
                 </div>
-                <!-- <form [formGroup]="HFormGroup1">
-                  <ng-template matStepLabel>Fill out your name</ng-template>
-                  <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>First Name</mat-label>
-                    <input matInput formControlName="firstName" required>
-                    <mat-icon matSuffix>face</mat-icon>
-                  </mat-form-field>
-                  <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Last Name</mat-label>
-                    <input matInput formControlName="lastName" required>
-                    <mat-icon matSuffix>face</mat-icon>
-                  </mat-form-field>
-                  <div>
-                    <button mat-raised-button matStepperNext color="primary"
-                      [disabled]="!HFormGroup1.valid">Next</button>
-                  </div>
-                </form> -->
+
 
               </mat-step>
               <mat-step>
@@ -85,13 +60,13 @@
                         <img src="assets/images/user/usrbig3.jpg" class="user-img" alt="">
 
 
-                        <form [formGroup]="fileUploadForm">
+                        <!-- <form [formGroup]="fileUploadForm">
                           <div class="row">
                             <div>
                               <app-file-upload formControlName="singleUpload"></app-file-upload>
                             </div>
                           </div>
-                        </form>
+                        </form> -->
 
                       </div>
                     </div>
@@ -99,16 +74,11 @@
 
                   <div class="col-lg-9 col-md-12">
                     <div class="card">
-
-
                       <div class="body">
-
                         <div class="row">
-
                           <div class="col-5">
-
                             <mat-form-field class="example-full-width" appearance="outline">
-                              <mat-label>First Name</mat-label>
+                              <mat-label>Prénom</mat-label>
                               <input matInput formControlName="firstName">
                               <mat-icon matSuffix>face</mat-icon>
 
@@ -118,21 +88,17 @@
                           <div class="col-1"></div>
                           <div class="col-5">
                             <mat-form-field class="example-full-width" appearance="outline">
-                              <mat-label>Last Name</mat-label>
+                              <mat-label>Nom</mat-label>
                               <input matInput formControlName="lastName">
                               <mat-icon matSuffix>face</mat-icon>
-
                             </mat-form-field>
                           </div>
                           <div class="col-5">
-
                             <mat-form-field class="example-full-width" appearance="outline">
-                              <mat-label>Real Name</mat-label>
+                              <mat-label>Nom complet</mat-label>
                               <input matInput formControlName="firstName">
                               <mat-icon matSuffix>face</mat-icon>
-
                             </mat-form-field>
-
                           </div>
                         </div>
                       </div>
@@ -143,13 +109,12 @@
                   <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Back</button>
                   <button mat-raised-button matStepperNext color="primary">Next</button>
                 </div>
-
               </mat-step>
               <mat-step>
-                <ng-template matStepLabel> Affectation des préferences</ng-template>
-                <h2>Affectation des préferences</h2>
+                <ng-template matStepLabel> Choix des préferences de l'utilisateur(Modifier les selects)</ng-template>
+                <h2>Choix des préferences</h2>
                 <div class="body">
-                  <form *ngIf="user" [formGroup]="userForm">
+                  <form [formGroup]="userForm">
                     <div class="row">
                       <div class="col-6">
                         <mat-form-field class="example-full-width" appearance="fill">
@@ -172,26 +137,23 @@
                         </mat-form-field>
                       </div>
                     </div>
-
                   </form>
-
-
                 </div>
                 <div>
-                  <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Back</button>
-                  <button mat-raised-button matStepperNext color="primary">Next</button>
+                  <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Précedent</button>
+                  <button mat-raised-button matStepperNext color="primary">Suivant</button>
                 </div>
-
               </mat-step>
               <mat-step>
-                <ng-template matStepLabel>Affectation des Groupes</ng-template>
-                <h2>Affectation des Groupes</h2>
+                <ng-template matStepLabel>Ajout de l'utilisateur aux groupes</ng-template>
+                <h2>Ajout de l'utilisateur aux groupes</h2>
                 <div class="body">
                   <form [formGroup]="userForm">
-                    <p-pickList [source]="sourceProducts" [target]="targetProducts" sourceHeader="Available Groupes"
-                      targetHeader="Selected Groupes" dragdrop="true" [responsive]="true"
+                    <p-pickList [source]="sourceProducts" [target]="targetProducts" sourceHeader="Groupes disponibles"
+                      targetHeader="Groupes sélectionnés" dragdrop="true" [responsive]="true"
                       [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}" filterBy="name"
-                      sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name">
+                      sourceFilterPlaceholder="Rechercher par nom de groupe "
+                      targetFilterPlaceholder="Rechercher par nom de groupe">
                       <ng-template let-product pTemplate="item">
                         <div class="product-item">
                           <div class="product-list-detail">
@@ -205,17 +167,16 @@
                   </form>
                 </div>
                 <div>
-                  <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Back</button>
-                  <button mat-raised-button matStepperNext color="primary">Next</button>
+                  <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Précedent</button>
+                  <button mat-raised-button matStepperNext color="primary">Suivant</button>
                 </div>
               </mat-step>
 
               <mat-step>
                 <ng-template matStepLabel> Step 5</ng-template>
                 <div>
-                  <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Back</button>
-
-
+                  <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Précedent</button>
+                  <button mat-raised-button matStepperNext color="primary">Sauvegarder</button>
                 </div>
               </mat-step>
             </mat-horizontal-stepper>

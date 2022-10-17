@@ -6,7 +6,6 @@ import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroy
 import { User } from 'src/app/models/user';
 import { ShowNotificationService } from 'src/app/services/show-notification.service';
 import { PrimeNGConfig } from 'primeng/api';
-import { ProductService } from './productService';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -14,27 +13,26 @@ import { ProductService } from './productService';
 })
 export class SigninComponent
   extends UnsubscribeOnDestroyAdapter
-  implements OnInit
-{
+  implements OnInit {
   sourceProducts: any[];
-    
+
   targetProducts: any[];
   loginForm: FormGroup;
   submitted = false;
   error = '';
   hide = true;
-  user : User ; 
+  user: User;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService , 
-    private showNotificationService : ShowNotificationService ,
-    private carService: ProductService, private primengConfig: PrimeNGConfig
+    private authService: AuthService,
+    private showNotificationService: ShowNotificationService,
+    private primengConfig: PrimeNGConfig
   ) {
     super();
   }
   ngOnInit() {
-    this.user = new User() ;
+    this.user = new User();
     this.loginForm = this.formBuilder.group({
       email: [
         this.user.email,
@@ -55,24 +53,24 @@ export class SigninComponent
       return;
     } else {
       this.subs.sink = this.authService
-      
+
         .login(this.loginForm.getRawValue())
         .subscribe(
           (res) => {
-            console.log("error" , res)
+            console.log("error", res)
             if (res) {
-              console.log("response" , res)
+              console.log("response", res)
               // const token = this.authService.currentUserValue.token;
               // if (token) {
-                this.router.navigate(['/administration/list-utilisateurs']);
-                this.showNotificationService.showNotification(
-                  'snackbar-danger',
-                  'Welcome To WDM',
-                  'top',
-                  'right'
-                );
-              }
-            
+              this.router.navigate(['/administration/list-utilisateurs']);
+              this.showNotificationService.showNotification(
+                'snackbar-danger',
+                'Bienvenue dans WDM',
+                'top',
+                'right'
+              );
+            }
+
           },
           (error) => {
             console.log(error)
