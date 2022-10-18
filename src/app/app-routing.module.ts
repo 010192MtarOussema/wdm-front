@@ -87,7 +87,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule)
       },
-   
+
 
       {
         path: 'task',
@@ -114,7 +114,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./widget/widget.module').then((m) => m.WidgetModule)
       },
-     
+
       {
         path: 'forms',
         loadChildren: () =>
@@ -125,13 +125,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./tables/tables.module').then((m) => m.TablesModule)
       },
-  
+
       {
         path: 'charts',
         loadChildren: () =>
           import('./charts/charts.module').then((m) => m.ChartsModule)
       },
- 
+
 
       {
         path: 'profile',
@@ -141,13 +141,7 @@ const routes: Routes = [
           )
       },
 
-      {
-        path: 'multilevel',
-        loadChildren: () =>
-          import('./multilevel/multilevel.module').then(
-            (m) => m.MultilevelModule
-          )
-      }
+
     ]
   },
   {
@@ -165,4 +159,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

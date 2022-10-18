@@ -27,13 +27,17 @@ export class GestionsUtilisateursComponent extends UnsubscribeOnDestroyAdapter
   implements OnInit {
   displayedColumns = [
     'select',
+    'identifiant',
     'img',
     'login',
-    'roles',
+
     'firstName',
     'lastName',
-    'email',
+    'realName',
     'status',
+    'createdDate',
+    'updateDate',
+    'lastVisitDate',
     'actions'
   ];
   userForm: FormGroup;
@@ -45,9 +49,9 @@ export class GestionsUtilisateursComponent extends UnsubscribeOnDestroyAdapter
 
   breadscrums = [
     {
-      title: 'Critéres des recherches ',
+      title: 'Critères des recherches ',
       items: ['Administration'],
-      active: 'compte utilisateur'
+      active: 'Liste des utilisateurs'
     }
   ];
   status = new UntypedFormControl('', Validators.required);
@@ -92,8 +96,8 @@ export class GestionsUtilisateursComponent extends UnsubscribeOnDestroyAdapter
   createContactForm() {
 
     this.userForm = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      firstName: [''],
+      lastName: [''],
       email: [
         '',
         [Validators.required, Validators.email, Validators.minLength(5)]

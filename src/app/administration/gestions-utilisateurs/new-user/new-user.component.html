@@ -12,7 +12,7 @@
         <div class="card">
           <div class="header">
             <h2>
-              <strong>Ajouter un nouvel utilisateur</strong>
+              <!-- <strong>Ajouter un nouvel utilisateur</strong> -->
             </h2>
           </div>
           <div class="body">
@@ -23,7 +23,6 @@
                 <div class="body">
                   <form *ngIf="user" [formGroup]="userForm">
                     <div class="row">
-                      <h2>Informations de compte</h2>
                       <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                         <mat-form-field class="example-full-width" appearance="outline">
                           <mat-label>Adresse mail</mat-label>
@@ -51,28 +50,44 @@
                 <ng-template matStepLabel>Informations personnelles
                 </ng-template>
                 <div class="row clearfix">
-                  <h2>Informations personnelles</h2>
                   <div class="col-lg-3 col-md-12">
-                    <div class="card">
-                      <div class="contact-grid">
-                        <div class="profile-header-image ">
-                        </div>
-                        <img src="assets/images/user/usrbig3.jpg" class="user-img" alt="">
-
-
-                        <!-- <form [formGroup]="fileUploadForm">
-                          <div class="row">
-                            <div>
-                              <app-file-upload formControlName="singleUpload"></app-file-upload>
+                    <div class="col-lg-4 col-md-12">
+                      <div class="card">
+                        <div class="m-b-20">
+                          <div class="contact-grid">
+                            <div class="profile-header bg-dark">
+                              <div class="user-name">Nom Utilisateur connecté</div>
+                              <div class="name-center">Role</div>
                             </div>
-                          </div>
-                        </form> -->
+                            <img src="assets/images/user/usrbig3.jpg" class="user-img" alt="">
+                            <p>
+                              456, Estern evenue, Courtage area,
+                              <br />New York
+                            </p>
+                            <div>
+                              <span class="phone">
+                                <i class="material-icons">phone</i>264-625-2583</span>
+                            </div>
 
+                          </div>
+                        </div>
                       </div>
+
                     </div>
+                    <!-- <div class="card"> -->
+                    <!-- <div class="contact-grid"> -->
+                    <!-- <div class="profile-header-image ">
+                        </div>
+                        <img src="assets/images/user/avatar_default.jpg" class="user-img" alt=""> -->
+
+
+
+
+                    <!-- </div> -->
+                    <!-- </div> -->
                   </div>
 
-                  <div class="col-lg-9 col-md-12">
+                  <div class="col-lg-8 col-md-12">
                     <div class="card">
                       <div class="body">
                         <div class="row">
@@ -106,33 +121,32 @@
                   </div>
                 </div>
                 <div>
-                  <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Back</button>
-                  <button mat-raised-button matStepperNext color="primary">Next</button>
+                  <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Précedent</button>
+                  <button mat-raised-button matStepperNext color="primary">Suivant</button>
                 </div>
               </mat-step>
               <mat-step>
-                <ng-template matStepLabel> Choix des préferences de l'utilisateur(Modifier les selects)</ng-template>
-                <h2>Choix des préferences</h2>
+                <ng-template matStepLabel> Choix des préferences de l'utilisateur</ng-template>
                 <div class="body">
                   <form [formGroup]="userForm">
                     <div class="row">
                       <div class="col-6">
-                        <mat-form-field class="example-full-width" appearance="fill">
-                          <mat-label>Select me</mat-label>
+
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Langue</mat-label>
                           <mat-select>
                             <mat-option value="option1">Option 1</mat-option>
                             <mat-option value="option2">Option 2</mat-option>
-                            <mat-option value="option3">Option 3</mat-option>
                           </mat-select>
                         </mat-form-field>
                       </div>
                       <div class="col-6">
-                        <mat-form-field class="example-full-width" appearance="fill">
-                          <mat-label>Select me</mat-label>
+
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Theme</mat-label>
                           <mat-select>
                             <mat-option value="option1">Option 1</mat-option>
                             <mat-option value="option2">Option 2</mat-option>
-                            <mat-option value="option3">Option 3</mat-option>
                           </mat-select>
                         </mat-form-field>
                       </div>
@@ -146,7 +160,6 @@
               </mat-step>
               <mat-step>
                 <ng-template matStepLabel>Ajout de l'utilisateur aux groupes</ng-template>
-                <h2>Ajout de l'utilisateur aux groupes</h2>
                 <div class="body">
                   <form [formGroup]="userForm">
                     <p-pickList [source]="sourceProducts" [target]="targetProducts" sourceHeader="Groupes disponibles"
@@ -173,7 +186,118 @@
               </mat-step>
 
               <mat-step>
-                <ng-template matStepLabel> Step 5</ng-template>
+                <ng-template matStepLabel> Attribution des habilitations à l'utilisateur</ng-template>
+
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                      <div class="body">
+                        <div class="responsive_table">
+                          <div class="materialTableHeader">
+                            <div class="row">
+                              <div class="col-8">
+                                <ul class="header-buttons-left ml-0">
+                                  <li class="dropdown">
+                                    <h2>Liste des habilitations </h2>
+                                  </li>
+                                  <li class="dropdown m-l-20">
+                                    <label for="search-input"><i
+                                        class="material-icons search-icon">rechercher</i></label>
+                                    <input placeholder="Rechercher" type="text" #filter
+                                      class="browser-default search-field" aria-label="Search box">
+                                  </li>
+
+                                </ul>
+                              </div>
+
+                            </div>
+                          </div>
+                          <mat-table #table matTableExporter [dataSource]="dataSource" matSort class="mat-cell"
+                            #exporter="matTableExporter">
+                            <!-- Checkbox Column -->
+                            <ng-container matColumnDef="select">
+                              <mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-10'">
+                                <mat-checkbox (change)="$event ? masterToggle() : null"
+                                  [checked]="selection.hasValue() && isAllSelected()"
+                                  [indeterminate]="selection.hasValue() && !isAllSelected()" [ngClass]="'tbl-checkbox'">
+                                </mat-checkbox>
+                              </mat-header-cell>
+                              <mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-6'">
+                                <mat-checkbox (click)="$event.stopPropagation()"
+                                  (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
+                                  [ngClass]="'tbl-checkbox'">
+                                </mat-checkbox>
+                              </mat-cell>
+                            </ng-container>
+                            <!-- ID Column -->
+                            <ng-container matColumnDef="id">
+                              <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+                              <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="name">
+                              <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-30'">
+                                Nom
+                              </mat-header-cell>
+                              <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-6"> <img
+                                  [src]="row.img" />
+                              </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="description">
+                              <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-30'">
+                                Description
+                              </mat-header-cell>
+                              <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-6"> <img
+                                  [src]="row.img" />
+                              </mat-cell>
+                            </ng-container>
+
+                            <!-- actions -->
+                            <ng-container matColumnDef="authorization">
+                              <mat-header-cell [ngClass]="'tbl-col-width-per-40'" *matHeaderCellDef>Accorder des
+                                Autorisations
+                              </mat-header-cell>
+                              <mat-cell *matCellDef="let row; let i=index;">
+
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                  <mat-label></mat-label>
+                                  <mat-select>
+                                    <mat-option value="option1">Option 1</mat-option>
+                                    <mat-option value="option2">Option 2</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="editCall(row)"
+                              [style.cursor]="'pointer'" matRipple>
+                            </mat-row>
+                          </mat-table>
+                          <!-- Loading spinner -->
+                          <div *ngIf="exampleDatabase.isTblLoading" class="tbl-spinner">
+                            <mat-progress-spinner color="primary" [diameter]="40" mode="indeterminate">
+                            </mat-progress-spinner>
+                          </div>
+                          <!-- context menu start -->
+                          <div style="visibility: hidden; position: fixed" [style.left]="contextMenuPosition.x"
+                            [style.top]="contextMenuPosition.y" [matMenuTriggerFor]="contextMenu">
+                          </div>
+
+
+                          <!-- context menu end -->
+
+                          <div *ngIf="!exampleDatabase.isTblLoading" class="no-results"
+                            [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+                            Aucun utilisateur trouvé
+                          </div>
+                          <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0"
+                            [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                          </mat-paginator>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div>
                   <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Précedent</button>
                   <button mat-raised-button matStepperNext color="primary">Sauvegarder</button>

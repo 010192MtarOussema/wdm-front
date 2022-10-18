@@ -12,7 +12,7 @@ import { UserConnect } from 'src/app/models/user-connect';
 export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
-  private readonly API_URL = 'http://localhost:8080/api/';
+  private readonly API_URL = 'http://localhost:8080/user/';
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(
@@ -29,11 +29,11 @@ export class AuthService {
 
     // console.log("---" , environment.apiUrl)
     return this.http
-      .post<any>(`${this.API_URL}block-user-connect`,userConnect)
+      .post<any>(`${this.API_URL}block-user-connect`, userConnect)
       .pipe(
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          console.log("---" , environment.apiUrl)
+          console.log("---", environment.apiUrl)
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
           return user;

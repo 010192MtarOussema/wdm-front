@@ -16,44 +16,37 @@
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>First Name</mat-label>
+                    <mat-label>Prénom</mat-label>
                     <input matInput formControlName="firstName">
                     <mat-icon matSuffix>face</mat-icon>
-                    <mat-error *ngIf="userForm.get('firstName').hasError('required')">
-                      First Name is required
-                    </mat-error>
+
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Last Name</mat-label>
+                    <mat-label>Nom</mat-label>
                     <input matInput formControlName="lastName">
                     <mat-icon matSuffix>face</mat-icon>
-                    <mat-error *ngIf="userForm.get('lastName').hasError('required')">
-                      Last Name is required
-                    </mat-error>
+
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Email</mat-label>
+                    <mat-label>Adresse mail</mat-label>
                     <input matInput formControlName="email" required>
                     <mat-icon matSuffix>email</mat-icon>
                     <mat-error *ngIf="userForm.get('email').hasError('required') || userForm.get('email').touched">
-                      Please enter a valid email address
+                      Le format de l'adresse mail est invalide
                     </mat-error>
                   </mat-form-field>
                 </div>
 
               </div>
-              <!-- <div class="header-button">
-                  <button mat-raised-button color="primary" (click)="addNewTask(sidenav)">Add
-                    Task</button>
-                </div> -->
+
               <div class="header-button">
-                <button mat-raised-button color="primary">Search </button>
+                <button mat-raised-button color="primary">Rechercher </button>
               </div>
             </form>
 
@@ -71,11 +64,11 @@
                   <div class="col-8">
                     <ul class="header-buttons-left ml-0">
                       <li class="dropdown">
-                        <h2>Listes des Utilisateurs </h2>
+                        <h2>Liste des utilisateurs </h2>
                       </li>
                       <li class="dropdown m-l-20">
                         <label for="search-input"><i class="material-icons search-icon">rechercher</i></label>
-                        <input placeholder="rechercher" type="text" #filter class="browser-default search-field"
+                        <input placeholder="Rechercher" type="text" #filter class="browser-default search-field"
                           aria-label="Search box">
                       </li>
                       <li>
@@ -86,7 +79,7 @@
                         </div>
                       </li>
                       <li>
-                        <div class="export-button m-l-10" matTooltip="REFRESH">
+                        <div class="export-button m-l-10" matTooltip="Rafraîchir">
                           <button mat-mini-fab color="primary" (click)="refresh()">
                             <mat-icon class="col-white">refresh</mat-icon>
                           </button>
@@ -126,55 +119,78 @@
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
                   <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
                 </ng-container>
+                <ng-container matColumnDef="identifiant">
+                  <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'"> Identifiant
+                  </mat-header-cell>
+                  <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-6"> <img
+                      [src]="row.img" />
+                  </mat-cell>
+                </ng-container>
                 <ng-container matColumnDef="img">
-                  <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'"> Picture
+                  <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'"> Image
                   </mat-header-cell>
                   <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-6"> <img
                       [src]="row.img" />
                   </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="login">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Login
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Identifiant de
+                    connexion
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
                     [ngClass]="'tbl-col-width-per-8'">
                     {{row.loginName}}</mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="roles">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Roles
-                  </mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
-                    [ngClass]="'tbl-col-width-per-8'">
-                    {{row.lName}}</mat-cell>
-                </ng-container>
+
                 <ng-container matColumnDef="firstName">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">First Name
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Prénom
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
                     [ngClass]="'tbl-col-width-per-8'">
                     {{row.firstName}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="lastName">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Last Name
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Nom
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
                     [ngClass]="'tbl-col-width-per-8'">
                     {{row.lastName}}</mat-cell>
                 </ng-container>
-                <!-- <ng-container matColumnDef="title">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Title
-                    </mat-header-cell>
-                    <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
-                      [ngClass]="'tbl-col-width-per-8'">
-                      {{row.lName}}</mat-cell>
-                  </ng-container> -->
-                <ng-container matColumnDef="email">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                    {{row.email}}</mat-cell>
+                <ng-container matColumnDef="realName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Nom complet
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
+                    [ngClass]="'tbl-col-width-per-8'">
+                    {{row.lastName}}</mat-cell>
                 </ng-container>
+
                 <ng-container matColumnDef="status">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-7'">status
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-6'">Statut
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
+                    [ngClass]="'tbl-col-width-per-7'">
+                    {{row.status}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="createdDate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-6'">Date
+                    d'inscription
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
+                    [ngClass]="'tbl-col-width-per-7'">
+                    {{row.status}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="updateDate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Date
+                    de dernière mise à jour
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
+                    [ngClass]="'tbl-col-width-per-7'">
+                    {{row.status}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="lastVisitDate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Date
+                    de dernière connexion
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
                     [ngClass]="'tbl-col-width-per-7'">
