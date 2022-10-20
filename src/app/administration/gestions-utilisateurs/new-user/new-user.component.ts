@@ -4,11 +4,9 @@ import { PrimeNGConfig, TreeNode } from 'primeng/api';
 import { User } from 'src/app/models/user';
 import { UserGroup } from 'src/app/models/userGroup';
 import { GroupesTilisateursService } from 'src/app/services/groupes-tilisateurs.service';
-import { formatDate } from '@angular/common';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { PreferenceService } from 'src/app/services/preference.service';
 import { Preference } from 'src/app/models/Preference';
-import { AbilityDtoService } from 'src/app/services/ability.service';
+import { AbilityService } from 'src/app/services/ability.service';
 import { AbilityDto } from 'src/app/models/ability';
 import { DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
@@ -21,6 +19,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
+import { Authorization } from 'src/app/models/authorization';
+import { AuthorizationService } from 'src/app/services/authorization.service';
 @Component({
   selector: 'app-new-user',
   templateUrl: './new-user.component.html',
@@ -30,13 +30,9 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
   displayedColumns = [
     'select',
     'name',
-
     'description',
-
-
     'authorization'
   ];
-  sourceProducts: any[] = [];
   userGroupes: UserGroup[];
   targetProducts: any[] = [];
   userForm: FormGroup;
@@ -45,11 +41,14 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
   show: boolean = false;
   fileUploadForm: UntypedFormGroup;
   status = new UntypedFormControl('', Validators.required);
-  animals: any[] = [
+  statusUser: any[] = [
     'En création',
     'Valide',
     'Bloqué'
   ];
+  toppings = new UntypedFormControl();
+
+  authorizations!: Authorization[];
   breadscrums = [
     {
       title: 'Ajouter un nouvel utilisateur',
@@ -69,56 +68,58 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
   dialogTitle: string;
   userImg: string;
   direction: string;
-  files3: AbilityDto[];
+  abilities: AbilityDto[];
 
-  exampleDatabase: GestionsUtilisateursService | null;
+  exampleDatabase: AbilityService | null;
   dataSource: ExampleDataSource | null;
   selection = new SelectionModel<User>(true, []);
-  constructor(private formBuilder: FormBuilder, private groupeUtilisateurService: GroupesTilisateursService, private nodeService: AbilityDtoService,
-    private primengConfig: PrimeNGConfig, public httpClient: HttpClient, private fb: UntypedFormBuilder,
+  constructor(private formBuilder: FormBuilder, private groupeUtilisateurService: GroupesTilisateursService, private abilityService: AbilityService,
+    private primengConfig: PrimeNGConfig, public httpClient: HttpClient, private fb: UntypedFormBuilder, private authorisationService: AuthorizationService,
     public preferenceService: PreferenceService, private snackBar: MatSnackBar
   ) {
     super();
   }
 
-  resetFormField() {
-    this.taskForm.controls.name.reset();
-    this.taskForm.controls.title.reset();
-    this.taskForm.controls.done.reset();
-    this.taskForm.controls.priority.reset();
-    this.taskForm.controls.due_date.reset();
-    this.taskForm.controls.note.reset();
-  }
-  public getRandomID(): string {
-    const S4 = () => {
-      return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-    };
-    return S4() + S4();
-  }
+
+
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild('filter', { static: true }) filter: ElementRef;
-  @ViewChild(MatMenuTrigger)
   contextMenu: MatMenuTrigger;
   contextMenuPosition = { x: '0px', y: '0px' };
   ngOnInit(): void {
     this.loadData();
-    this.nodeService.getAllAbilityDto().then(files => { this.files3 = files; console.log("test ", this.files3) });
-
-
     this.preferenceService.getAPreferences().subscribe(data => {
-      console.log(data)
       this.preferences = data;
+      // const json = this.preferences.forEach(posibleValue => {
+      //   JSON.stringify(posibleValue.possibleValue);
+      //   console.log(JSON.stringify(posibleValue.possibleValue))
+      // })
+      console.info("list des pref", this.preferences)
+
     })
+    // this.abilityService.getAllAbilityDto().subscribe(response => {
+    //   this.abilities = response;
+    //   console.log("list des abilities", this.abilities);
+    // })
+
+    this.authorisationService.getAllAuthorization().subscribe(data => {
+      this.authorizations = data;
+    })
+
     this.groupeUtilisateurService.list().subscribe(data => {
-      this.sourceProducts = data;
+      this.userGroupes = data;
 
+      console.info("list des groupes", this.userGroupes)
 
+      this.primengConfig.ripple = true;
     });
-    this.primengConfig.ripple = true;
     this.user = new User();
     this.createContactForm();
   }
+
+
+
   formControl = new UntypedFormControl('', [
     Validators.required
     // Validators.email,
@@ -156,25 +157,25 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
   disableInfosCompte() {
     return this.userForm.get('loginName').hasError('required') || this.userForm.get('pseudo').hasError('required')
   }
-  removeSelectedRows() {
-    const totalSelect = this.selection.selected.length;
-    this.selection.selected.forEach((item) => {
-      const index: number = this.dataSource.renderedData.findIndex(
-        (d) => d === item
-      );
-      // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
-      this.exampleDatabase.dataChange.value.splice(index, 1);
-      this.selection = new SelectionModel<User>(true, []);
-    });
-    this.showNotification(
-      'snackbar-danger',
-      totalSelect + ' Record Delete Successfully...!!!',
-      'bottom',
-      'center'
-    );
-  }
+  // removeSelectedRows() {
+  //   const totalSelect = this.selection.selected.length;
+  //   this.selection.selected.forEach((item) => {
+  //     const index: number = this.dataSource.renderedData.findIndex(
+  //       (d) => d === item
+  //     );
+  //     // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+  //     this.exampleDatabase.dataChange.value.splice(index, 1);
+  //     this.selection = new SelectionModel<User>(true, []);
+  //   });
+  //   this.showNotification(
+  //     'snackbar-danger',
+  //     totalSelect + ' Record Delete Successfully...!!!',
+  //     'bottom',
+  //     'center'
+  //   );
+  // }
   public loadData() {
-    this.exampleDatabase = new GestionsUtilisateursService(this.httpClient);
+    this.exampleDatabase = new AbilityService(this.httpClient);
     this.dataSource = new ExampleDataSource(
       this.exampleDatabase,
       this.paginator,
@@ -198,7 +199,7 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
     });
   }
 }
-export class ExampleDataSource extends DataSource<User> {
+export class ExampleDataSource extends DataSource<AbilityDto> {
   filterChange = new BehaviorSubject('');
   get filter(): string {
     return this.filterChange.value;
@@ -206,10 +207,10 @@ export class ExampleDataSource extends DataSource<User> {
   set filter(filter: string) {
     this.filterChange.next(filter);
   }
-  filteredData: User[] = [];
-  renderedData: User[] = [];
+  filteredData: AbilityDto[] = [];
+  renderedData: AbilityDto[] = [];
   constructor(
-    public gestionUtilisateurService: GestionsUtilisateursService,
+    public gestionUtilisateurService: AbilityService,
     public paginator: MatPaginator,
     public _sort: MatSort
   ) {
@@ -218,7 +219,7 @@ export class ExampleDataSource extends DataSource<User> {
     this.filterChange.subscribe(() => (this.paginator.pageIndex = 0));
   }
   /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<User[]> {
+  connect(): Observable<AbilityDto[]> {
     // Listen for any changes in the base data, sorting, filtering, or pagination
     const displayDataChanges = [
       this.gestionUtilisateurService.dataChange,
@@ -226,28 +227,16 @@ export class ExampleDataSource extends DataSource<User> {
       this.filterChange,
       this.paginator.page
     ];
-    this.gestionUtilisateurService.getAllUsers();
+    this.gestionUtilisateurService.getAllAbilities();
     return merge(...displayDataChanges).pipe(
       map(() => {
         // Filter data
         this.filteredData = this.gestionUtilisateurService.data
           .slice()
-          .filter((user: User) => {
+          .filter((user: AbilityDto) => {
             const searchStr = (
-              user.firstName +
-              user.lastName +
-              user.email +
-              user.status +
-              user.passeword +
-              user.picture +
-              user.lastModifyPassword +
-              user.lastVisitDate +
-              user.pseudo +
-              user.realName +
-              user.createdDate +
-              user.abilities +
-              user.userGroups
-
+              user.name +
+              user.description
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
           });
@@ -265,7 +254,7 @@ export class ExampleDataSource extends DataSource<User> {
   }
   disconnect() { }
   /** Returns a sorted copy of the database data. */
-  sortData(data: User[]): User[] {
+  sortData(data: AbilityDto[]): AbilityDto[] {
     if (!this._sort.active || this._sort.direction === '') {
       return data;
     }

@@ -64,13 +64,13 @@ export class GestionsUtilisateursComponent extends UnsubscribeOnDestroyAdapter
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
-    public advanceTableService: GestionsUtilisateursService,
+    public utilisateurService: GestionsUtilisateursService,
     private snackBar: MatSnackBar,
     private router: Router, private formBuilder: FormBuilder,
   ) {
     super();
-    this.advanceTableService.getAllUser().subscribe(data =>
-      console.log("list users <====> " + data))
+    // this.utilisateurServices.getAllUser().subscribe(data =>
+    //   console.log("list users <====> " + data))
   }
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -177,7 +177,7 @@ export class GestionsUtilisateursComponent extends UnsubscribeOnDestroyAdapter
           (x) => x.id === this.id
         );
         this.exampleDatabase.dataChange.value[foundIndex] =
-          this.advanceTableService.getDialogData();
+          this.utilisateurService.getDialogData();
         // for delete we use splice in order to remove single object from DataService
         // this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
         this.refreshTable();
@@ -301,7 +301,7 @@ export class ExampleDataSource extends DataSource<User> {
               user.lastName +
               user.email +
               user.status +
-              user.passeword +
+              user.password +
               user.picture +
               user.lastModifyPassword +
               user.lastVisitDate +

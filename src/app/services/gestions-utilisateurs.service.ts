@@ -11,7 +11,7 @@ import { UserConnect } from '../models/user-connect';
 })
 export class GestionsUtilisateursService extends UnsubscribeOnDestroyAdapter {
   // private readonly API_URL = 'assets/data/advanceTable.json';
-  private readonly API_URL = 'http://localhost:8080/api/';
+  private readonly API_URL = 'http://localhost:8080/user/';
 
   isTblLoading = true;
   dataChange: BehaviorSubject<User[]> = new BehaviorSubject<
@@ -30,11 +30,11 @@ export class GestionsUtilisateursService extends UnsubscribeOnDestroyAdapter {
   }
   /** CRUD METHODS */
   getAllUser(): Observable<User> {
-    return this.httpClient.get<User>(this.API_URL + 'users')
+    return this.httpClient.get<User>(this.API_URL + 'list')
   }
   getAllUsers(): void {
     this.httpClient
-      .get<User[]>(this.API_URL + 'users')
+      .get<User[]>(this.API_URL + 'list')
       .subscribe(
         (data) => {
           this.isTblLoading = false;

@@ -10,11 +10,11 @@ import { UnsubscribeOnDestroyAdapter } from '../shared/UnsubscribeOnDestroyAdapt
 })
 export class PreferenceService extends UnsubscribeOnDestroyAdapter {
   // private readonly API_URL = 'assets/data/advanceTable.json';
-  private readonly API_URL = 'http://localhost:8080/api/';
+  private readonly API_URL = 'http://localhost:8080/preferences/';
 
   isTblLoading = true;
   dataChange: BehaviorSubject<Preference[]> = new BehaviorSubject<
-  Preference[]
+    Preference[]
   >([]);
   // Temporarily stores data from dialogs
   dialogData: any;
@@ -28,12 +28,12 @@ export class PreferenceService extends UnsubscribeOnDestroyAdapter {
     return this.dialogData;
   }
   /** CRUD METHODS */
-  getAPreferences(): Observable<Preference[]>{
-   return this.httpClient.get<Preference[]>(this.API_URL+'list-preferences')
+  getAPreferences(): Observable<Preference[]> {
+    return this.httpClient.get<Preference[]>(this.API_URL + 'list')
   }
   getAllPreferences(): void {
-   this.httpClient
-      .get<Preference[]>(this.API_URL+'preferences')
+    this.httpClient
+      .get<Preference[]>(this.API_URL + 'preferences')
       .subscribe(
         (data) => {
           this.isTblLoading = false;
@@ -48,33 +48,33 @@ export class PreferenceService extends UnsubscribeOnDestroyAdapter {
   addPreference(preference: Preference): void {
     // this.dialogData = advanceTable;
 
-      this.httpClient.post(this.API_URL+'add-preference', preference).subscribe(data => {
+    this.httpClient.post(this.API_URL + 'add-preference', preference).subscribe(data => {
       this.dialogData = preference;
-      },
+    },
       (err: HttpErrorResponse) => {
-     // error code here
-    });
+        // error code here
+      });
   }
   updatePreference(preference: Preference): void {
     // this.dialogData = advanceTable;
 
-     this.httpClient.put(this.API_URL+"update-preference/"+ preference.id, preference).subscribe(data => {
+    this.httpClient.put(this.API_URL + "update-preference/" + preference.id, preference).subscribe(data => {
       this.dialogData = preference;
     },
-    (err: HttpErrorResponse) => {
-      // error code here
-    }
-  );
+      (err: HttpErrorResponse) => {
+        // error code here
+      }
+    );
   }
   deletePreference(id: number): void {
-    console.log("service id" , id);
+    console.log("service id", id);
 
-     this.httpClient.post(this.API_URL+'delete-preference', id).subscribe(data => {
+    this.httpClient.post(this.API_URL + 'delete-preference', id).subscribe(data => {
       this.dialogData = data;
       console.log(id);
-      },
+    },
       (err: HttpErrorResponse) => {
-         // error code here
+        // error code here
       }
     );
   }

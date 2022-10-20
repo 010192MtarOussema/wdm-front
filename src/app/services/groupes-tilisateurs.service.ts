@@ -9,11 +9,11 @@ import { UserGroup } from '../models/userGroup';
 })
 export class GroupesTilisateursService extends UnsubscribeOnDestroyAdapter {
   // private readonly API_URL = 'assets/data/advanceTable.json';
-  private readonly API_URL = 'http://localhost:8080/api/';
+  private readonly API_URL = 'http://localhost:8080/users-groupes/';
 
   isTblLoading = true;
   dataChange: BehaviorSubject<UserGroup[]> = new BehaviorSubject<
-  UserGroup[]
+    UserGroup[]
   >([]);
   // Temporarily stores data from dialogs
   dialogData: any;
@@ -28,12 +28,12 @@ export class GroupesTilisateursService extends UnsubscribeOnDestroyAdapter {
   }
   /** CRUD METHODS */
 
-  list() :Observable<UserGroup[]> {
-   return this.httpClient.get<UserGroup[]>(this.API_URL+'list-users-groupes')
+  list(): Observable<UserGroup[]> {
+    return this.httpClient.get<UserGroup[]>(this.API_URL + 'list')
   }
   getUserGrpoupes() {
-   this.httpClient
-      .get<UserGroup[]>(this.API_URL+'list-users-groupes')
+    this.httpClient
+      .get<UserGroup[]>(this.API_URL + 'list')
       .subscribe(
         (data) => {
           this.isTblLoading = false;
@@ -48,33 +48,33 @@ export class GroupesTilisateursService extends UnsubscribeOnDestroyAdapter {
   addUserGroupe(userGroup: UserGroup): void {
     // this.dialogData = advanceTable;
 
-      this.httpClient.post(this.API_URL+'add-user-group', userGroup).subscribe(data => {
+    this.httpClient.post(this.API_URL + 'add-user-group', userGroup).subscribe(data => {
       this.dialogData = userGroup;
-      },
+    },
       (err: HttpErrorResponse) => {
-     // error code here
-    });
+        // error code here
+      });
   }
   updateUserGroupe(user: UserGroup): void {
     // this.dialogData = advanceTable;
 
-     this.httpClient.put(this.API_URL+"update-user-group/"+ user.id, user).subscribe(data => {
+    this.httpClient.put(this.API_URL + "update-user-group/" + user.id, user).subscribe(data => {
       this.dialogData = user;
     },
-    (err: HttpErrorResponse) => {
-      // error code here
-    }
-  );
+      (err: HttpErrorResponse) => {
+        // error code here
+      }
+    );
   }
   deleteUserGroupe(id: number): void {
-    console.log("service id" , id);
+    console.log("service id", id);
 
-     this.httpClient.delete(this.API_URL+'delete-user-groupe/'+ id).subscribe(data => {
+    this.httpClient.delete(this.API_URL + 'delete-user-groupe/' + id).subscribe(data => {
       this.dialogData = data;
       console.log(id);
-      },
+    },
       (err: HttpErrorResponse) => {
-         // error code here
+        // error code here
       }
     );
   }

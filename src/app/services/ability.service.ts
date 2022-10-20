@@ -7,9 +7,9 @@ import { AbilityDto } from '../models/ability';
 @Injectable({
   providedIn: 'root'
 })
-export class AbilityDtoService extends UnsubscribeOnDestroyAdapter {
+export class AbilityService extends UnsubscribeOnDestroyAdapter {
   // private readonly API_URL = 'assets/data/advanceTable.json';
-  private readonly API_URL = 'http://localhost:8080/api/';
+  private readonly API_URL = 'http://localhost:8080/abilities/';
 
   isTblLoading = true;
   dataChange: BehaviorSubject<AbilityDto[]> = new BehaviorSubject<
@@ -29,14 +29,11 @@ export class AbilityDtoService extends UnsubscribeOnDestroyAdapter {
   /** CRUD METHODS */
   getAllAbilityDto() {
 
-    return this.httpClient.get<any>(this.API_URL + 'list')
-      .toPromise()
-      .then(res => <AbilityDto[]>res.data);
-    // return this.httpClient.get<AbilityDto[]>(this.API_URL + 'list')
+    return this.httpClient.get<AbilityDto[]>(this.API_URL + 'list')
   }
   getAllAbilities(): void {
     this.httpClient
-      .get<AbilityDto[]>(this.API_URL + 'roles')
+      .get<AbilityDto[]>(this.API_URL + 'list')
       .subscribe(
         (data) => {
           this.isTblLoading = false;

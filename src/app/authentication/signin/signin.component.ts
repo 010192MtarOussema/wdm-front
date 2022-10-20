@@ -38,7 +38,7 @@ export class SigninComponent
         this.user.email,
         [Validators.required, Validators.email, Validators.minLength(5)]
       ],
-      password: [this.user.passeword, Validators.required]
+      password: [this.user.password, Validators.required]
     });
   }
   get f() {

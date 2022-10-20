@@ -1,11 +1,12 @@
 
-export class UserGroup  {
-    id? : number ; 
-    name?:string ; 
-    description? : string ; 
-    status? : string ;
-   
+export class UserGroup {
+    id?: number;
+    name?: string;
+    description?: string;
+    status?: string;
+    abilities: [];
 
-  
- 
+
+
+
 }
