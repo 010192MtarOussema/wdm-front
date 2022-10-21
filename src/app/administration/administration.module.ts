@@ -39,6 +39,8 @@ import { AddNewGroupeComponent } from './groupes-utilisateurs/add-new-groupe/add
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { TreeModule } from 'primeng/tree';
+import { UserDetailComponent } from './gestions-utilisateurs/user-detail/user-detail.component';
+import { GroupDetailsComponent } from './groupes-utilisateurs/group-details/group-details.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { TreeModule } from 'primeng/tree';
     GestionsUtilisateursComponent,
     BlockUserComponent,
     AddNewGroupeComponent,
+    UserDetailComponent,
+    GroupDetailsComponent,
 
   ],
   imports: [

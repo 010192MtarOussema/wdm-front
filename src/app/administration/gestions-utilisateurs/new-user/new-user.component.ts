@@ -11,7 +11,6 @@ import { AbilityDto } from 'src/app/models/ability';
 import { DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { GestionsUtilisateursService } from 'src/app/services/gestions-utilisateurs.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatMenuTrigger } from '@angular/material/menu';

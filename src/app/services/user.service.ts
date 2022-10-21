@@ -9,7 +9,7 @@ import { UserConnect } from '../models/user-connect';
 @Injectable({
   providedIn: 'root'
 })
-export class GestionsUtilisateursService extends UnsubscribeOnDestroyAdapter {
+export class UserService extends UnsubscribeOnDestroyAdapter {
   // private readonly API_URL = 'assets/data/advanceTable.json';
   private readonly API_URL = 'http://localhost:8080/user/';
 

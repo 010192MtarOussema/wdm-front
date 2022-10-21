@@ -1,6 +1,6 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Component, Inject } from '@angular/core';
-import { GestionsUtilisateursService } from 'src/app/services/gestions-utilisateurs.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-block-user',
@@ -11,7 +11,7 @@ export class BlockUserComponent {
   constructor(
     public dialogRef: MatDialogRef<BlockUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public advanceTableService: GestionsUtilisateursService
+    public advanceTableService: UserService
   ) { }
   onNoClick(): void {
     this.dialogRef.close();

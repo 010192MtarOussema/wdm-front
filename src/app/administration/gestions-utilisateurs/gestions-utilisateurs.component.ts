@@ -13,9 +13,9 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
 import { User } from '../../models/user';
 import { BlockUserComponent } from './block-user/block-user.component';
-import { GestionsUtilisateursService } from 'src/app/services/gestions-utilisateurs.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -41,7 +41,7 @@ export class GestionsUtilisateursComponent extends UnsubscribeOnDestroyAdapter
     'actions'
   ];
   userForm: FormGroup;
-  exampleDatabase: GestionsUtilisateursService | null;
+  exampleDatabase: UserService | null;
   dataSource: ExampleDataSource | null;
   selection = new SelectionModel<User>(true, []);
   id: number;
@@ -64,7 +64,7 @@ export class GestionsUtilisateursComponent extends UnsubscribeOnDestroyAdapter
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
-    public utilisateurService: GestionsUtilisateursService,
+    public utilisateurService: UserService,
     private snackBar: MatSnackBar,
     private router: Router, private formBuilder: FormBuilder,
   ) {
@@ -227,7 +227,7 @@ export class GestionsUtilisateursComponent extends UnsubscribeOnDestroyAdapter
     );
   }
   public loadData() {
-    this.exampleDatabase = new GestionsUtilisateursService(this.httpClient);
+    this.exampleDatabase = new UserService(this.httpClient);
     this.dataSource = new ExampleDataSource(
       this.exampleDatabase,
       this.paginator,
@@ -272,7 +272,7 @@ export class ExampleDataSource extends DataSource<User> {
   filteredData: User[] = [];
   renderedData: User[] = [];
   constructor(
-    public gestionUtilisateurService: GestionsUtilisateursService,
+    public gestionUtilisateurService: UserService,
     public paginator: MatPaginator,
     public _sort: MatSort
   ) {
