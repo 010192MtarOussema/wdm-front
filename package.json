@@ -23,6 +23,7 @@
     "@angular/platform-browser": "^14.0.4",
     "@angular/platform-browser-dynamic": "^14.0.4",
     "@angular/router": "^14.0.4",
+    "@auth0/angular-jwt": "^5.1.0",
     "@ckeditor/ckeditor5-angular": "^2.0.2",
     "@ckeditor/ckeditor5-build-classic": "^31.0.0",
     "@ng-bootstrap/ng-bootstrap": "^9.1.1",

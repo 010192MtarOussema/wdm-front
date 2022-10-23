@@ -24,8 +24,7 @@ const document: any = window.document;
 })
 export class HeaderComponent
   extends UnsubscribeOnDestroyAdapter
-  implements OnInit, AfterViewInit
-{
+  implements OnInit, AfterViewInit {
   public config: any = {};
   isNavbarCollapsed = true;
   isNavbarShow = true;
@@ -224,10 +223,10 @@ export class HeaderComponent
     }
   }
   logout() {
-    this.subs.sink = this.authService.logout().subscribe((res) => {
-      if (!res.success) {
-        this.router.navigate(['/authentication/signin']);
-      }
-    });
+    // this.subs.sink = this.authService.logout().subscribe((res) => {
+    //   if (!res.success) {
+    //     this.router.navigate(['/authentication/signin']);
+    //   }
+    // });
   }
 }
