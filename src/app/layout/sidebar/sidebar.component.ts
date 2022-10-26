@@ -86,7 +86,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
   }
   ngOnInit() {
-    if (this.authService.currentUserValue) {
+    if (this.authService) {
       this.sidebarItems = ROUTES.filter((sidebarItem) => sidebarItem);
     }
 

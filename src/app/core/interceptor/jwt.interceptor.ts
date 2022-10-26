@@ -23,9 +23,7 @@ export class JwtInterceptor implements HttpInterceptor {
     if (httpRequest.url.includes(`${this.authenticationService.host}/user/register`)) {
       return next.handle(httpRequest);
     }
-    if (httpRequest.url.includes(`${this.authenticationService.host}/user/resetpassword`)) {
-      return next.handle(httpRequest);
-    }
+
     this.authenticationService.loadToken();
     const token = this.authenticationService.getToken();
     const request = httpRequest.clone({
@@ -34,7 +32,7 @@ export class JwtInterceptor implements HttpInterceptor {
       }
     });
 
-
+    return next.handle(request);
 
   }
 }

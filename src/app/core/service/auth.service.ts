@@ -1,18 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { User } from '../models/user';
 import { environment } from 'src/environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { User } from 'src/app/models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
-  private readonly API_URL = 'http://localhost:8081/user/';
   private token: string;
 
   public host = environment.apiUrl;
@@ -20,38 +17,21 @@ export class AuthService {
 
   private jwtHelper = new JwtHelperService();
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User>(
-      JSON.parse(localStorage.getItem('currentUser'))
-    );
-    this.currentUser = this.currentUserSubject.asObservable();
+
   }
 
-  public get currentUserValue(): User {
-    return this.currentUserSubject.value;
-  }
 
-  public login(user: User): Observable<HttpResponse<any> | HttpErrorResponse> {
 
-    // console.log("---" , environment.apiUrl)
+  public login(user: User): Observable<HttpResponse<User>> {
+
+
     return this.http
-      .post<HttpResponse<any> | HttpErrorResponse>(`${this.host}/user/login`, user
+      .post<User>(`${this.host}/user/login`, user
         , { observe: 'response' })
-    // .pipe(
-    //   map((user) => {
-    //     // store user details and jwt token in local storage to keep user logged in between page refreshes
-    //     console.log("---", environment.apiUrl)
-    //     localStorage.setItem('currentUser', JSON.stringify(user));
-    //     this.currentUserSubject.next(user);
-    //     return user;
-    //   })
-    // );
+
   }
 
   logout() {
-    // remove user from local storage to log user out
-    // localStorage.removeItem('currentUser');
-    // this.currentUserSubject.next(null);
-    // return of({ success: false });
     this.token = null;
     this.loggedInEmail = null;
     localStorage.removeItem('user');
@@ -82,6 +62,7 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     this.loadToken();
+    console.info(this.token)
     if (this.token != null && this.token !== '') {
       if (this.jwtHelper.decodeToken(this.token).sub != null || '') {
         if (!this.jwtHelper.isTokenExpired(this.token)) {
@@ -91,7 +72,7 @@ export class AuthService {
       }
     } else {
       this.logout();
+      return false;
     }
-    return false;
   }
 }
