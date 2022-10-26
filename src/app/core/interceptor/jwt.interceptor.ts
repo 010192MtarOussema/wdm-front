@@ -5,12 +5,13 @@ import {
   HttpEvent,
   HttpInterceptor,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { AuthService } from '../service/auth.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor(private authenticationService: AuthService) { }
+  constructor(private authenticationService: AuthService, private route: Router) { }
 
   intercept(
     httpRequest: HttpRequest<any>,
@@ -32,7 +33,17 @@ export class JwtInterceptor implements HttpInterceptor {
       }
     });
 
-    return next.handle(request);
+    return next.handle(request).pipe(
+      catchError((err) => {
+        if (err.status == 0) {
+          // auto logout if 401 response returned from api
+          this.route.navigate(['authentication/page500'])
+        }
+
+        const error = err.error.message || err.statusText;
+        return throwError(error);
+      })
+    );
 
   }
 }

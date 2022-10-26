@@ -19,12 +19,12 @@ import { HeaderType } from 'src/app/models/enum/header-type.enum';
 export class SigninComponent
   extends UnsubscribeOnDestroyAdapter
   implements OnInit {
-  public showLoading: boolean;
+
 
   private subscriptions: Subscription[] = [];
   loginForm: FormGroup;
   submitted = false;
-  error = '';
+  error: any;
   hide = true;
   user: User;
   constructor(
@@ -54,37 +54,33 @@ export class SigninComponent
     return this.loginForm.controls;
   }
   onLogin() {
-    this.showLoading = true;
-    this.showLoading = true;
-    this.submitted = false;
-    console.log(this.loginForm.getRawValue())
-    this.subscriptions.push(
-      this.authService.login(this.loginForm.getRawValue()).subscribe(
-        (response: HttpResponse<User>) => {
-          const token = response.headers.get(HeaderType.JWT_TOKEN);
-          this.authService.saveToken(token);
-          this.authService.addUserToLocalStorage(response.body)
-          this.router.navigate(['/administration/list-utilisateurs']);
-          this.showLoading = false;
-        },
-        (errorResponse: HttpErrorResponse) => {
-          console.log(errorResponse)
-          this.sendErrorNotification(NotificationType.ERROR, errorResponse.error.message)
-          this.showLoading = false;
-          this.submitted = false;
-        }
-      )
-    )
 
+    this.submitted = true;
+    if (this.loginForm.invalid) {
 
-  }
-  private sendErrorNotification(notificationType: NotificationType, message: string): void {
-    if (message) {
-      this.notificationService.notify(notificationType, message);
+      return;
     } else {
-      this.notificationService.notify(notificationType, 'An error occurred. Please try again.');
+      console.log(this.loginForm.getRawValue())
+      this.subscriptions.push(
+        this.authService.login(this.loginForm.getRawValue()).subscribe(
+          (response: HttpResponse<User>) => {
+            const token = response.headers.get(HeaderType.JWT_TOKEN);
+            this.authService.saveToken(token);
+            this.authService.addUserToLocalStorage(response.body)
+            this.router.navigate(['/administration/list-utilisateurs']);
+            this.submitted = false;
+          },
+          (errorResponse: HttpErrorResponse) => {
+            console.log(errorResponse)
+            this.error = errorResponse.error.message
+            this.submitted = false;
+          }
+        )
+      )
     }
+
   }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe())
   }
