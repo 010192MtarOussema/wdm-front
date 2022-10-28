@@ -24,14 +24,13 @@ export class SigninComponent
   private subscriptions: Subscription[] = [];
   loginForm: FormGroup;
   submitted = false;
-  error: any;
+  error: '';
   hide = true;
   user: User;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private notificationService: NotificationService
   ) {
     super();
   }

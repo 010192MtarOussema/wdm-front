@@ -106,13 +106,7 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
       this.authorizations = data;
     })
 
-    this.groupeUtilisateurService.list().subscribe(data => {
-      this.userGroupes = data;
 
-      console.info("list des groupes", this.userGroupes)
-
-      this.primengConfig.ripple = true;
-    });
     this.user = new User();
     this.createContactForm();
   }
@@ -173,7 +167,7 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
   //     'center'
   //   );
   // }
-  public loadData() {
+  private loadData() {
     this.exampleDatabase = new AbilityService(this.httpClient);
     this.dataSource = new ExampleDataSource(
       this.exampleDatabase,

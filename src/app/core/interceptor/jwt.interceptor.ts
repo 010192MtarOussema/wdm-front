@@ -18,12 +18,14 @@ export class JwtInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
 
-    if (httpRequest.url.includes(`${this.authenticationService.host}/user/login`)) {
-      return next.handle(httpRequest);
+
+    if (httpRequest.url.includes(`${this.authenticationService.host}/*`)) {
+
+      return next.handle(httpRequest)
     }
-    if (httpRequest.url.includes(`${this.authenticationService.host}/user/register`)) {
-      return next.handle(httpRequest);
-    }
+    // if (httpRequest.url.includes(`${this.authenticationService.host}/user/register`)) {
+    //   return next.handle(httpRequest);
+    // }
 
     this.authenticationService.loadToken();
     const token = this.authenticationService.getToken();
@@ -32,18 +34,16 @@ export class JwtInterceptor implements HttpInterceptor {
         Authorization: `Bearer ${token}`
       }
     });
-
     return next.handle(request).pipe(
       catchError((err) => {
         if (err.status == 0) {
-          // auto logout if 401 response returned from api
           this.route.navigate(['authentication/page500'])
         }
 
         const error = err.error.message || err.statusText;
         return throwError(error);
       })
-    );
+    );;
 
   }
 }
