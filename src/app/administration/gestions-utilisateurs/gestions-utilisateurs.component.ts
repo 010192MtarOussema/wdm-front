@@ -30,7 +30,6 @@ export class GestionsUtilisateursComponent extends UnsubscribeOnDestroyAdapter
     'identifiant',
     'img',
     'login',
-
     'firstName',
     'lastName',
     'realName',

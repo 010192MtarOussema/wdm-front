@@ -6,40 +6,44 @@
       </app-breadcrumb>
     </div>
 
-    <form [formGroup]="userForm">
-      <div class="row clearfix">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <div class="card">
 
-            <div class="body">
-              <mat-horizontal-stepper [linear]="isLinear" #stepper labelPosition="bottom">
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+
+          <div class="body">
+            <mat-horizontal-stepper [linear]="isLinear" #stepper labelPosition="bottom">
+              <form [formGroup]="emailForm">
                 <mat-step>
                   <ng-template matStepLabel>Informations de compte</ng-template>
-
-
                   <div class="body ">
                     <div class="row">
                       <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+
                         <mat-form-field class="example-full-width" appearance="outline">
                           <mat-label>Adresse mail</mat-label>
                           <input matInput formControlName="email" required>
                           <mat-icon matSuffix>email</mat-icon>
+
+
                           <mat-error
-                            *ngIf="userForm.get('email').hasError('required') || userForm.get('email').touched">
+                            *ngIf="emailForm.get('email').hasError('required') || emailForm.get('email').touched">
                             Le format de l'adresse mail est invalide
                           </mat-error>
+
+
                         </mat-form-field>
+                        <mat-error *ngIf="error">{{error}} </mat-error>
                       </div>
 
                     </div>
                     <div>
-                      <button mat-raised-button matStepperNext color="primary">Suivant</button>
+                      <button mat-raised-button color="primary" (click)="ValidateEmail()">Suivant</button>
                     </div>
                   </div>
-
-
-
                 </mat-step>
+              </form>
+              <form [formGroup]="userForm">
                 <mat-step>
                   <ng-template matStepLabel>Informations personnelles
                   </ng-template>
@@ -126,32 +130,6 @@
                     <button mat-raised-button matStepperNext color="primary">Suivant</button>
                   </div>
                 </mat-step>
-                <!-- <mat-step>
-                  <ng-template matStepLabel>Ajout de l'utilisateur aux groupes</ng-template>
-                  <div class="body">
-
-                    <p-pickList [source]="userGroupes" [target]="targetProducts" sourceHeader="Groupes disponibles"
-                      targetHeader="Groupes sélectionnés" dragdrop="true" [responsive]="true"
-                      [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}" filterBy="name"
-                      sourceFilterPlaceholder="Rechercher par nom de groupe "
-                      targetFilterPlaceholder="Rechercher par nom de groupe">
-                      <ng-template let-userGroup pTemplate="item">
-                        <div class="product-item">
-                          <div class="product-list-detail">
-                            <h5 class="mb-2">{{userGroup.name}}</h5>
-                          </div>
-
-                        </div>
-                      </ng-template>
-                    </p-pickList>
-
-                  </div>
-                  <div>
-                    <button mat-raised-button matStepperPrevious color="warn" class="msr-2">Précedent</button>
-                    <button mat-raised-button matStepperNext color="primary">Suivant</button>
-                  </div>
-                </mat-step> -->
-
                 <mat-step>
                   <ng-template matStepLabel> Attribution des habilitations à l'utilisateur</ng-template>
 
@@ -272,13 +250,14 @@
                     <button mat-raised-button matStepperNext color="primary">Sauvegarder</button>
                   </div>
                 </mat-step>
-              </mat-horizontal-stepper>
-            </div>
+              </form>
+            </mat-horizontal-stepper>
           </div>
         </div>
       </div>
+    </div>
 
-    </form>
+
 
 
 

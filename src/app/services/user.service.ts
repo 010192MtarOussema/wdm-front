@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
 import { User } from '../models/user';
 import { ChangerMotDePasseUser } from '../models/change-password';
@@ -67,24 +67,17 @@ export class UserService extends UnsubscribeOnDestroyAdapter {
       }
     );
   }
-  blockUser(id: number): void {
-    console.log("service id", id);
 
-    this.httpClient.post(this.API_URL + 'block-user', id).subscribe(data => {
-      this.dialogData = data;
-      console.log(id);
-    },
-      (err: HttpErrorResponse) => {
-        // error code here
-      }
-    );
+
+  validateExistEmail(email: string): Observable<any> {
+    let params = new HttpParams().set("email", email);
+    // console.log(formData)
+    return this.httpClient.post(`${this.API_URL}valid-email`, params)
   }
 
   changePassword(changePassword: ChangerMotDePasseUser): Observable<ChangerMotDePasseUser> {
     return this.httpClient.post<ChangerMotDePasseUser>(this.API_URL + 'update/password', changePassword)
   }
-  blockUserToConnect(userConnect: UserConnect): Observable<UserConnect> {
-    return this.httpClient.post<UserConnect>(this.API_URL + "block-user-connect", userConnect)
-  }
+
 
 }

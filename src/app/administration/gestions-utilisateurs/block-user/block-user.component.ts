@@ -17,6 +17,6 @@ export class BlockUserComponent {
     this.dialogRef.close();
   }
   confirmDelete(): void {
-    this.advanceTableService.blockUser(this.data.id);
+    // this.advanceTableService.blockUser(this.data.id);
   }
 }

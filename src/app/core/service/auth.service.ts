@@ -62,7 +62,6 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     this.loadToken();
-    console.info(this.token)
     if (this.token != null && this.token !== '') {
       if (this.jwtHelper.decodeToken(this.token).sub != null || '') {
         if (!this.jwtHelper.isTokenExpired(this.token)) {

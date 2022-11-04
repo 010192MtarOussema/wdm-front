@@ -15,11 +15,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { SelectionModel } from '@angular/cdk/collections';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
 import { Authorization } from 'src/app/models/authorization';
 import { AuthorizationService } from 'src/app/services/authorization.service';
+import { UserService } from 'src/app/services/user.service';
+import { MatStepper } from '@angular/material/stepper';
 @Component({
   selector: 'app-new-user',
   templateUrl: './new-user.component.html',
@@ -35,6 +37,7 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
   userGroupes: UserGroup[];
   targetProducts: any[] = [];
   userForm: FormGroup;
+  emailForm: FormGroup;
   isLinear = false;
   user: User;
   show: boolean = false;
@@ -56,8 +59,10 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
     }
   ];
   selectedFiles2: AbilityDto;
+  isEditable = false;
+  isOptional = false;
 
-
+  isNotFound: boolean;
   //preferences
   preferences!: Preference[];
   mode = new UntypedFormControl('side');
@@ -68,15 +73,16 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
   userImg: string;
   direction: string;
   abilities: AbilityDto[];
-
+  error: '';
   exampleDatabase: AbilityService | null;
   dataSource: ExampleDataSource | null;
   selection = new SelectionModel<User>(true, []);
-  constructor(private formBuilder: FormBuilder, private groupeUtilisateurService: GroupesTilisateursService, private abilityService: AbilityService,
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private abilityService: AbilityService,
     private primengConfig: PrimeNGConfig, public httpClient: HttpClient, private fb: UntypedFormBuilder, private authorisationService: AuthorizationService,
     public preferenceService: PreferenceService, private snackBar: MatSnackBar
   ) {
     super();
+
   }
 
 
@@ -84,6 +90,8 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild('filter', { static: true }) filter: ElementRef;
+  @ViewChild("stepper", { static: false }) stepper: MatStepper;
+
   contextMenu: MatMenuTrigger;
   contextMenuPosition = { x: '0px', y: '0px' };
   ngOnInit(): void {
@@ -109,6 +117,7 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
 
     this.user = new User();
     this.createContactForm();
+    this.createEmailForm()
   }
 
 
@@ -124,13 +133,22 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
         ? 'Not a valid email'
         : '';
   }
+  createEmailForm() {
+    this.emailForm = this.formBuilder.group({
+      email: [
+        this.user.email,
+        [Validators.required, Validators.email]
+      ],
+
+    })
+  }
   createContactForm() {
 
     this.userForm = this.formBuilder.group({
       firstName: [''],
       lastName: [''],
       email: [
-        '',
+        this.user.email,
         [Validators.required, Validators.email, Validators.minLength(5)]
       ],
       status: ['', [Validators.required]],
@@ -148,7 +166,22 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
       || this.userForm.get('status').hasError('required') || this.userForm.get('realName').hasError('required')
   }
   disableInfosCompte() {
-    return this.userForm.get('loginName').hasError('required') || this.userForm.get('pseudo').hasError('required')
+    return this.emailForm && this.isLinear
+  }
+
+  ValidateEmail() {
+    console.log(this.emailForm.value.email)
+    this.userService.validateExistEmail(this.emailForm.value.email).subscribe(data => {
+      console.log(data)
+      this.isNotFound = data
+      if (this.isNotFound === true)
+        this.stepper.next()
+
+
+    }, (errorResponse: HttpErrorResponse) => {
+      this.error = errorResponse.error.message
+      console.log(errorResponse.error.message)
+    })
   }
   // removeSelectedRows() {
   //   const totalSelect = this.selection.selected.length;
