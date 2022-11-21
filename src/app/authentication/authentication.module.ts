@@ -13,7 +13,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { PickListModule } from 'primeng/picklist';
 
 @NgModule({
   declarations: [
@@ -33,7 +32,7 @@ import { PickListModule } from 'primeng/picklist';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    PickListModule
+
   ]
 })
 export class AuthenticationModule { }

@@ -145,33 +145,7 @@
                                         <button mat-raised-button matStepperNext color="primary">Suivant</button>
                                     </div>
                                 </mat-step>
-                                <mat-step>
-                                    <ng-template matStepLabel>Ajout de l'utilisateur aux groupes</ng-template>
-                                    <div class="body">
 
-                                        <p-pickList [source]="userGroupes" [target]="targetProducts"
-                                            sourceHeader="Groupes disponibles" targetHeader="Groupes sélectionnés"
-                                            dragdrop="true" [responsive]="true" [sourceStyle]="{'height':'300px'}"
-                                            [targetStyle]="{'height':'300px'}" filterBy="name"
-                                            sourceFilterPlaceholder="Rechercher par nom de groupe "
-                                            targetFilterPlaceholder="Rechercher par nom de groupe">
-                                            <ng-template let-userGroup pTemplate="item">
-                                                <div class="product-item">
-                                                    <div class="product-list-detail">
-                                                        <h5 class="mb-2">{{userGroup.name}}</h5>
-                                                    </div>
-
-                                                </div>
-                                            </ng-template>
-                                        </p-pickList>
-
-                                    </div>
-                                    <div>
-                                        <button mat-raised-button matStepperPrevious color="warn"
-                                            class="msr-2">Précedent</button>
-                                        <button mat-raised-button matStepperNext color="primary">Suivant</button>
-                                    </div>
-                                </mat-step>
 
                                 <mat-step>
                                     <ng-template matStepLabel> Attribution des habilitations à l'utilisateur

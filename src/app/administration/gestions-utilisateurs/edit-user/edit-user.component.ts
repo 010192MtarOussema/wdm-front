@@ -7,7 +7,6 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
-import { PrimeNGConfig } from 'primeng/api';
 import { BehaviorSubject, fromEvent, map, merge, Observable } from 'rxjs';
 import { AbilityDto } from 'src/app/models/ability';
 import { Authorization } from 'src/app/models/authorization';
@@ -73,7 +72,7 @@ export class EditUserComponent extends UnsubscribeOnDestroyAdapter implements On
   dataSource: ExampleDataSource | null;
   selection = new SelectionModel<User>(true, []);
   constructor(private formBuilder: FormBuilder, private userGroupesService: UserGroupeService, private abilityService: AbilityService,
-    private primengConfig: PrimeNGConfig, public httpClient: HttpClient, private fb: UntypedFormBuilder, private authorisationService: AuthorizationService,
+    public httpClient: HttpClient, private fb: UntypedFormBuilder, private authorisationService: AuthorizationService,
     public preferenceService: PreferenceService, private snackBar: MatSnackBar
   ) {
     super();
@@ -111,7 +110,6 @@ export class EditUserComponent extends UnsubscribeOnDestroyAdapter implements On
 
       console.info("list des groupes", this.userGroupes)
 
-      this.primengConfig.ripple = true;
     });
     this.user = new User();
     this.createContactForm();

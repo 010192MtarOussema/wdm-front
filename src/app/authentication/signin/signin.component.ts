@@ -4,8 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
 import { ShowNotificationService } from 'src/app/services/show-notification.service';
-import { PrimeNGConfig } from 'primeng/api';
-import { NotificationService } from 'src/app/services/notification.service';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { User } from 'src/app/models/user';

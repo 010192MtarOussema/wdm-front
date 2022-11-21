@@ -33,12 +33,10 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { GestionsUtilisateursComponent } from './gestions-utilisateurs/gestions-utilisateurs.component';
 import { BlockUserComponent } from './gestions-utilisateurs/block-user/block-user.component';
 import { NewUserComponent } from './gestions-utilisateurs/new-user/new-user.component';
-import { PickListModule } from 'primeng/picklist';
 import { EditUserComponent } from './gestions-utilisateurs/edit-user/edit-user.component';
 import { AddNewGroupeComponent } from './groupes-utilisateurs/add-new-groupe/add-new-groupe.component';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { TreeModule } from 'primeng/tree';
 import { UserDetailComponent } from './gestions-utilisateurs/user-detail/user-detail.component';
 import { GroupDetailsComponent } from './groupes-utilisateurs/group-details/group-details.component';
 
@@ -83,10 +81,9 @@ import { GroupDetailsComponent } from './groupes-utilisateurs/group-details/grou
     SharedModule,
     MatStepperModule,
     ScrollingModule,
-    PickListModule,
     PerfectScrollbarModule,
     MatSidenavModule,
-    TreeModule,
+
     AdministrationRoutingModule
   ]
 })

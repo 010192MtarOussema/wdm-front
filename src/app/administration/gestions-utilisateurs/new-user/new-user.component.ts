@@ -1,9 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { PrimeNGConfig, TreeNode } from 'primeng/api';
 import { User } from 'src/app/models/user';
 import { UserGroup } from 'src/app/models/userGroup';
-import { GroupesTilisateursService } from 'src/app/services/groupes-tilisateurs.service';
 import { PreferenceService } from 'src/app/services/preference.service';
 import { Preference } from 'src/app/models/Preference';
 import { AbilityService } from 'src/app/services/ability.service';
@@ -78,7 +76,7 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
   dataSource: ExampleDataSource | null;
   selection = new SelectionModel<User>(true, []);
   constructor(private formBuilder: FormBuilder, private userService: UserService, private abilityService: AbilityService,
-    private primengConfig: PrimeNGConfig, public httpClient: HttpClient, private fb: UntypedFormBuilder, private authorisationService: AuthorizationService,
+    public httpClient: HttpClient, private fb: UntypedFormBuilder, private authorisationService: AuthorizationService,
     public preferenceService: PreferenceService, private snackBar: MatSnackBar
   ) {
     super();

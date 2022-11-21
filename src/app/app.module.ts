@@ -32,8 +32,7 @@ import {
 import { WINDOW_PROVIDERS } from './core/service/window.service';
 import { ShowNotificationService } from './services/show-notification.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NotificationModule } from './notification/notification.module';
-import { NotificationService } from './services/notification.service';
+
 import { AuthGuard } from './core/guard/auth.guard';
 // import { fakeBackendProvider } from './core/interceptor/fake-backend';
 
@@ -73,7 +72,6 @@ export function createTranslateLoader(http: HttpClient): any {
       }
     }),
     CoreModule,
-    NotificationModule,
     SharedModule
   ],
   providers: [
@@ -86,7 +84,6 @@ export function createTranslateLoader(http: HttpClient): any {
     // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
     MatSnackBar,
-    NotificationService,
     WINDOW_PROVIDERS
   ],
   bootstrap: [AppComponent]
