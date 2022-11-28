@@ -18,70 +18,117 @@ export class SigninComponent
   extends UnsubscribeOnDestroyAdapter
   implements OnInit {
 
-
-  private subscriptions: Subscription[] = [];
   loginForm: FormGroup;
   submitted = false;
-  error: '';
+  error = '';
   hide = true;
-  user: User;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService,
+    private authService: AuthService
   ) {
     super();
   }
   ngOnInit() {
-    // if (this.authService.isLoggedIn()) {
-    //   this.router.navigate(['/administration/list-utilisateurs']);
-    // } else {
-    //   this.router.navigate(['/authentication/signin']);
-    // }
-    this.user = new User();
     this.loginForm = this.formBuilder.group({
       email: [
-        this.user.email,
+        'admin@lorax.com',
         [Validators.required, Validators.email, Validators.minLength(5)]
       ],
-      password: [this.user.password, Validators.required]
+      password: ['admin', Validators.required]
     });
   }
   get f() {
     return this.loginForm.controls;
   }
-  onLogin() {
-
+  onSubmit() {
     this.submitted = true;
+    this.error = '';
     if (this.loginForm.invalid) {
-
+      this.error = 'Username and Password not valid !';
       return;
     } else {
-      console.log(this.loginForm.getRawValue())
-      this.subscriptions.push(
-        this.authService.login(this.loginForm.getRawValue()).subscribe(
-          (response: HttpResponse<User>) => {
-            const token = response.headers.get(HeaderType.JWT_TOKEN);
-            this.authService.saveToken(token);
-            this.authService.addUserToLocalStorage(response.body)
-            this.router.navigate(['/administration/list-utilisateurs']);
-            this.submitted = false;
+      this.subs.sink = this.authService
+        .login(this.f.email.value, this.f.password.value)
+        .subscribe(
+          (res) => {
+            if (res) {
+              const token = this.authService.currentUserValue.token;
+              if (token) {
+                this.router.navigate(['/dashboard/main']);
+              }
+            } else {
+              this.error = 'Invalid Login';
+            }
           },
-          (errorResponse: HttpErrorResponse) => {
-            console.log(errorResponse)
-            this.error = errorResponse.error.message
+          (error) => {
+            this.error = error;
             this.submitted = false;
           }
-        )
-      )
+        );
     }
-
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe())
   }
 }
+
+//   private subscriptions: Subscription[] = [];
+//   loginForm: FormGroup;
+//   submitted = false;
+//   error: '';
+//   hide = true;
+//   user: User;
+//   constructor(
+//     private formBuilder: FormBuilder,
+//     private router: Router,
+//     private authService: AuthService,
+//   ) {
+//     super();
+//   }
+//   ngOnInit() {
+
+//     this.user = new User();
+//     this.loginForm = this.formBuilder.group({
+//       email: [
+//         this.user.email,
+//         [Validators.required, Validators.email, Validators.minLength(5)]
+//       ],
+//       password: [this.user.password, Validators.required]
+//     });
+//   }
+//   get f() {
+//     return this.loginForm.controls;
+//   }
+//   onLogin() {
+
+//     this.submitted = true;
+//     if (this.loginForm.invalid) {
+
+//       return;
+//     } else {
+//       console.log(this.loginForm.getRawValue())
+//       this.subscriptions.push(
+//         this.authService.login(this.loginForm.getRawValue()).subscribe(
+//           (response: HttpResponse<User>) => {
+//             const token = response.headers.get(HeaderType.JWT_TOKEN);
+//             this.authService.saveToken(token);
+//             this.authService.addUserToLocalStorage(response.body)
+//             this.router.navigate(['/administration/list-utilisateurs']);
+//             this.submitted = false;
+//           },
+//           (errorResponse: HttpErrorResponse) => {
+//             console.log(errorResponse)
+//             this.error = errorResponse.error.message
+//             this.submitted = false;
+//           }
+//         )
+//       )
+//     }
+
+//   }
+
+//   ngOnDestroy(): void {
+//     this.subscriptions.forEach(sub => sub.unsubscribe())
+//   }
+// }
 
 
 

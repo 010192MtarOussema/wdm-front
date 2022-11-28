@@ -26,7 +26,6 @@ import { UserService } from 'src/app/services/user.service';
 export class GestionsUtilisateursComponent extends UnsubscribeOnDestroyAdapter
   implements OnInit {
   displayedColumns = [
-    'select',
     'identifiant',
     'img',
     'login',
@@ -136,7 +135,7 @@ export class GestionsUtilisateursComponent extends UnsubscribeOnDestroyAdapter
     //   },
     //   direction: tempDirection
     // });
-    this.router.navigate(['/administration/edit-user']);
+    this.router.navigate(['/administration/edit-user', this.id]);
     // this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
     //   if (result === 1) {
     //     // When using an edit things are little different, firstly we find record inside DataService by id

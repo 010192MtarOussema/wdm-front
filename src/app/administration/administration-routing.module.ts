@@ -24,11 +24,11 @@ const routes: Routes = [
     component: NewUserComponent
   },
   {
-    path: 'edit-user',
+    path: 'edit-user/:id',
     component: EditUserComponent
   },
   {
-    path: 'user-detail',
+    path: 'user-detail/:id',
     component: UserDetailComponent
   },
   {
@@ -36,11 +36,11 @@ const routes: Routes = [
     component: AddNewGroupeComponent
   },
   {
-    path: 'edit-groupe',
+    path: 'edit-groupe/:id',
     component: EditGroupeComponent
   },
   {
-    path: 'groupe-details',
+    path: 'groupe-details/:id',
     component: GroupDetailsComponent,
   }
 

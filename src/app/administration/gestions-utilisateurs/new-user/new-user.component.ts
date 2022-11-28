@@ -27,7 +27,6 @@ import { MatStepper } from '@angular/material/stepper';
 })
 export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnInit {
   displayedColumns = [
-    'select',
     'name',
     'description',
     'authorization'

@@ -25,27 +25,14 @@
                           aria-label="Search box">
                       </li>
                       <li>
-                        <div class="export-button m-l-10" matTooltip="ADD">
+                        <div class="export-button m-l-10" matTooltip="Ajouter un nouveau groupe">
                           <button mat-mini-fab color="primary" (click)="addNew()">
                             <mat-icon class="col-white">add</mat-icon>
                           </button>
                         </div>
                       </li>
-                      <li>
-                        <div class="export-button m-l-10" matTooltip="REFRESH">
-                          <button mat-mini-fab color="primary" (click)="refresh()">
-                            <mat-icon class="col-white">refresh</mat-icon>
-                          </button>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="export-button m-l-10" [hidden]=!selection.hasValue() matTooltip="DELETE">
-                          <button mat-mini-fab color="warn" (click)="removeSelectedRows()">
-                            <mat-icon class="col-white">delete
-                            </mat-icon>
-                          </button>
-                        </div>
-                      </li>
+
+
                     </ul>
                   </div>
 
@@ -53,45 +40,34 @@
               </div>
               <mat-table #table matTableExporter [dataSource]="dataSource" matSort class="mat-cell"
                 #exporter="matTableExporter">
-                <!-- Checkbox Column -->
-                <ng-container matColumnDef="select">
-                  <mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-12'">
-                    <mat-checkbox (change)="$event ? masterToggle() : null"
-                      [checked]="selection.hasValue() && isAllSelected()"
-                      [indeterminate]="selection.hasValue() && !isAllSelected()" [ngClass]="'tbl-checkbox'">
-                    </mat-checkbox>
-                  </mat-header-cell>
-                  <mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-12'">
-                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-                      [checked]="selection.isSelected(row)" [ngClass]="'tbl-checkbox'">
-                    </mat-checkbox>
-                  </mat-cell>
-                </ng-container>
+
                 <!-- ID Column -->
-                <ng-container matColumnDef="id">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
-                  <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+                <ng-container matColumnDef="identifiant">
+                  <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-9'"> Identifiant
+                  </mat-header-cell>
+                  <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-9"> {{row.id}}
+                  </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="name">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-12'">Name
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-14'">Nom du groupe
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
-                    [ngClass]="'tbl-col-width-per-12'">
+                    [ngClass]="'tbl-col-width-per-14'">
                     {{row.name}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="description">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-12'">Description
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-20'">Description
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
-                    [ngClass]="'tbl-col-width-per-12'">
+                    [ngClass]="'tbl-col-width-per-20'">
                     {{row.description}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="status">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-12'">Status
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-14'">Statut
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
-                    [ngClass]="'tbl-col-width-per-12'">
+                    [ngClass]="'tbl-col-width-per-14'">
                     {{row.status}}</mat-cell>
                 </ng-container>
 
@@ -103,6 +79,14 @@
                     <button mat-icon-button (click)="$event.stopPropagation()" (click)="editCall(row)"
                       class="tbl-action-btn">
                       <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                    </button>
+                    <button mat-icon-button (click)="$event.stopPropagation()" (click)="deleteItem(row)"
+                      class="tbl-action-btn">
+                      <app-feather-icons [icon]="'users'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                    </button>
+                    <button mat-icon-button (click)="$event.stopPropagation()" (click)="deleteItem(row)"
+                      class="tbl-action-btn">
+                      <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
                     </button>
                     <button mat-icon-button (click)="$event.stopPropagation()" (click)="deleteItem(row)"
                       class="tbl-action-btn">
@@ -171,7 +155,7 @@
 
               <div *ngIf="!exampleDatabase.isTblLoading" class="no-results"
                 [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
-                Aucun utilisateur trouvé
+                Aucun groupe trouvé
               </div>
               <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="10"
                 [pageSizeOptions]="[5, 10, 25, 100]">

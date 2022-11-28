@@ -11,40 +11,57 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor(private authenticationService: AuthService, private route: Router) { }
+  // constructor(private authenticationService: AuthService, private route: Router) { }
+  constructor(private authenticationService: AuthService) { }
 
   intercept(
-    httpRequest: HttpRequest<any>,
+    request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-
-
-    if (httpRequest.url.includes(`${this.authenticationService.host}/user/login`)) {
-
-      return next.handle(httpRequest)
+    // add authorization header with jwt token if available
+    let currentUser = this.authenticationService.currentUserValue;
+    if (currentUser && currentUser.token) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${currentUser.token}`,
+        },
+      });
     }
-    // if (httpRequest.url.includes(`${this.authenticationService.host}/user/register`)) {
-    //   return next.handle(httpRequest);
-    // }
 
-    this.authenticationService.loadToken();
-    const token = this.authenticationService.getToken();
-    const request = httpRequest.clone({
-      setHeaders: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    return next.handle(request)
-    // .pipe(
-    //   catchError((err) => {
-    //     if (err.status == 0) {
-    //       this.route.navigate(['authentication/page500'])
-    //     }
-
-    //     const error = err.error.message || err.statusText;
-    //     return throwError(error);
-    //   })
-    // );;
-
+    return next.handle(request);
   }
+  // intercept(
+  //   httpRequest: HttpRequest<any>,
+  //   next: HttpHandler
+  // ): Observable<HttpEvent<any>> {
+
+
+  //   if (httpRequest.url.includes(`${this.authenticationService.host}/user/login`)) {
+
+  //     return next.handle(httpRequest)
+  //   }
+  //   // if (httpRequest.url.includes(`${this.authenticationService.host}/user/register`)) {
+  //   //   return next.handle(httpRequest);
+  //   // }
+
+  //   this.authenticationService.loadToken();
+  //   const token = this.authenticationService.getToken();
+  //   const request = httpRequest.clone({
+  //     setHeaders: {
+  //       Authorization: `Bearer ${token}`
+  //     }
+  //   });
+  //   return next.handle(request)
+  //   // .pipe(
+  //   //   catchError((err) => {
+  //   //     if (err.status == 0) {
+  //   //       this.route.navigate(['authentication/page500'])
+  //   //     }
+
+  //   //     const error = err.error.message || err.statusText;
+  //   //     return throwError(error);
+  //   //   })
+  //   // );;
+
+  // }
 }

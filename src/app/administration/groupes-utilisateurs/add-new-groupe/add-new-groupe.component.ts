@@ -27,7 +27,7 @@ import { AuthorizationService } from 'src/app/services/authorization.service';
 })
 export class AddNewGroupeComponent extends UnsubscribeOnDestroyAdapter implements OnInit {
   displayedColumns = [
-    'select',
+
     'name',
     'description',
     'authorization'
@@ -49,7 +49,7 @@ export class AddNewGroupeComponent extends UnsubscribeOnDestroyAdapter implement
   authorizations!: Authorization[];
   breadscrums = [
     {
-      title: 'Ajouter un nouvel utilisateur',
+      title: 'Ajouter un nouveau groupe',
       items: ['Administration'],
       active: 'Utilisateurs'
     }

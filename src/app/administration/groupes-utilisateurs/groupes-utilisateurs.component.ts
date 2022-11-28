@@ -24,7 +24,8 @@ import { Router } from '@angular/router';
 export class GroupesUtilisateursComponent extends UnsubscribeOnDestroyAdapter
   implements OnInit {
   displayedColumns = [
-    'select',
+
+    'identifiant',
     'name',
     'description',
     'status',

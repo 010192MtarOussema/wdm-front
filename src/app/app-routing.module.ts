@@ -18,69 +18,7 @@ const routes: Routes = [
             (m) => m.AdministrationModule
           )
       },
-      {
-        path: 'localisation',
-        loadChildren: () =>
-          import('./localisation/localisation.module').then(
-            (m) => m.LocalisationModule
-          )
-      },
-      {
-        path: 'materiel',
-        loadChildren: () =>
-          import('./materiel/materiel.module').then(
-            (m) => m.MaterielModule
-          )
-      },
-      {
-        path: 'surveillance-fonctionnelle',
-        loadChildren: () =>
-          import('./surveillance-fonctionnelle/surveillance-fonctionnelle.module').then(
-            (m) => m.SurveillanceFonctionnelleModule
-          )
-      },
-      {
-        path: 'surveillance-systeme',
-        loadChildren: () =>
-          import('./surveillance-systeme/surveillance-systeme.module').then(
-            (m) => m.SurveillanceSystemeModule
-          )
-      },
-      {
-        path: 'rapports',
-        loadChildren: () =>
-          import('./rapports/rapports.module').then(
-            (m) => m.RapportsModule
-          )
-      },
-      {
-        path: 'journaux',
-        loadChildren: () =>
-          import('./journaux/journaux.module').then(
-            (m) => m.JournauxModule
-          )
-      },
-      {
-        path: 'gestion-contenu',
-        loadChildren: () =>
-          import('./gestion-contenu/gestion-contenu.module').then(
-            (m) => m.GestionContenuModule
-          )
-      },
-      {
-        path: 'telechargements',
-        loadChildren: () =>
-          import('./gestion-contenu/gestion-contenu.module').then(
-            (m) => m.GestionContenuModule
-          )
-      },
-      {
-        path: 'certificats',
-        loadChildren: () =>
-          import('./certificats/certificats.module').then(
-            (m) => m.CertificatsModule
-          )
-      },
+
       { path: '', redirectTo: '/authentication/signin', pathMatch: 'full' },
       {
         path: 'dashboard',

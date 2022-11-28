@@ -30,10 +30,10 @@ import {
   HttpClient
 } from '@angular/common/http';
 import { WINDOW_PROVIDERS } from './core/service/window.service';
-import { ShowNotificationService } from './services/show-notification.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AuthGuard } from './core/guard/auth.guard';
+import { fakeBackendProvider } from './core/interceptor/fake-backend';
 // import { fakeBackendProvider } from './core/interceptor/fake-backend';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -82,7 +82,7 @@ export function createTranslateLoader(http: HttpClient): any {
     },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-
+    fakeBackendProvider,
     MatSnackBar,
     WINDOW_PROVIDERS
   ],
