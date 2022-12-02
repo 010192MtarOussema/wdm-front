@@ -95,11 +95,12 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
     this.loadData();
     this.preferenceService.getAPreferences().subscribe(data => {
       this.preferences = data;
-      // const json = this.preferences.forEach(posibleValue => {
-      //   JSON.stringify(posibleValue.possibleValue);
-      //   console.log(JSON.stringify(posibleValue.possibleValue))
-      // })
-      console.info("list des pref", this.preferences)
+      const json = this.preferences.forEach(posibleValue => {
+
+        console.log(JSON.stringify(posibleValue.possiblevalue))
+      })
+
+      // console.info("list des pref", data.possibleValue)
 
     })
     // this.abilityService.getAllAbilityDto().subscribe(response => {

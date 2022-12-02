@@ -1,0 +1,31 @@
+<div class="container">
+    <p>Pour ajouter un utlisateur au groupe {{data.name}} , saisissez son adresse
+        mail
+    </p>
+    <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Adresse mail</mat-label>
+                <input matInput required>
+                <mat-icon matSuffix>email</mat-icon>
+
+
+                <!-- <mat-error
+              *ngIf="emailForm.get('email').hasError('required') || emailForm.get('email').touched">
+              Le format de l'adresse mail est invalide
+            </mat-error> -->
+
+
+            </mat-form-field>
+            <!-- <mat-error *ngIf="error">{{error}} </mat-error> -->
+        </div>
+
+    </div>
+    <div mat-dialog-actions class="mb-1">
+        <button mat-flat-button color="primary" [mat-dialog-close]="1" (click)="confirmDelete()">
+            Ajouter
+        </button>
+        <button mat-flat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+</div>

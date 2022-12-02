@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-group-details',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./group-details.component.sass']
 })
 export class GroupDetailsComponent implements OnInit {
-
-  constructor() { }
+  breadscrums = [
+    {
+      title: 'Détails groupe + nom du groupe',
+      items: ['Extra'],
+      active: 'Profile'
+    }
+  ];
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    let _idusergroupe = this.activatedRoute.snapshot.params.id;
+    console.log(_idusergroupe)
   }
 
 }

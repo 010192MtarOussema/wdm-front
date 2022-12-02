@@ -1,0 +1,198 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header" *ngFor="let breadscrum of breadscrums">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+            </app-breadcrumb>
+        </div>
+        <!-- Your content goes here  -->
+        <div class="row clearfix">
+
+            <div>
+                <div class="card">
+                    <mat-tab-group>
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                <mat-icon class="example-tab-icon msr-2">face</mat-icon>
+                                Informations générales
+                            </ng-template>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="project_widget">
+                                    <div class="header">
+                                        <h2><strong>About</strong></h2>
+                                    </div>
+                                    <div class="body">
+                                        <div class="row">
+                                            <div class="col-md-3 col-6 b-r">
+                                                <strong>
+                                                    Identifiant de connexion</strong>
+                                                <br>
+                                                <p class="text-muted">Emily Smith</p>
+                                            </div>
+
+                                            <div class="col-md-3 col-6 b-r">
+                                                <strong>
+                                                    Statut</strong>
+                                                <br>
+                                                <p class="text-muted">Emily Smith</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="body">
+                                        <div class="row">
+                                            <div class="col-md-3 col-6 b-r">
+                                                <strong> Prénom </strong>
+                                                <br>
+                                                <p class="text-muted">Emily Smith</p>
+                                            </div>
+                                            <div class="col-md-3 col-6 b-r">
+                                                <strong>Nom </strong>
+                                                <br>
+                                                <p class="text-muted">(123) 456 7890</p>
+                                            </div>
+                                            <div class="col-md-3 col-6 b-r">
+                                                <strong>Nom complet</strong>
+                                                <br>
+                                                <p class="text-muted">johndeo@example.com</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="body">
+                                        <div class="row">
+                                            <div class="col-md-3 col-6 b-r">
+                                                <strong> Date d'inscription </strong>
+                                                <br>
+                                                <p class="text-muted">Emily Smith</p>
+                                            </div>
+                                            <div class="col-md-3 col-6 b-r">
+                                                <strong>Date de dernière mise à jour </strong>
+                                                <br>
+                                                <p class="text-muted">(123) 456 7890</p>
+                                            </div>
+                                            <div class="col-md-3 col-6 b-r">
+                                                <strong>
+                                                    Date de dernière connexion</strong>
+                                                <br>
+                                                <p class="text-muted">johndeo@example.com</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </mat-tab>
+
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                <mat-icon class="example-tab-icon msr-2">settings</mat-icon>
+                                Préferences
+                            </ng-template>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="project_widget">
+                                    <div class="header">
+                                        <h2><strong>About</strong></h2>
+                                    </div>
+                                    <div class="body">
+
+                                        <div class="col-md-3 col-6 b-r">
+                                            <strong>Login Name :<p class="text-muted">Emily Smith</p></strong>
+
+
+                                        </div>
+
+                                        <div class="col-md-3 col-6 b-r">
+                                            <strong>Pseudo</strong>
+                                            <br>
+                                            <p class="text-muted">Pseudo :</p>
+                                        </div>
+                                        <div class="col-md-3 col-6 b-r">
+                                            <strong>Email :</strong>
+                                            <br>
+                                            <p class="text-muted">johndeo@example.com</p>
+                                        </div>
+                                        <div class="col-md-3 col-6">
+                                            <strong>First Name :</strong>
+                                            <br>
+                                            <p class="text-muted">India</p>
+                                        </div>
+                                        <div class="col-md-3 col-6">
+                                            <strong>Last Name :</strong>
+                                            <br>
+                                            <p class="text-muted">India</p>
+                                        </div>
+                                        <div class="col-md-3 col-6">
+                                            <strong>Real Name :</strong>
+                                            <br>
+                                            <p class="text-muted">India</p>
+                                        </div>
+
+
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </mat-tab>
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                <mat-icon class="example-tab-icon msr-2">settings</mat-icon>
+                                Habilitations
+                            </ng-template>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="project_widget">
+                                    <div class="header">
+                                        <h2><strong>About</strong></h2>
+                                    </div>
+                                    <div class="body">
+
+                                        <div class="col-md-3 col-6 b-r">
+                                            <strong>Login Name :<p class="text-muted">Emily Smith</p></strong>
+
+
+                                        </div>
+
+                                        <div class="col-md-3 col-6 b-r">
+                                            <strong>Pseudo</strong>
+                                            <br>
+                                            <p class="text-muted">Pseudo :</p>
+                                        </div>
+                                        <div class="col-md-3 col-6 b-r">
+                                            <strong>Email :</strong>
+                                            <br>
+                                            <p class="text-muted">johndeo@example.com</p>
+                                        </div>
+                                        <div class="col-md-3 col-6">
+                                            <strong>First Name :</strong>
+                                            <br>
+                                            <p class="text-muted">India</p>
+                                        </div>
+                                        <div class="col-md-3 col-6">
+                                            <strong>Last Name :</strong>
+                                            <br>
+                                            <p class="text-muted">India</p>
+                                        </div>
+                                        <div class="col-md-3 col-6">
+                                            <strong>Real Name :</strong>
+                                            <br>
+                                            <p class="text-muted">India</p>
+                                        </div>
+
+
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

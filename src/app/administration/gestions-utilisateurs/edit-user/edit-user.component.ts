@@ -7,6 +7,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
+import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, fromEvent, map, merge, Observable } from 'rxjs';
 import { AbilityDto } from 'src/app/models/ability';
 import { Authorization } from 'src/app/models/authorization';
@@ -73,7 +74,7 @@ export class EditUserComponent extends UnsubscribeOnDestroyAdapter implements On
   selection = new SelectionModel<User>(true, []);
   constructor(private formBuilder: FormBuilder, private userGroupesService: UserGroupeService, private abilityService: AbilityService,
     public httpClient: HttpClient, private fb: UntypedFormBuilder, private authorisationService: AuthorizationService,
-    public preferenceService: PreferenceService, private snackBar: MatSnackBar
+    public preferenceService: PreferenceService, private snackBar: MatSnackBar, private activatedRoute: ActivatedRoute
   ) {
     super();
   }
@@ -86,6 +87,8 @@ export class EditUserComponent extends UnsubscribeOnDestroyAdapter implements On
   contextMenu: MatMenuTrigger;
   contextMenuPosition = { x: '0px', y: '0px' };
   ngOnInit(): void {
+    let _idusergroupe = this.activatedRoute.snapshot.params.id;
+    console.log(_idusergroupe)
     this.loadData();
     this.preferenceService.getAPreferences().subscribe(data => {
       this.preferences = data;

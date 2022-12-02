@@ -118,6 +118,16 @@ export class GestionsUtilisateursComponent extends UnsubscribeOnDestroyAdapter
     this.router.navigate(['/administration/add-new-user']);
 
   }
+  detailCall(row) {
+    this.id = row.id;
+    let tempDirection;
+    if (localStorage.getItem('isRtl') === 'true') {
+      tempDirection = 'rtl';
+    } else {
+      tempDirection = 'ltr';
+    }
+    this.router.navigate(['/administration/user-detail', this.id]);
+  }
   editCall(row) {
     this.id = row.id;
     console.log('row ', row)

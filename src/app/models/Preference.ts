@@ -3,8 +3,8 @@ export class Preference {
     id: number;
     name: string;
     description: string;
-    valueType: string;
+    valuetype: string;
     defaultValue: string;
-    possibleValue: string;
+    possiblevalue: string;
 
 }

@@ -8,13 +8,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { UnsubscribeOnDestroyAdapter } from 'src/app/shared/UnsubscribeOnDestroyAdapter';
 import { DeleteDialogComponent } from './delete/delete.component';
-import { FormDialogComponent } from './dialogs/form-dialog/form-dialog.component';
 import { UserGroup } from '../../models/userGroup';
 import { GroupesTilisateursService } from '../../services/groupes-tilisateurs.service';
 import { BehaviorSubject, fromEvent, map, merge, Observable } from 'rxjs';
 import { AdvanceTable } from 'src/app/advance-table/advance-table.model';
 import { DataSource } from '@angular/cdk/collections';
 import { Router } from '@angular/router';
+import { AddUserToGroupComponent } from './add-user-to-group/add-user-to-group.component';
+import { DeleteUserToGroupComponent } from './delete-user-to-group/delete-user-to-group.component';
 
 @Component({
   selector: 'app-groupes-utilisateurs',
@@ -35,7 +36,7 @@ export class GroupesUtilisateursComponent extends UnsubscribeOnDestroyAdapter
   exampleDatabase: GroupesTilisateursService | null;
   dataSource: ExampleDataSource | null;
   selection = new SelectionModel<UserGroup>(true, []);
-  id: number;
+  idUsergroup: number;
   user: UserGroup | null;
 
   breadscrums = [
@@ -102,8 +103,18 @@ export class GroupesUtilisateursComponent extends UnsubscribeOnDestroyAdapter
     //   }
     // });
   }
+  detailCall(row) {
+    this.idUsergroup = row.id;
+    let tempDirection;
+    if (localStorage.getItem('isRtl') === 'true') {
+      tempDirection = 'rtl';
+    } else {
+      tempDirection = 'ltr';
+    }
+    this.router.navigate(['/administration/groupe-details', this.idUsergroup]);
+  }
   editCall(row) {
-    this.id = row.id;
+    this.idUsergroup = row.id;
     console.log('row ', row)
 
     let tempDirection;
@@ -112,36 +123,38 @@ export class GroupesUtilisateursComponent extends UnsubscribeOnDestroyAdapter
     } else {
       tempDirection = 'ltr';
     }
-    const dialogRef = this.dialog.open(FormDialogComponent, {
-      data: {
-        advanceTable: row,
-        action: 'edit'
-      },
-      direction: tempDirection
-    });
-    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-      if (result === 1) {
-        // When using an edit things are little different, firstly we find record inside DataService by id
-        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
-          (x) => x.id === this.id
-        );
-        // Then you update that record using data from dialogData (values you enetered)
-        this.exampleDatabase.dataChange.value[foundIndex] =
-          this.advanceTableService.getDialogData();
-        // And lastly refresh table
-        this.refreshTable();
-        this.showNotification(
-          'snackbar-success',
-          'Groupe  modifié avec succès...!!!',
-          'top',
-          'center'
-        );
-      }
-    });
+    this.router.navigate(['/administration/edit-groupe', this.idUsergroup]);
+
+    // const dialogRef = this.dialog.open(FormDialogComponent, {
+    //   data: {
+    //     advanceTable: row,
+    //     action: 'edit'
+    //   },
+    //   direction: tempDirection
+    // });
+    // this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+    //   if (result === 1) {
+    //     // When using an edit things are little different, firstly we find record inside DataService by id
+    //     const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
+    //       (x) => x.id === this.id
+    //     );
+    //     // Then you update that record using data from dialogData (values you enetered)
+    //     this.exampleDatabase.dataChange.value[foundIndex] =
+    //       this.advanceTableService.getDialogData();
+    //     // And lastly refresh table
+    //     this.refreshTable();
+    //     this.showNotification(
+    //       'snackbar-success',
+    //       'Groupe  modifié avec succès...!!!',
+    //       'top',
+    //       'center'
+    //     );
+    //   }
+    // });
   }
   deleteItem(row) {
-    this.id = row.id;
-    console.log("row", this.id)
+    this.idUsergroup = row.id;
+    console.log("row", this.idUsergroup)
     let tempDirection;
     if (localStorage.getItem('isRtl') === 'true') {
       tempDirection = 'rtl';
@@ -155,7 +168,73 @@ export class GroupesUtilisateursComponent extends UnsubscribeOnDestroyAdapter
     this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
       if (result === 1) {
         const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
-          (x) => x.id === this.id
+          (x) => x.id === this.idUsergroup
+        );
+        this.exampleDatabase.dataChange.value[foundIndex] =
+          this.advanceTableService.getDialogData();
+        // for delete we use splice in order to remove single object from DataService
+        // this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
+        this.refreshTable();
+        this.showNotification(
+          'snackbar-success',
+          'Compte utilisateur désactivé   avec succès...!!!',
+          'top',
+          'center'
+        );
+      }
+    });
+  }
+
+  affectUserTogroup(row) {
+    this.idUsergroup = row.id;
+    console.log("row", this.idUsergroup)
+    let tempDirection;
+    if (localStorage.getItem('isRtl') === 'true') {
+      tempDirection = 'rtl';
+    } else {
+      tempDirection = 'ltr';
+    }
+    const dialogRef = this.dialog.open(AddUserToGroupComponent, {
+      data: row,
+      direction: tempDirection
+    });
+    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+      if (result === 1) {
+        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
+          (x) => x.id === this.idUsergroup
+        );
+        this.exampleDatabase.dataChange.value[foundIndex] =
+          this.advanceTableService.getDialogData();
+        // for delete we use splice in order to remove single object from DataService
+        // this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
+        this.refreshTable();
+        this.showNotification(
+          'snackbar-success',
+          'Compte utilisateur désactivé   avec succès...!!!',
+          'top',
+          'center'
+        );
+      }
+    });
+  }
+
+  supprimerUserToGroup(row) {
+    this.idUsergroup = row.id;
+    console.log("row", this.idUsergroup)
+    let tempDirection;
+    if (localStorage.getItem('isRtl') === 'true') {
+      tempDirection = 'rtl';
+    } else {
+      tempDirection = 'ltr';
+    }
+    const dialogRef = this.dialog.open(DeleteUserToGroupComponent, {
+      data: row,
+      direction: tempDirection
+    });
+    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+      if (result === 1) {
+        const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
+          (x) => x.id === this.idUsergroup
         );
         this.exampleDatabase.dataChange.value[foundIndex] =
           this.advanceTableService.getDialogData();

@@ -71,7 +71,7 @@ export class AddNewGroupeComponent extends UnsubscribeOnDestroyAdapter implement
   exampleDatabase: AbilityService | null;
   dataSource: ExampleDataSource | null;
   selection = new SelectionModel<User>(true, []);
-  constructor(private formBuilder: FormBuilder, private groupeUtilisateurService: GroupesTilisateursService, private abilityService: AbilityService,
+  constructor(private formBuilder: FormBuilder, private abilityService: AbilityService,
     public httpClient: HttpClient, private fb: UntypedFormBuilder, private authorisationService: AuthorizationService,
     public preferenceService: PreferenceService, private snackBar: MatSnackBar
   ) {

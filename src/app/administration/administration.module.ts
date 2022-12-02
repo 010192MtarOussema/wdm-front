@@ -28,7 +28,6 @@ import { ComponentsModule } from '../shared/components/components.module';
 import { SharedModule } from '../shared/shared.module';
 import { MatStepperModule } from '@angular/material/stepper';
 import { DeleteDialogComponent } from './groupes-utilisateurs/delete/delete.component';
-import { FormDialogComponent as advanceTableForm } from './groupes-utilisateurs/dialogs/form-dialog/form-dialog.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { GestionsUtilisateursComponent } from './gestions-utilisateurs/gestions-utilisateurs.component';
 import { BlockUserComponent } from './gestions-utilisateurs/block-user/block-user.component';
@@ -39,19 +38,26 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { UserDetailComponent } from './gestions-utilisateurs/user-detail/user-detail.component';
 import { GroupDetailsComponent } from './groupes-utilisateurs/group-details/group-details.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTabsModule } from '@angular/material/tabs';
+import { AddUserToGroupComponent } from './groupes-utilisateurs/add-user-to-group/add-user-to-group.component';
+import { EditGroupeComponent } from './groupes-utilisateurs/edit-groupe/edit-groupe.component';
+import { DeleteUserToGroupComponent } from './groupes-utilisateurs/delete-user-to-group/delete-user-to-group.component';
 
 @NgModule({
   declarations: [
     GroupesUtilisateursComponent,
-    advanceTableForm,
     NewUserComponent,
     EditUserComponent,
     DeleteDialogComponent,
     GestionsUtilisateursComponent,
     BlockUserComponent,
+    EditGroupeComponent,
     AddNewGroupeComponent,
     UserDetailComponent,
     GroupDetailsComponent,
+    AddUserToGroupComponent,
+    DeleteUserToGroupComponent,
 
   ],
   imports: [
@@ -83,6 +89,10 @@ import { GroupDetailsComponent } from './groupes-utilisateurs/group-details/grou
     ScrollingModule,
     PerfectScrollbarModule,
     MatSidenavModule,
+    CommonModule,
+
+    MatExpansionModule,
+    MatTabsModule,
 
     AdministrationRoutingModule
   ]
