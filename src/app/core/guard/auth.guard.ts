@@ -17,19 +17,22 @@ import { AuthService } from '../service/auth.service';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) { }
 
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot
-  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.isUserLoggedIn();
-  }
 
-  private isUserLoggedIn(): boolean {
-    if (this.authService.currentUser) {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    if (this.authService.currentUserValue) {
       return true;
     }
     this.router.navigate(['/authentication/signin']);
     return false;
-
   }
+  // private isUserLoggedIn(): boolean {
+  //   if (this.authService.currentUser) {
+  //     return true;
+  //   }
+  //   this.router.navigate(['/authentication/signin']);
+  //   return false;
+
+  // }
   //   if (this.authService.currentUserValue) {
   //     return true;
   //   }

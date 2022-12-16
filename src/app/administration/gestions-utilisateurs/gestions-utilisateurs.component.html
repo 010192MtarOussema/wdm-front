@@ -21,6 +21,8 @@
                     <mat-icon matSuffix>face</mat-icon>
 
                   </mat-form-field>
+                  <input placeholder="Rechercher" type="text" #filter class="browser-default search-field"
+                    aria-label="Search box">
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width" appearance="outline">
@@ -129,7 +131,7 @@
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
                     [ngClass]="'tbl-col-width-per-8'">
-                    {{row.firstName}}</mat-cell>
+                    {{row.firstname}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="lastName">
                   <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Nom

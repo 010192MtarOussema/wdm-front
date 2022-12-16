@@ -9,6 +9,8 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { User } from 'src/app/models/user';
 import { NotificationType } from 'src/app/models/enum/notification-type.enum';
 import { HeaderType } from 'src/app/models/enum/header-type.enum';
+import { StorageService } from 'src/app/core/service/storage.service';
+import { LoginRequest } from 'src/app/models/LoginResuest';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -22,22 +24,34 @@ export class SigninComponent
   submitted = false;
   error = '';
   hide = true;
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  roles: string[] = [];
+  loginRequest: LoginRequest;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private storageService: StorageService
   ) {
     super();
   }
   ngOnInit() {
+    this.loginRequest = new LoginRequest();
     this.loginForm = this.formBuilder.group({
       email: [
-        'admin@lorax.com',
+        this.loginRequest.email,
         [Validators.required, Validators.email, Validators.minLength(5)]
       ],
-      password: ['admin', Validators.required]
+      passeword: [this.loginRequest.passeword, Validators.required]
     });
+    if (this.storageService.isLoggedIn()) {
+      this.isLoggedIn = true;
+      this.roles = this.storageService.getUser().roles;
+    }
   }
+
   get f() {
     return this.loginForm.controls;
   }
@@ -49,11 +63,12 @@ export class SigninComponent
       return;
     } else {
       this.subs.sink = this.authService
-        .login(this.f.email.value, this.f.password.value)
+        .login(this.f.email.value, this.f.passeword.value)
         .subscribe(
           (res) => {
             if (res) {
               const token = this.authService.currentUserValue.token;
+              console.log("token", token)
               if (token) {
                 this.router.navigate(['/dashboard/main']);
               }
@@ -67,6 +82,10 @@ export class SigninComponent
           }
         );
     }
+
+  }
+  reloadPage(): void {
+    window.location.reload();
   }
 }
 
