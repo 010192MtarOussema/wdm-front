@@ -12,9 +12,12 @@
         <div class="card">
 
           <div class="body">
-            <mat-horizontal-stepper [linear]="isLinear" #stepper labelPosition="bottom">
-              <form [formGroup]="emailForm">
-                <mat-step>
+            <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+              {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}} {{isLinear}}
+            </button> -->
+            <mat-stepper [linear]="isLinear" #stepper labelPosition="bottom">
+              <mat-step [stepControl]="emailForm">
+                <form [formGroup]="emailForm">
                   <ng-template matStepLabel>Informations de compte</ng-template>
                   <div class="body ">
                     <div class="row">
@@ -41,8 +44,8 @@
                       <button mat-raised-button color="primary" (click)="ValidateEmail()">Suivant</button>
                     </div>
                   </div>
-                </mat-step>
-              </form>
+                </form>
+              </mat-step>
               <form [formGroup]="userForm">
                 <mat-step>
                   <ng-template matStepLabel>Informations personnelles
@@ -236,7 +239,7 @@
                   </div>
                 </mat-step>
               </form>
-            </mat-horizontal-stepper>
+            </mat-stepper>
           </div>
         </div>
       </div>

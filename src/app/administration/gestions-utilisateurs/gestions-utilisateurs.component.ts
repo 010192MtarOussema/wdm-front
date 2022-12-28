@@ -26,7 +26,8 @@ import { UserService } from 'src/app/services/user.service';
 export class GestionsUtilisateursComponent extends UnsubscribeOnDestroyAdapter
   implements OnInit {
   displayedColumns = [
-    'identifiant',
+    'select',
+
     'img',
     'login',
     'firstName',
@@ -47,7 +48,7 @@ export class GestionsUtilisateursComponent extends UnsubscribeOnDestroyAdapter
 
   breadscrums = [
     {
-      title: 'Critères des recherches ',
+      title: 'Liste des utilisateurs',
       items: ['Administration'],
       active: 'Liste des utilisateurs'
     }

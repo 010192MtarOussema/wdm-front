@@ -1,4 +1,5 @@
 
-export class Maintenance  {
+export class Maintenance {
 
+    id: number
 }

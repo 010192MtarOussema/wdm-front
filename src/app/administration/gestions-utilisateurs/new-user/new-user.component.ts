@@ -92,6 +92,7 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
   contextMenu: MatMenuTrigger;
   contextMenuPosition = { x: '0px', y: '0px' };
   ngOnInit(): void {
+    this.isLinear = true
     this.loadData();
     this.preferenceService.getAPreferences().subscribe(data => {
       this.preferences = data;
@@ -171,15 +172,15 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
     console.log(this.emailForm.value.email)
     this.userService.validateExistEmail(this.emailForm.value.email).subscribe(data => {
       console.log(data)
-      this.isNotFound = data
-      if (this.isNotFound === true)
-        this.stepper.next()
+      this.isLinear = true
+      this.stepper.next()
+    }
+      , (errorResponse: HttpErrorResponse) => {
+        this.error = errorResponse.error.message
 
 
-    }, (errorResponse: HttpErrorResponse) => {
-      this.error = errorResponse.error.message
-      console.log(errorResponse.error.message)
-    })
+        console.log(errorResponse.error.message)
+      })
   }
   // removeSelectedRows() {
   //   const totalSelect = this.selection.selected.length;

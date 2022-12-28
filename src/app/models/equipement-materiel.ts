@@ -1,4 +1,4 @@
 
-export class EquipementMateriel  {
-
+export class EquipementMateriel {
+    id: number;
 }

@@ -1,4 +1,5 @@
 
-export class PiecesRechange  {
-    
+export class PiecesRechange {
+    id: number
+
 }

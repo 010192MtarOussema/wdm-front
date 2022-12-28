@@ -28,7 +28,7 @@ export class AuthService {
   }
   login(email: string, passeword: string) {
     return this.http.post<any>(
-      AUTH_API + 'signin',
+      AUTH_API + 'login',
       {
         email,
         passeword,
