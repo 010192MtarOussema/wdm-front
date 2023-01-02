@@ -156,27 +156,29 @@
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
                     [ngClass]="'tbl-col-width-per-8'">
-                    {{row.status}}</mat-cell>
+                    <span class="label bg-green shadow-style">{{row.status}}</span>
+
+                  </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="createdDate">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Date
                     d'inscription</mat-header-cell>
                   <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                    {{row.mobile}}</mat-cell>
+                    {{row.createddate}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="updateDate">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-20'">Date
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Date
                     de dernière mise à jour
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
-                    [ngClass]="'tbl-col-width-per-20'">
-                    {{row.updateddate}}</mat-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                    {{row.lastvisitdate}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="lastVisitDate">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Date
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Date
                     de dernière connexion</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
+                    [ngClass]="'tbl-col-width-per-8'">
                     {{row.lastvisitdate}}</mat-cell>
                 </ng-container>
                 <!-- actions -->
@@ -220,9 +222,9 @@
                 </mat-progress-spinner>
               </div>
               <!-- context menu start -->
-              <div style="visibility: hidden; position: fixed" [style.left]="contextMenuPosition.x"
+              <!-- <div style="visibility: hidden; position: fixed" [style.left]="contextMenuPosition.x"
                 [style.top]="contextMenuPosition.y" [matMenuTriggerFor]="contextMenu">
-              </div>
+              </div> -->
 
               <!-- context menu end -->
 

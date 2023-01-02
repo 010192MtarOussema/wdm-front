@@ -66,6 +66,9 @@ export class UserGroupeService extends UnsubscribeOnDestroyAdapter {
       }
     );
   }
+  getUserGroupById(id: number) {
+    return this.httpClient.get<UserGroup>(this.API_URL + "get-by/" + id)
+  }
   deleteUserGroupe(id: number): void {
     console.log("service id", id);
 

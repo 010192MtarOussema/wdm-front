@@ -68,7 +68,13 @@ export class UserService extends UnsubscribeOnDestroyAdapter {
     );
   }
 
+  getUserById(id: number) {
+    return this.httpClient.get<User>(this.API_URL + "get-by/" + id)
+  }
 
+  getUserByGroup(id: number) {
+    return this.httpClient.get(this.API_URL + "/user/by-group/" + id)
+  }
   validateExistEmail(email: string): Observable<any> {
     let params = new HttpParams().set("email", email);
     // console.log(formData)

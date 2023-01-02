@@ -306,19 +306,19 @@ export class ExampleDataSource extends DataSource<User> {
           .slice()
           .filter((user: User) => {
             const searchStr = (
-              user.firstName +
-              user.lastName +
+              user.firstname +
+              user.lastname +
               user.email +
               user.status +
-              user.password +
+              user.passeword +
               user.picture +
-              user.lastModifyPassword +
-              user.lastVisitDate +
+              user.lastmodifypassword +
+              user.lastvisitdate +
               user.pseudo +
-              user.realName +
-              user.createdDate +
-              user.abilities +
-              user.userGroups
+              user.realname +
+              user.createddate +
+              user.abilitiesDtos +
+              user.usergroupdtos
 
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;

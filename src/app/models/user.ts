@@ -2,22 +2,26 @@
 export class User {
     id: number;
     status: string;
-    loginName: string;
+    loginname: string;
     pseudo: string;
     email: string;
     picture: string;
-    firstName: string;
-    lastName: string;
-    realName: string;
-    createdDate: string;
-    updatedDate: string;
-    lastVisitDate: string;
-    failedLoginCount: string;
-    password: string;
-    lastModifyPassword: string;
-    abilities: [];
-    userGroups: [];
+    firstname: string;
+    lastname: string;
+    realname: string;
+    createddate: string;
+    updateddate: string;
+    lastvisitdate: string;
+    failedlogincount: string;
+    passeword: string;
+    lastmodifypassword: string;
+    abilitiesDtos: [];
+    usergroupdtos: [];
     preferences: [];
+
+    constructor() {
+
+    }
 
 
 }
