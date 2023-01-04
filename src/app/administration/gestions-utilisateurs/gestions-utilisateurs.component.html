@@ -80,7 +80,7 @@
               </div>
               <mat-table #table matTableExporter [dataSource]="dataSource" matSort class="mat-cell"
                 #exporter="matTableExporter">
-                <!-- Checkbox Column -->
+
                 <ng-container matColumnDef="select">
                   <mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'">
                     <mat-checkbox (change)="$event ? masterToggle() : null"
@@ -103,25 +103,104 @@
                   <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'"> Image
                   </mat-header-cell>
                   <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-6"> <img
-                      src="assets/images/user/avatar_default.jpg" />
+                      [src]="row.img" />
                   </mat-cell>
                 </ng-container>
-
-                <ng-container matColumnDef="login">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                    {{row.email}}</mat-cell>
-
-                </ng-container>
-
-
                 <ng-container matColumnDef="firstName">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">First Name
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Nom
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
                     [ngClass]="'tbl-col-width-per-8'">
                     {{row.firstname}}</mat-cell>
                 </ng-container>
+                <ng-container matColumnDef="lastName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Prénom
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
+                    [ngClass]="'tbl-col-width-per-8'">
+                    {{row.lastname}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="login">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                    {{row.email}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="status">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-7'">Statut
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
+                    [ngClass]="'tbl-col-width-per-7'">
+                    {{row.status}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="realName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Nom complet</mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                    {{row.realname }}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="createdDate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Date
+                    d'inscription</mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                    {{row.createddate}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="lastVisitDate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Date
+                    de mise à jour </mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                    {{row.lastvisitdate}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="updateDate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-20'">Date
+                    de dernière connexion
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
+                    [ngClass]="'tbl-col-width-per-20'">
+                    {{row.lastvisitdate}}</mat-cell>
+                </ng-container>
+
+
+
+
+
+
+                <!-- Checkbox Column -->
+                <!-- <ng-container matColumnDef="select">
+                  <mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'">
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()" [ngClass]="'tbl-checkbox'">
+                    </mat-checkbox>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-6'">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)" [ngClass]="'tbl-checkbox'">
+                    </mat-checkbox>
+                  </mat-cell>
+                </ng-container> -->
+                <!-- ID Column -->
+                <!-- <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+                  <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="img">
+                  <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'"> Image
+                  </mat-header-cell>
+                  <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-6"> <img
+                      src="assets/images/user/avatar_default.jpg" />
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="firstName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">First Name
+
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
+                    [ngClass]="'tbl-col-width-per-8'">
+                    {{row.firstname}}</mat-cell>
+                </ng-container>
+
+
                 <ng-container matColumnDef="lastName">
                   <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Last Name
                   </mat-header-cell>
@@ -130,17 +209,45 @@
                     {{row.lastname}}</mat-cell>
                 </ng-container>
 
+                <ng-container matColumnDef="login">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                    {{row.email}}</mat-cell>
+
+                </ng-container> -->
+
+
+
+                <!-- <ng-container matColumnDef="gender">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-7'">Gender
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
+                    [ngClass]="'tbl-col-width-per-7'">
+                    {{row.gender}}</mat-cell>
+                </ng-container> -->
+
+                <!-- <ng-container matColumnDef="status">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-7'"> Statut
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
+                    [ngClass]="'tbl-col-width-per-7'">
+                    {{row.status}}
+
+                  </mat-cell>
+                </ng-container>
 
 
 
                 <ng-container matColumnDef="realName">
 
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Nom complet</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-20'">Nom
+                    complet</mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
+                    [ngClass]="'tbl-col-width-per-20'">
                     {{row.realname}}</mat-cell>
 
 
-                </ng-container>
+                </ng-container> -->
 
                 <!-- <ng-container matColumnDef="status">
                   <mat-header-cell *matHeaderCellDef mat-sort-header
@@ -151,20 +258,13 @@
                 </ng-container> -->
 
 
-                <ng-container matColumnDef="status">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-8'">Statut
-                  </mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
-                    [ngClass]="'tbl-col-width-per-8'">
-                    <span class="label bg-green shadow-style">{{row.status}}</span>
 
-                  </mat-cell>
-                </ng-container>
 
-                <ng-container matColumnDef="createdDate">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Date
+                <!-- <ng-container matColumnDef="createdDate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'tbl-col-width-per-12'">Date
                     d'inscription</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
+                    [ngClass]="'tbl-col-width-per-6'">
                     {{row.createddate}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="updateDate">
@@ -180,7 +280,7 @@
                   <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
                     [ngClass]="'tbl-col-width-per-8'">
                     {{row.lastvisitdate}}</mat-cell>
-                </ng-container>
+                </ng-container> -->
                 <!-- actions -->
                 <ng-container matColumnDef="actions">
                   <mat-header-cell class="pr-0" *matHeaderCellDef>Actions</mat-header-cell>

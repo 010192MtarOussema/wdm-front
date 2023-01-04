@@ -6,9 +6,6 @@ import { PreferenceService } from 'src/app/services/preference.service';
 import { Preference } from 'src/app/models/Preference';
 import { AbilityService } from 'src/app/services/ability.service';
 import { AbilityDto } from 'src/app/models/ability';
-import { DataSource } from '@angular/cdk/collections';
-import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatMenuTrigger } from '@angular/material/menu';
@@ -20,17 +17,21 @@ import { Authorization } from 'src/app/models/authorization';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { UserService } from 'src/app/services/user.service';
 import { MatStepper } from '@angular/material/stepper';
+import { ThemePalette } from '@angular/material/core';
+export interface Task {
+  name: string;
+  completed: boolean;
+  color: ThemePalette;
+  subtasks?: Task[];
+}
+
 @Component({
   selector: 'app-new-user',
   templateUrl: './new-user.component.html',
   styleUrls: ['./new-user.component.scss']
 })
 export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnInit {
-  displayedColumns = [
-    'name',
-    'description',
-    'authorization'
-  ];
+
   userGroupes: UserGroup[];
   targetProducts: any[] = [];
   userForm: FormGroup;
@@ -46,7 +47,7 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
     'Bloqué'
   ];
   toppings = new UntypedFormControl();
-
+  color: ThemePalette = 'accent';
   authorizations!: Authorization[];
   breadscrums = [
     {
@@ -58,8 +59,12 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
   selectedFiles2: AbilityDto;
   isEditable = false;
   isOptional = false;
-
+  checkedPref: false;
   isNotFound: boolean;
+  disableSelect = new FormControl(false);
+  checked = new FormControl(true);
+
+  disabled = new FormControl(true);
   //preferences
   preferences!: Preference[];
   mode = new UntypedFormControl('side');
@@ -72,8 +77,40 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
   abilities: AbilityDto[];
   error: '';
   exampleDatabase: AbilityService | null;
-  dataSource: ExampleDataSource | null;
   selection = new SelectionModel<User>(true, []);
+
+  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
+  task: Task = {
+    name: 'Indeterminate',
+    completed: false,
+    color: 'primary',
+    subtasks: [
+      { name: 'Primary', completed: false, color: 'primary' },
+      { name: 'Accent', completed: false, color: 'accent' },
+      { name: 'Warn', completed: false, color: 'warn' },
+    ],
+  };
+
+  allComplete: boolean = false;
+
+  updateAllComplete() {
+    this.allComplete = this.task.subtasks != null && this.task.subtasks.every(t => t.completed);
+  }
+
+  someComplete(): boolean {
+    if (this.task.subtasks == null) {
+      return false;
+    }
+    return this.task.subtasks.filter(t => t.completed).length > 0 && !this.allComplete;
+  }
+
+  setAll(completed: boolean) {
+    this.allComplete = completed;
+    if (this.task.subtasks == null) {
+      return;
+    }
+    this.task.subtasks.forEach(t => (t.completed = completed));
+  }
   constructor(private formBuilder: FormBuilder, private userService: UserService, private abilityService: AbilityService,
     public httpClient: HttpClient, private fb: UntypedFormBuilder, private authorisationService: AuthorizationService,
     public preferenceService: PreferenceService, private snackBar: MatSnackBar
@@ -93,7 +130,7 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
   contextMenuPosition = { x: '0px', y: '0px' };
   ngOnInit(): void {
     this.isLinear = true
-    this.loadData();
+
     this.preferenceService.getAPreferences().subscribe(data => {
       this.preferences = data;
       const json = this.preferences.forEach(posibleValue => {
@@ -113,6 +150,12 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
       this.authorizations = data;
     })
 
+    this.abilityService.getAllAbilityDto().subscribe(data => {
+
+      this.abilities = data;
+      console.log("data abilities ", this.abilities)
+    })
+
 
     this.user = new User();
     this.createContactForm();
@@ -120,7 +163,10 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
   }
 
 
-
+  shows() {
+    console.log('test', !this.disabled, this.checked)
+    return !this.disabled
+  }
   formControl = new UntypedFormControl('', [
     Validators.required
     // Validators.email,
@@ -155,6 +201,7 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
       loginName: ['', [Validators.required]],
       pseudo: ['', [Validators.required]],
       passeword: ['', [Validators.required]],
+      checked: ['']
       // abilities: new FormControl([]),
       // userGroups: new FormControl([]),
       // userPreferenceValues: new FormControl([])
@@ -199,22 +246,7 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
   //     'center'
   //   );
   // }
-  private loadData() {
-    this.exampleDatabase = new AbilityService(this.httpClient);
-    this.dataSource = new ExampleDataSource(
-      this.exampleDatabase,
-      this.paginator,
-      this.sort
-    );
-    this.subs.sink = fromEvent(this.filter.nativeElement, 'keyup').subscribe(
-      () => {
-        if (!this.dataSource) {
-          return;
-        }
-        this.dataSource.filter = this.filter.nativeElement.value;
-      }
-    );
-  }
+
   showNotification(colorName, text, placementFrom, placementAlign) {
     this.snackBar.open(text, '', {
       duration: 5000,
@@ -224,93 +256,4 @@ export class NewUserComponent extends UnsubscribeOnDestroyAdapter implements OnI
     });
   }
 }
-export class ExampleDataSource extends DataSource<AbilityDto> {
-  filterChange = new BehaviorSubject('');
-  get filter(): string {
-    return this.filterChange.value;
-  }
-  set filter(filter: string) {
-    this.filterChange.next(filter);
-  }
-  filteredData: AbilityDto[] = [];
-  renderedData: AbilityDto[] = [];
-  constructor(
-    public gestionUtilisateurService: AbilityService,
-    public paginator: MatPaginator,
-    public _sort: MatSort
-  ) {
-    super();
-    // Reset to the first page when the user changes the filter.
-    this.filterChange.subscribe(() => (this.paginator.pageIndex = 0));
-  }
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<AbilityDto[]> {
-    // Listen for any changes in the base data, sorting, filtering, or pagination
-    const displayDataChanges = [
-      this.gestionUtilisateurService.dataChange,
-      this._sort.sortChange,
-      this.filterChange,
-      this.paginator.page
-    ];
-    this.gestionUtilisateurService.getAllAbilities();
-    return merge(...displayDataChanges).pipe(
-      map(() => {
-        // Filter data
-        this.filteredData = this.gestionUtilisateurService.data
-          .slice()
-          .filter((user: AbilityDto) => {
-            const searchStr = (
-              user.name +
-              user.description
-            ).toLowerCase();
-            return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
-          });
-        // Sort filtered data
-        const sortedData = this.sortData(this.filteredData.slice());
-        // Grab the page's slice of the filtered sorted data.
-        const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
-        this.renderedData = sortedData.splice(
-          startIndex,
-          this.paginator.pageSize
-        );
-        return this.renderedData;
-      })
-    );
-  }
-  disconnect() { }
-  /** Returns a sorted copy of the database data. */
-  sortData(data: AbilityDto[]): AbilityDto[] {
-    if (!this._sort.active || this._sort.direction === '') {
-      return data;
-    }
-    return data.sort((a, b) => {
-      let propertyA: number | string = '';
-      let propertyB: number | string = '';
-      switch (this._sort.active) {
-        case 'id':
-          [propertyA, propertyB] = [a.id, b.id];
-          break;
-          // case 'fName':
-          //   [propertyA, propertyB] = [a.email, b.];
-          //   break;
-          // case 'lName':
-          //   [propertyA, propertyB] = [a.lName, b.lName];
-          //   break;
-          // case 'email':
-          //   [propertyA, propertyB] = [a.email, b.email];
-          //   break;
-          // case 'address':
-          //   [propertyA, propertyB] = [a.address, b.address];
-          //   break;
-          // case 'mobile':
-          //   [propertyA, propertyB] = [a.mobile, b.mobile];
-          break;
-      }
-      const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
-      const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
-      return (
-        (valueA < valueB ? -1 : 1) * (this._sort.direction === 'asc' ? 1 : -1)
-      );
-    });
-  }
-}
+

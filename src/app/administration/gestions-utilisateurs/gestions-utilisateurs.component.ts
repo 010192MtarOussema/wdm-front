@@ -29,14 +29,15 @@ export class GestionsUtilisateursComponent extends UnsubscribeOnDestroyAdapter
     'select',
 
     'img',
-    'login',
     'firstName',
     'lastName',
-    'realName',
+    'login',
     'status',
+    'realName',
+
     'createdDate',
-    'updateDate',
     'lastVisitDate',
+    'updateDate',
     'actions'
   ];
   userForm: FormGroup;
